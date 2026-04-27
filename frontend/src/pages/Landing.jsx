@@ -7,6 +7,7 @@ import HowItWorks from "../components/HowItWorks";
 import Stats from "../components/Stats";
 import CTA from "../components/CTA";
 import Footer from "../components/Footer";
+import CursorGlow from "../components/CursorGlow";
 
 export default function Landing() {
   return (
@@ -14,6 +15,7 @@ export default function Landing() {
       data-testid="landing-page"
       className="relative min-h-screen bg-[#050505] text-[#f5f3ee] overflow-hidden"
     >
+      <CursorGlow />
       <Nav />
       <Hero />
       <TrustedBy />
