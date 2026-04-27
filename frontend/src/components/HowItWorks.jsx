@@ -31,7 +31,7 @@ export default function HowItWorks() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-20 gap-6">
           <div className="max-w-2xl">
-            <span className="mono text-[10px] uppercase tracking-[0.25em] text-[#4dd4ff] mb-4 block">
+            <span className="mono text-[10px] uppercase tracking-[0.25em] text-[#34d399] mb-4 block">
               03 — Workflow
             </span>
             <h2 className="serif text-5xl md:text-6xl leading-[1.02] tracking-tight">
@@ -55,13 +55,13 @@ export default function HowItWorks() {
                 className="relative bg-[#050505] p-8 md:p-10 group hover:bg-[#0a0a0b] transition-colors duration-500"
               >
                 <div className="flex items-center justify-between mb-12">
-                  <span className="serif text-5xl text-[#1a1715] group-hover:text-[#4dd4ff] transition-colors duration-500">
+                  <span className="serif text-5xl text-[#1a1715] group-hover:text-[#34d399] transition-colors duration-500">
                     {s.n}
                   </span>
                   <Icon
                     size={22}
                     strokeWidth={1.4}
-                    className="text-[#6b6660] group-hover:text-[#93e8ff] transition-colors duration-500"
+                    className="text-[#6b6660] group-hover:text-[#6ee7b7] transition-colors duration-500"
                   />
                 </div>
                 <h3 className="serif text-2xl md:text-3xl mb-4 text-[#f5f3ee]">
@@ -72,7 +72,7 @@ export default function HowItWorks() {
                 </p>
 
                 {i < steps.length - 1 && (
-                  <span className="hidden md:block absolute top-1/2 -right-3 w-5 h-px bg-[#4dd4ff]/40" />
+                  <span className="hidden md:block absolute top-1/2 -right-3 w-5 h-px bg-[#34d399]/40" />
                 )}
               </div>
             );

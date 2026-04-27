@@ -46,7 +46,7 @@ export default function Nav() {
               className="text-sm text-[#b9b3a7] hover:text-[#f5f3ee] transition-colors duration-300 relative group"
             >
               {item.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#4dd4ff] group-hover:w-full transition-all duration-300" />
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#34d399] group-hover:w-full transition-all duration-300" />
             </a>
           ))}
         </nav>

@@ -10,7 +10,7 @@ export default function ProductIntro() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
         {/* Left — sticky meta */}
         <div className="lg:col-span-4 lg:sticky lg:top-32">
-          <span className="mono text-[10px] uppercase tracking-[0.25em] text-[#4dd4ff] mb-4 block">
+          <span className="mono text-[10px] uppercase tracking-[0.25em] text-[#34d399] mb-4 block">
             01 — The Engine
           </span>
           <h2 className="serif text-4xl md:text-5xl leading-[1.05] mb-6">
@@ -25,7 +25,7 @@ export default function ProductIntro() {
           <a
             href="#features"
             data-testid="product-link"
-            className="inline-flex items-center gap-2 text-[#f5f3ee] border-b border-[#4dd4ff] pb-1 hover:text-[#93e8ff] transition-colors"
+            className="inline-flex items-center gap-2 text-[#f5f3ee] border-b border-[#34d399] pb-1 hover:text-[#6ee7b7] transition-colors"
           >
             Explore the platform
             <ArrowUpRight size={14} />
@@ -55,7 +55,7 @@ export default function ProductIntro() {
                   },
                 ].map((c) => (
                   <div key={c.k}>
-                    <div className="mono text-[10px] uppercase tracking-[0.22em] text-[#4dd4ff] mb-2">
+                    <div className="mono text-[10px] uppercase tracking-[0.22em] text-[#34d399] mb-2">
                       {c.k}
                     </div>
                     <p className="text-sm text-[#b9b3a7] leading-relaxed">
@@ -83,13 +83,13 @@ function ChipViz() {
       >
         <defs>
           <linearGradient id="trace" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#4dd4ff" stopOpacity="0" />
-            <stop offset="50%" stopColor="#4dd4ff" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#4dd4ff" stopOpacity="0" />
+            <stop offset="0%" stopColor="#34d399" stopOpacity="0" />
+            <stop offset="50%" stopColor="#34d399" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#34d399" stopOpacity="0" />
           </linearGradient>
           <radialGradient id="halo" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#4dd4ff" stopOpacity="0.35" />
-            <stop offset="100%" stopColor="#4dd4ff" stopOpacity="0" />
+            <stop offset="0%" stopColor="#34d399" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#34d399" stopOpacity="0" />
           </radialGradient>
         </defs>
 
@@ -123,7 +123,7 @@ function ChipViz() {
         {/* circuit traces */}
         <g
           fill="none"
-          stroke="#4dd4ff"
+          stroke="#34d399"
           strokeOpacity="0.55"
           strokeWidth="1"
           strokeLinecap="round"
@@ -145,7 +145,7 @@ function ChipViz() {
             height="100"
             rx="6"
             fill="#0a0a0b"
-            stroke="#4dd4ff"
+            stroke="#34d399"
             strokeOpacity="0.7"
             strokeWidth="1.2"
           />
@@ -156,7 +156,7 @@ function ChipViz() {
             height="70"
             rx="2"
             fill="none"
-            stroke="#4dd4ff"
+            stroke="#34d399"
             strokeOpacity="0.3"
             strokeDasharray="2 2"
           />
@@ -166,7 +166,7 @@ function ChipViz() {
             textAnchor="middle"
             fontSize="11"
             fontFamily="JetBrains Mono"
-            fill="#93e8ff"
+            fill="#6ee7b7"
             letterSpacing="2"
           >
             ACE / 12nm
@@ -179,7 +179,7 @@ function ChipViz() {
                 y1="160"
                 x2={335 + i * 22}
                 y2="150"
-                stroke="#4dd4ff"
+                stroke="#34d399"
                 strokeOpacity="0.5"
               />
               <line
@@ -187,7 +187,7 @@ function ChipViz() {
                 y1="260"
                 x2={335 + i * 22}
                 y2="270"
-                stroke="#4dd4ff"
+                stroke="#34d399"
                 strokeOpacity="0.5"
               />
             </g>
@@ -239,13 +239,13 @@ function ChipViz() {
           [240, 320],
           [600, 240],
         ].map(([x, y], i) => (
-          <circle key={i} cx={x} cy={y} r="3" fill="#4dd4ff" />
+          <circle key={i} cx={x} cy={y} r="3" fill="#34d399" />
         ))}
       </svg>
 
       {/* HUD top-left */}
       <div className="absolute top-4 left-4 mono text-[10px] uppercase tracking-[0.2em] text-[#6b6660]">
-        <span className="text-[#4dd4ff]">●</span> live · run #4138 · pass
+        <span className="text-[#34d399]">●</span> live · run #4138 · pass
       </div>
       <div className="absolute top-4 right-4 mono text-[10px] uppercase tracking-[0.2em] text-[#6b6660]">
         node 12nm · 150× · 0 false alarms
