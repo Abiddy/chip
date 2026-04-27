@@ -63,7 +63,7 @@ export default function Features() {
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
         <div className="max-w-3xl mb-16 md:mb-24">
-          <span className="mono text-[10px] uppercase tracking-[0.25em] text-[#ff8a3d] mb-4 block">
+          <span className="mono text-[10px] uppercase tracking-[0.25em] text-[#4dd4ff] mb-4 block">
             02 — Capabilities
           </span>
           <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight">
@@ -89,7 +89,7 @@ export default function Features() {
                 <Icon
                   size={26}
                   strokeWidth={1.4}
-                  className="feature-icon text-[#ff8a3d] mb-7"
+                  className="feature-icon text-[#4dd4ff] mb-7"
                 />
                 <h3 className="serif text-xl mb-3 text-[#f5f3ee]">{f.name}</h3>
                 <p className="text-sm text-[#b9b3a7] leading-relaxed">

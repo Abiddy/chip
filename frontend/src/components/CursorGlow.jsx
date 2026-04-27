@@ -109,9 +109,9 @@ export default function CursorGlow() {
 
         const haloSize = 140;
         const grad = ctx.createRadialGradient(h.x, h.y, 0, h.x, h.y, haloSize);
-        grad.addColorStop(0, `rgba(255, 176, 112, ${0.18 * h.alpha})`);
-        grad.addColorStop(0.4, `rgba(255, 138, 61, ${0.07 * h.alpha})`);
-        grad.addColorStop(1, "rgba(255, 138, 61, 0)");
+        grad.addColorStop(0, `rgba(147, 232, 255, ${0.18 * h.alpha})`);
+        grad.addColorStop(0.4, `rgba(77, 212, 255, ${0.07 * h.alpha})`);
+        grad.addColorStop(1, "rgba(77, 212, 255, 0)");
         ctx.fillStyle = grad;
         ctx.beginPath();
         ctx.arc(h.x, h.y, haloSize, 0, Math.PI * 2);
@@ -135,12 +135,12 @@ export default function CursorGlow() {
 
         const size = p.size * (1 - t * 0.55);
         const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size);
-        grad.addColorStop(0, `rgba(255, 200, 140, ${alpha})`);
+        grad.addColorStop(0, `rgba(180, 240, 255, ${alpha})`);
         grad.addColorStop(
           0.35,
-          `rgba(255, 138, 61, ${alpha * 0.55})`
+          `rgba(77, 212, 255, ${alpha * 0.55})`
         );
-        grad.addColorStop(1, "rgba(255, 138, 61, 0)");
+        grad.addColorStop(1, "rgba(77, 212, 255, 0)");
         ctx.fillStyle = grad;
         ctx.beginPath();
         ctx.arc(p.x, p.y, size, 0, Math.PI * 2);

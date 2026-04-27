@@ -13,9 +13,9 @@
     --ink-dim: #6b6660;
     --line: rgba(255, 246, 224, 0.08);
     --line-strong: rgba(255, 246, 224, 0.18);
-    --amber: #ff8a3d;
-    --amber-warm: #ffb070;
-    --amber-deep: #d65a1f;
+    --amber: #4dd4ff;
+    --amber-warm: #93e8ff;
+    --amber-deep: #0ea5e9;
 }
 
 * {
@@ -38,6 +38,8 @@ body {
     background: var(--amber);
     color: #050505;
 }
+
+.text-accent { color: var(--amber-warm); }
 
 /* Custom cursor accent on interactive elements */
 a,
@@ -86,9 +88,9 @@ button {
     transform: translate(-50%, -50%);
     background: radial-gradient(
         ellipse at center,
-        rgba(255, 138, 61, 0.45) 0%,
-        rgba(255, 138, 61, 0.18) 22%,
-        rgba(214, 90, 31, 0.08) 40%,
+        rgba(77, 212, 255, 0.38) 0%,
+        rgba(77, 212, 255, 0.14) 22%,
+        rgba(14, 165, 233, 0.07) 40%,
         transparent 65%
     );
     filter: blur(60px);
@@ -104,8 +106,8 @@ button {
     height: 700px;
     background: radial-gradient(
         ellipse at center,
-        rgba(255, 176, 112, 0.22) 0%,
-        rgba(255, 138, 61, 0.08) 35%,
+        rgba(147, 232, 255, 0.18) 0%,
+        rgba(77, 212, 255, 0.06) 35%,
         transparent 65%
     );
     filter: blur(80px);
@@ -150,7 +152,7 @@ button {
     inset: 0;
     pointer-events: none;
     opacity: 0.35;
-    background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ff8a3d' stroke-width='0.5' opacity='0.25'%3E%3Cpath d='M0 40h40v-40'/%3E%3Cpath d='M40 40v40h40'/%3E%3Cpath d='M80 80h40v40'/%3E%3Cpath d='M120 80v-40h40'/%3E%3Cpath d='M0 120h60v40'/%3E%3Cpath d='M100 120h60'/%3E%3C/g%3E%3Cg fill='%23ff8a3d' opacity='0.4'%3E%3Ccircle cx='40' cy='40' r='1.5'/%3E%3Ccircle cx='80' cy='80' r='1.5'/%3E%3Ccircle cx='120' cy='80' r='1.5'/%3E%3Ccircle cx='120' cy='120' r='1.5'/%3E%3Ccircle cx='60' cy='120' r='1.5'/%3E%3Ccircle cx='100' cy='120' r='1.5'/%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%234dd4ff' stroke-width='0.5' opacity='0.25'%3E%3Cpath d='M0 40h40v-40'/%3E%3Cpath d='M40 40v40h40'/%3E%3Cpath d='M80 80h40v40'/%3E%3Cpath d='M120 80v-40h40'/%3E%3Cpath d='M0 120h60v40'/%3E%3Cpath d='M100 120h60'/%3E%3C/g%3E%3Cg fill='%234dd4ff' opacity='0.4'%3E%3Ccircle cx='40' cy='40' r='1.5'/%3E%3Ccircle cx='80' cy='80' r='1.5'/%3E%3Ccircle cx='120' cy='80' r='1.5'/%3E%3Ccircle cx='120' cy='120' r='1.5'/%3E%3Ccircle cx='60' cy='120' r='1.5'/%3E%3Ccircle cx='100' cy='120' r='1.5'/%3E%3C/g%3E%3C/svg%3E");
     background-size: 160px 160px;
     mask-image: radial-gradient(
         ellipse at center,
@@ -274,9 +276,10 @@ button {
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 40px -10px rgba(255, 138, 61, 0.5);
+    box-shadow: 0 12px 40px -10px rgba(77, 212, 255, 0.55);
     background: var(--amber-warm);
     border-color: var(--amber-warm);
+    color: #050505;
 }
 
 .btn-ghost {
@@ -311,8 +314,8 @@ button {
     inset: 0;
     background: linear-gradient(
         180deg,
-        rgba(255, 138, 61, 0) 0%,
-        rgba(255, 138, 61, 0.04) 100%
+        rgba(77, 212, 255, 0) 0%,
+        rgba(77, 212, 255, 0.045) 100%
     );
     opacity: 0;
     transition: opacity 0.4s ease;
@@ -352,7 +355,7 @@ button {
     padding: 0.4rem 0.9rem;
     border: 1px solid var(--line-strong);
     border-radius: 999px;
-    background: rgba(255, 138, 61, 0.05);
+    background: rgba(77, 212, 255, 0.05);
     backdrop-filter: blur(12px);
     font-size: 0.75rem;
     color: var(--ink-soft);
@@ -385,11 +388,11 @@ button {
     background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 138, 61, 0.2);
+    background: rgba(77, 212, 255, 0.2);
     border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 138, 61, 0.4);
+    background: rgba(77, 212, 255, 0.4);
 }
 
 /* ---------- Shadcn dark base ---------- */
@@ -407,13 +410,13 @@ button {
         --secondary-foreground: 40 18% 95%;
         --muted: 0 0% 10%;
         --muted-foreground: 40 5% 60%;
-        --accent: 22 100% 62%;
+        --accent: 196 100% 65%;
         --accent-foreground: 0 0% 4%;
         --destructive: 0 84% 60%;
         --destructive-foreground: 40 18% 95%;
         --border: 40 15% 18%;
         --input: 40 15% 18%;
-        --ring: 22 100% 62%;
+        --ring: 196 100% 65%;
         --radius: 0.75rem;
     }
 }

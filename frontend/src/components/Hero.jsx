@@ -28,16 +28,9 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10 w-full text-center">
-        <div className="reveal-fade flex justify-center mb-8" style={{ animationDelay: "0.1s" }}>
-          <span className="tag-pill" data-testid="hero-tag">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#ff8a3d] pulse-dot" />
-            <span className="mono">ACE — Analog Verification Engine</span>
-          </span>
-        </div>
-
         <h1
           data-testid="hero-headline"
-          className="serif reveal-up text-[clamp(3rem,9vw,7.5rem)] leading-[0.95] tracking-tight mb-6"
+          className="serif reveal-up text-[clamp(2.25rem,6.5vw,5.5rem)] leading-[0.98] tracking-tight mb-6"
           style={{ animationDelay: "0.2s" }}
         >
           Verification, at

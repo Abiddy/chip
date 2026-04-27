@@ -13,7 +13,7 @@ export default function CTA() {
           className="absolute left-1/2 bottom-0 w-[1200px] h-[600px] -translate-x-1/2 translate-y-1/3"
           style={{
             background:
-              "radial-gradient(ellipse at center, rgba(255,138,61,0.35) 0%, rgba(255,138,61,0.1) 30%, transparent 65%)",
+              "radial-gradient(ellipse at center, rgba(77,212,255,0.35) 0%, rgba(77,212,255,0.1) 30%, transparent 65%)",
             filter: "blur(80px)",
           }}
         />
@@ -21,7 +21,7 @@ export default function CTA() {
       <div className="circuit-bg opacity-25" aria-hidden="true" />
 
       <div className="relative max-w-5xl mx-auto px-6 lg:px-10 text-center">
-        <span className="mono text-[10px] uppercase tracking-[0.25em] text-[#ff8a3d] mb-6 block">
+        <span className="mono text-[10px] uppercase tracking-[0.25em] text-[#4dd4ff] mb-6 block">
           Ready when you are
         </span>
         <h2 className="serif text-5xl md:text-7xl leading-[0.98] tracking-tight mb-8">

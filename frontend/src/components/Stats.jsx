@@ -32,7 +32,7 @@ export default function Stats() {
           className="absolute left-1/2 top-1/2 w-[900px] h-[500px] -translate-x-1/2 -translate-y-1/2"
           style={{
             background:
-              "radial-gradient(ellipse at center, rgba(255,138,61,0.18) 0%, transparent 70%)",
+              "radial-gradient(ellipse at center, rgba(77,212,255,0.18) 0%, transparent 70%)",
             filter: "blur(60px)",
           }}
         />

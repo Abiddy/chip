@@ -34,7 +34,7 @@ export default function Footer() {
 
             <div className="mt-8 flex items-center gap-3">
               <span className="mono text-[10px] uppercase tracking-[0.22em] text-[#6b6660]">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#ff8a3d] pulse-dot mr-2 align-middle" />
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#4dd4ff] pulse-dot mr-2 align-middle" />
                 Status — All systems operational
               </span>
             </div>
