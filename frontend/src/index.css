@@ -452,6 +452,41 @@ button {
     );
 }
 
+/* ---------- Chip confetti fall ---------- */
+.chip-fall {
+    position: absolute;
+    top: -40px;
+    will-change: transform, opacity;
+    animation-name: chip-fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    filter: drop-shadow(0 0 4px rgba(52, 211, 153, 0.35));
+}
+
+@keyframes chip-fall {
+    0% {
+        transform: translate3d(0, -40px, 0) rotate(0);
+    }
+    50% {
+        transform: translate3d(
+                calc(var(--drift) * 0.5),
+                300px,
+                0
+            )
+            rotate(calc(var(--rot) * 0.5));
+    }
+    100% {
+        transform: translate3d(var(--drift), 640px, 0) rotate(var(--rot));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .chip-fall {
+        animation: none !important;
+        opacity: 0.15 !important;
+    }
+}
+
 /* ---------- Tag pill ---------- */
 .tag-pill {
     display: inline-flex;

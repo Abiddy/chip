@@ -2,6 +2,7 @@ import Nav from "../components/Nav";
 import Hero from "../components/Hero";
 import TrustedBy from "../components/TrustedBy";
 import ProductIntro from "../components/ProductIntro";
+import SavingsCTA from "../components/SavingsCTA";
 import Features from "../components/Features";
 import HowItWorks from "../components/HowItWorks";
 import Stats from "../components/Stats";
@@ -20,6 +21,7 @@ export default function Landing() {
       <Hero />
       <TrustedBy />
       <ProductIntro />
+      <SavingsCTA />
       <Features />
       <HowItWorks />
       <Stats />
