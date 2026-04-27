@@ -35,7 +35,7 @@ export default function Hero() {
         >
           Verification, at
           <br />
-          <span className="accent">silicon speed.</span>
+          <span className="accent speed-buzz">silicon speed.</span>
         </h1>
 
         <p
