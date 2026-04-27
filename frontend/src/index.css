@@ -339,7 +339,7 @@ button {
 .speed-buzz {
     position: relative;
     display: inline-block;
-    animation: speed-buzz 5.2s infinite;
+    animation: speed-buzz 2s infinite;
     will-change: transform, filter, text-shadow;
 }
 
@@ -362,7 +362,7 @@ button {
     opacity: 0;
     transform: scaleX(0);
     transform-origin: left center;
-    animation: speed-streak 5.2s infinite;
+    animation: speed-streak 2s infinite;
     pointer-events: none;
 }
 
