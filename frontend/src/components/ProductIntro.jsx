@@ -14,7 +14,7 @@ export default function ProductIntro() {
             01 — The Engine
           </span>
           <h2 className="serif text-4xl md:text-5xl leading-[1.05] mb-6">
-            Meet <span className="italic">ACE.</span>
+            Meet <span className="accent">ACE.</span>
           </h2>
           <p className="text-[#b9b3a7] leading-relaxed mb-6 max-w-md">
             ACE isn&apos;t another EDA tool grafted onto legacy stacks.

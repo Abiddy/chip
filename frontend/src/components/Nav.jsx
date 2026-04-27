@@ -32,10 +32,9 @@ export default function Nav() {
         <a
           href="#"
           data-testid="nav-logo"
-          className="flex items-center gap-2.5 group"
+          className="flex items-center group"
         >
-          <LensLogo className="w-7 h-7 text-[#f5f3ee] group-hover:text-[#ffb070] transition-colors duration-300" />
-          <span className="serif text-xl tracking-tight">Lens</span>
+          <LensLogo className="h-8 transition-opacity duration-300 group-hover:opacity-80" />
         </a>
 
         <nav className="hidden md:flex items-center gap-9">

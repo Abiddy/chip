@@ -42,7 +42,7 @@ export default function Hero() {
         >
           Verification, at
           <br />
-          <span className="italic text-[#ffb070]">silicon speed.</span>
+          <span className="accent">silicon speed.</span>
         </h1>
 
         <p

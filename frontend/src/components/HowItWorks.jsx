@@ -36,7 +36,7 @@ export default function HowItWorks() {
             </span>
             <h2 className="serif text-5xl md:text-6xl leading-[1.02] tracking-tight">
               From netlist to{" "}
-              <span className="italic text-[#ffb070]">tape-out.</span>
+              <span className="accent">tape-out.</span>
             </h2>
           </div>
           <p className="text-[#b9b3a7] text-base md:text-lg max-w-md leading-relaxed">

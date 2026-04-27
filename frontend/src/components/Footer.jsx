@@ -24,9 +24,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-12 gap-12 mb-16">
           <div className="lg:col-span-5">
-            <a href="#" className="flex items-center gap-2.5 mb-4">
-              <LensLogo className="w-7 h-7 text-[#f5f3ee]" />
-              <span className="serif text-2xl">Lens</span>
+            <a href="#" className="flex items-center mb-4">
+              <LensLogo className="h-9" />
             </a>
             <p className="text-[#b9b3a7] text-sm leading-relaxed max-w-sm">
               Analog verification, at silicon speed. Built for teams shipping

@@ -69,7 +69,7 @@ export default function Features() {
           <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight">
             Why ACE
             <br />
-            <span className="italic text-[#ffb070]">stands out.</span>
+            <span className="accent">stands out.</span>
           </h2>
           <p className="text-[#b9b3a7] text-base md:text-lg max-w-xl mt-6 leading-relaxed">
             Eight capabilities, one verified outcome — silicon that ships

@@ -27,7 +27,7 @@ export default function CTA() {
         <h2 className="serif text-5xl md:text-7xl leading-[0.98] tracking-tight mb-8">
           Stop waiting on
           <br />
-          <span className="italic text-[#ffb070]">verification.</span>
+          <span className="accent">verification.</span>
         </h2>
         <p className="text-[#b9b3a7] text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
           Join the analog teams shipping faster, cleaner silicon with ACE.
