@@ -265,7 +265,7 @@ button {
     background: var(--ink);
     color: #0a0a0b;
     font-weight: 500;
-    border-radius: 999px;
+    border-radius: 0;
     transition:
         transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
         background 0.3s ease,
@@ -290,7 +290,7 @@ button {
     background: transparent;
     color: var(--ink);
     border: 1px solid var(--line-strong);
-    border-radius: 999px;
+    border-radius: 0;
     font-weight: 500;
     transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }

@@ -168,7 +168,7 @@ export default function SavingsCTA() {
     <section
       id="savings"
       data-testid="savings-section"
-      className="relative overflow-hidden border-t border-b border-[#ffffff0d] bg-[#060707]"
+      className="relative overflow-hidden bg-[#060707]"
       style={{ minHeight: "560px" }}
     >
       {/* soft green wash */}
@@ -206,21 +206,38 @@ export default function SavingsCTA() {
         ))}
       </div>
 
+      {/* top + bottom edge fades (blend into surrounding sections) */}
+      <div
+        className="absolute top-0 left-0 right-0 h-40 pointer-events-none z-[5]"
+        aria-hidden="true"
+        style={{
+          background:
+            "linear-gradient(to bottom, #050505 0%, rgba(5,5,5,0.85) 30%, rgba(5,5,5,0) 100%)",
+        }}
+      />
+      <div
+        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none z-[5]"
+        aria-hidden="true"
+        style={{
+          background:
+            "linear-gradient(to top, #050505 0%, rgba(5,5,5,0.85) 30%, rgba(5,5,5,0) 100%)",
+        }}
+      />
+
       {/* content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-10 py-28 md:py-36 text-center flex flex-col items-center">
+      <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-10 py-32 md:py-44 text-center flex flex-col items-center">
         <span className="mono text-[10px] uppercase tracking-[0.25em] text-[#6ee7b7] mb-5 block">
           ROI · Savings Calculator
         </span>
         <h2
           data-testid="savings-heading"
-          className="serif text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5 max-w-3xl"
+          className="serif text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-6 max-w-3xl"
         >
-          You&apos;d be surprised how much
-          <br />
-          <span className="accent">we save you.</span>
+          Your CFO is <span className="accent">going to like</span> this.
         </h2>
-        <p className="text-[#b9b3a7] text-base md:text-lg mb-10 max-w-md">
-          Run the math. We dare you.
+        <p className="text-[#b9b3a7] text-base md:text-lg mb-10 max-w-xl leading-relaxed">
+          Verification is the most expensive line in your stack.
+          <br className="hidden sm:block" /> We fix that.
         </p>
 
         <a
