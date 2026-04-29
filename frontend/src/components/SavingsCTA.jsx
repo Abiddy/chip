@@ -213,10 +213,15 @@ export default function SavingsCTA() {
         </span>
         <h2
           data-testid="savings-heading"
-          className="serif text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-10 max-w-3xl"
+          className="serif text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-5 max-w-3xl"
         >
-          How much does <span className="accent">LENS</span> save you?
+          You&apos;d be surprised how much
+          <br />
+          <span className="accent">we save you.</span>
         </h2>
+        <p className="text-[#b9b3a7] text-base md:text-lg mb-10 max-w-md">
+          Run the math. We dare you.
+        </p>
 
         <a
           href="https://lenseda.com/ace-roi.html"
