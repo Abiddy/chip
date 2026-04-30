@@ -233,11 +233,12 @@ export default function SavingsCTA() {
           data-testid="savings-heading"
           className="serif text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-6 max-w-3xl"
         >
-          Your CFO is <span className="accent">going to like</span> this.
+          You&apos;d be surprised how much
+          <br />
+          <span className="accent">we save you.</span>
         </h2>
         <p className="text-[#b9b3a7] text-base md:text-lg mb-10 max-w-xl leading-relaxed">
-          Verification is the most expensive line in your stack.
-          <br className="hidden sm:block" /> We fix that.
+          Spoiler: it&apos;s a lot. Your CFO is going to like this.
         </p>
 
         <a
