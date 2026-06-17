@@ -3,6 +3,7 @@ import { ChevronRight, Menu, X } from "lucide-react";
 import { useScroll } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { AnimatedGroup } from "@/components/ui/animated-group";
+import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { cn } from "@/lib/utils";
 import LensLogo from "@/components/LensLogo";
 
@@ -143,15 +144,15 @@ export function HeroSection() {
         <section data-testid="hero-section">
           <div className="relative pt-24">
             <div className="absolute inset-0 -z-10 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,var(--background)_75%)]" />
-            <div className="mx-auto max-w-5xl px-6">
-              <div className="sm:mx-auto lg:mr-auto">
+            <ContainerScroll
+              titleComponent={
                 <AnimatedGroup
                   variants={{
                     container: {
                       visible: {
                         transition: {
                           staggerChildren: 0.05,
-                          delayChildren: 0.75,
+                          delayChildren: 0.2,
                         },
                       },
                     },
@@ -160,19 +161,19 @@ export function HeroSection() {
                 >
                   <h1
                     data-testid="hero-headline"
-                    className="mt-8 max-w-2xl text-balance text-5xl font-medium tracking-tight md:text-6xl lg:mt-16"
+                    className="mx-auto mt-8 max-w-2xl text-balance text-5xl font-medium tracking-tight md:text-6xl lg:mt-16"
                   >
                     Verification, at silicon speed.
                   </h1>
                   <p
                     data-testid="hero-subline"
-                    className="mt-8 max-w-2xl text-pretty text-lg text-muted-foreground"
+                    className="mx-auto mt-8 max-w-2xl text-pretty text-lg text-muted-foreground"
                   >
                     Lens eliminates analog verification bottlenecks at 12&nbsp;nm and
                     beyond. 100% accurate. 150&times; faster. Built from the silicon up
                     for the way modern teams tape out.
                   </p>
-                  <div className="mt-12 flex items-center gap-2">
+                  <div className="mt-12 flex items-center justify-center gap-2">
                     <div className="rounded-[14px] border border-border/60 bg-foreground/5 p-0.5">
                       <Button
                         asChild
@@ -196,37 +197,17 @@ export function HeroSection() {
                     </Button>
                   </div>
                 </AnimatedGroup>
-              </div>
-            </div>
-            <AnimatedGroup
-              variants={{
-                container: {
-                  visible: {
-                    transition: {
-                      staggerChildren: 0.05,
-                      delayChildren: 0.75,
-                    },
-                  },
-                },
-                ...transitionVariants,
-              }}
+              }
             >
-              <div className="relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20">
-                <div
-                  aria-hidden
-                  className="absolute inset-0 z-10 bg-gradient-to-b from-transparent from-35% to-background"
-                />
-                <div className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl border bg-background p-4 shadow-lg shadow-zinc-950/10 ring-1 ring-border/50">
-                  <img
-                    className="relative aspect-[15/8] w-full rounded-2xl border border-border/25 object-cover object-top"
-                    src={`${process.env.PUBLIC_URL}/ace-mock.png`}
-                    alt="ACE electronic design automation workspace"
-                    width="2700"
-                    height="1440"
-                  />
-                </div>
-              </div>
-            </AnimatedGroup>
+              <img
+                src={`${process.env.PUBLIC_URL}/ace-workspace-mock.png`}
+                alt="ACE Design Workspace"
+                width={1400}
+                height={720}
+                draggable={false}
+                className="mx-auto h-full w-full rounded-2xl object-cover object-left-top"
+              />
+            </ContainerScroll>
           </div>
         </section>
 

@@ -11,7 +11,7 @@ export default function Landing() {
   return (
     <main
       data-testid="landing-page"
-      className="relative min-h-screen overflow-hidden bg-background text-foreground"
+      className="relative min-h-screen overflow-x-hidden bg-background text-foreground"
     >
       <HeroSection />
       <ProductIntro />
