@@ -10,13 +10,13 @@ export default function ProductIntro() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
         {/* Left — sticky meta */}
         <div className="lg:col-span-4 lg:sticky lg:top-32">
-          <span className="mono text-[10px] uppercase tracking-[0.25em] text-[#34d399] mb-4 block">
+          <span className="mono text-[10px] text-teal-600 mb-4 block">
             01 — The Engine
           </span>
           <h2 className="serif text-4xl md:text-5xl leading-[1.05] mb-6">
             Meet <span className="accent">ACE.</span>
           </h2>
-          <p className="text-[#b9b3a7] leading-relaxed mb-6 max-w-md">
+          <p className="text-muted-foreground leading-relaxed mb-6 max-w-md">
             ACE isn&apos;t another EDA tool grafted onto legacy stacks.
             It&apos;s a clean-sheet analog verification engine, purpose-built
             for the deep-node era — where every nanosecond and every nanometer
@@ -25,7 +25,7 @@ export default function ProductIntro() {
           <a
             href="#features"
             data-testid="product-link"
-            className="inline-flex items-center gap-2 text-[#f5f3ee] border-b border-[#34d399] pb-1 hover:text-[#6ee7b7] transition-colors"
+            className="inline-flex items-center gap-2 text-foreground border-b border-teal-600 pb-1 hover:text-teal-700 transition-colors"
           >
             Explore the platform
             <ArrowUpRight size={14} />
@@ -34,11 +34,11 @@ export default function ProductIntro() {
 
         {/* Right — visual + copy */}
         <div className="lg:col-span-8">
-          <div className="relative rounded-md border border-[#ffffff14] bg-gradient-to-br from-[#0c0c0d] to-[#070708] overflow-hidden">
+          <div className="relative rounded-xl border border-border bg-gradient-to-br from-slate-50 to-white overflow-hidden shadow-sm">
             {/* simulated waveform / chip viz */}
             <ChipViz />
 
-            <div className="p-8 md:p-10 border-t border-[#ffffff10]">
+            <div className="p-8 md:p-10 border-t border-border">
               <div className="grid sm:grid-cols-3 gap-6">
                 {[
                   {
@@ -55,10 +55,10 @@ export default function ProductIntro() {
                   },
                 ].map((c) => (
                   <div key={c.k}>
-                    <div className="mono text-[10px] uppercase tracking-[0.22em] text-[#34d399] mb-2">
+                    <div className="mono text-[10px] text-teal-600 mb-2">
                       {c.k}
                     </div>
-                    <p className="text-sm text-[#b9b3a7] leading-relaxed">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                       {c.v}
                     </p>
                   </div>
@@ -93,13 +93,13 @@ function ChipViz() {
           </radialGradient>
         </defs>
 
-        <rect width="800" height="420" fill="#070708" />
+        <rect width="800" height="420" fill="#f8fafc" />
 
         {/* halo */}
         <ellipse cx="400" cy="210" rx="260" ry="180" fill="url(#halo)" />
 
         {/* base grid */}
-        <g stroke="#ffffff" strokeOpacity="0.05" strokeWidth="0.5">
+        <g stroke="#0f172a" strokeOpacity="0.06" strokeWidth="0.5">
           {Array.from({ length: 20 }).map((_, i) => (
             <line
               key={`v-${i}`}
@@ -144,8 +144,8 @@ function ChipViz() {
             width="160"
             height="100"
             rx="6"
-            fill="#0a0a0b"
-            stroke="#34d399"
+            fill="#ffffff"
+            stroke="#0d9488"
             strokeOpacity="0.7"
             strokeWidth="1.2"
           />
@@ -165,8 +165,8 @@ function ChipViz() {
             y="215"
             textAnchor="middle"
             fontSize="11"
-            fontFamily="JetBrains Mono"
-            fill="#6ee7b7"
+            fontFamily="Inter"
+            fill="#0f766e"
             letterSpacing="2"
           >
             ACE / 12nm
@@ -244,10 +244,10 @@ function ChipViz() {
       </svg>
 
       {/* HUD top-left */}
-      <div className="absolute top-4 left-4 mono text-[10px] uppercase tracking-[0.2em] text-[#6b6660]">
-        <span className="text-[#34d399]">●</span> live · run #4138 · pass
+      <div className="absolute top-4 left-4 mono text-[10px] text-muted-foreground">
+        <span className="text-teal-600">●</span> live · run #4138 · pass
       </div>
-      <div className="absolute top-4 right-4 mono text-[10px] uppercase tracking-[0.2em] text-[#6b6660]">
+      <div className="absolute top-4 right-4 mono text-[10px] text-muted-foreground">
         node 12nm · 150× · 0 false alarms
       </div>
     </div>

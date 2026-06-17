@@ -26,12 +26,12 @@ export default function HowItWorks() {
     <section
       id="how"
       data-testid="how-it-works"
-      className="relative py-32 md:py-40 border-t border-[#ffffff0d] bg-[#070708]"
+      className="relative py-32 md:py-40 border-t border-border bg-muted/30"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-20 gap-6">
           <div className="max-w-2xl">
-            <span className="mono text-[10px] uppercase tracking-[0.25em] text-[#34d399] mb-4 block">
+            <span className="mono text-[10px] text-teal-600 mb-4 block">
               03 — Workflow
             </span>
             <h2 className="serif text-5xl md:text-6xl leading-[1.02] tracking-tight">
@@ -39,40 +39,40 @@ export default function HowItWorks() {
               <span className="accent">tape-out.</span>
             </h2>
           </div>
-          <p className="text-[#b9b3a7] text-base md:text-lg max-w-md leading-relaxed">
+          <p className="text-muted-foreground text-base md:text-lg max-w-md leading-relaxed">
             Three steps. No detours. No false alarms. Designed by engineers
             who&apos;ve lived the bottleneck.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-px bg-[#ffffff0d]">
+        <div className="grid md:grid-cols-3 gap-px bg-border">
           {steps.map((s, i) => {
             const Icon = s.icon;
             return (
               <div
                 key={s.n}
                 data-testid={`workflow-step-${i}`}
-                className="relative bg-[#050505] p-8 md:p-10 group hover:bg-[#0a0a0b] transition-colors duration-500"
+                className="relative bg-background p-8 md:p-10 group hover:bg-muted/50 transition-colors duration-500"
               >
                 <div className="flex items-center justify-between mb-12">
-                  <span className="serif text-5xl text-[#1a1715] group-hover:text-[#34d399] transition-colors duration-500">
+                  <span className="serif text-5xl text-slate-200 group-hover:text-teal-600 transition-colors duration-500">
                     {s.n}
                   </span>
                   <Icon
                     size={22}
                     strokeWidth={1.4}
-                    className="text-[#6b6660] group-hover:text-[#6ee7b7] transition-colors duration-500"
+                    className="text-muted-foreground group-hover:text-teal-600 transition-colors duration-500"
                   />
                 </div>
-                <h3 className="serif text-2xl md:text-3xl mb-4 text-[#f5f3ee]">
+                <h3 className="serif text-2xl md:text-3xl mb-4 text-foreground">
                   {s.title}
                 </h3>
-                <p className="text-sm text-[#b9b3a7] leading-relaxed">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {s.desc}
                 </p>
 
                 {i < steps.length - 1 && (
-                  <span className="hidden md:block absolute top-1/2 -right-3 w-5 h-px bg-[#34d399]/40" />
+                  <span className="hidden md:block absolute top-1/2 -right-3 w-5 h-px bg-teal-600/40" />
                 )}
               </div>
             );

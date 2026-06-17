@@ -25,7 +25,7 @@ export default function Stats() {
   return (
     <section
       data-testid="stats-section"
-      className="relative py-28 md:py-36 border-t border-[#ffffff0d]"
+      className="relative py-28 md:py-36 border-t border-border"
     >
       <div className="absolute inset-0 pointer-events-none">
         <div
@@ -39,21 +39,21 @@ export default function Stats() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#ffffff0d] border border-[#ffffff0d]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border border border-border">
           {stats.map((s, i) => (
             <div
               key={i}
               data-testid={`stat-${i}`}
-              className="bg-[#050505] p-8 md:p-10 flex flex-col justify-between min-h-[200px] hover:bg-[#0a0a0b] transition-colors duration-500"
+              className="bg-background p-8 md:p-10 flex flex-col justify-between min-h-[200px] hover:bg-muted/50 transition-colors duration-500"
             >
               <div className="stat-num text-5xl md:text-6xl lg:text-7xl mb-6">
                 {s.n}
               </div>
               <div>
-                <div className="text-[#f5f3ee] text-sm font-medium mb-1">
+                <div className="text-foreground text-sm font-medium mb-1">
                   {s.label}
                 </div>
-                <div className="mono text-[10px] uppercase tracking-[0.18em] text-[#6b6660]">
+                <div className="mono text-[10px] text-muted-foreground">
                   {s.sub}
                 </div>
               </div>

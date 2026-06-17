@@ -168,7 +168,7 @@ export default function SavingsCTA() {
     <section
       id="savings"
       data-testid="savings-section"
-      className="relative overflow-hidden bg-[#060707]"
+      className="relative overflow-hidden bg-slate-50"
       style={{ minHeight: "560px" }}
     >
       {/* soft green wash */}
@@ -212,7 +212,7 @@ export default function SavingsCTA() {
         aria-hidden="true"
         style={{
           background:
-            "linear-gradient(to bottom, #050505 0%, rgba(5,5,5,0.85) 30%, rgba(5,5,5,0) 100%)",
+            "linear-gradient(to bottom, #ffffff 0%, rgba(255,255,255,0.85) 30%, rgba(255,255,255,0) 100%)",
         }}
       />
       <div
@@ -220,13 +220,13 @@ export default function SavingsCTA() {
         aria-hidden="true"
         style={{
           background:
-            "linear-gradient(to top, #050505 0%, rgba(5,5,5,0.85) 30%, rgba(5,5,5,0) 100%)",
+            "linear-gradient(to top, #ffffff 0%, rgba(255,255,255,0.85) 30%, rgba(255,255,255,0) 100%)",
         }}
       />
 
       {/* content */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-10 py-32 md:py-44 text-center flex flex-col items-center">
-        <span className="mono text-[10px] uppercase tracking-[0.25em] text-[#6ee7b7] mb-5 block">
+        <span className="mono text-[10px] text-teal-600 mb-5 block">
           ROI · Savings Calculator
         </span>
         <h2
@@ -237,7 +237,7 @@ export default function SavingsCTA() {
           <br />
           <span className="accent">we save you.</span>
         </h2>
-        <p className="text-[#b9b3a7] text-base md:text-lg mb-10 max-w-xl leading-relaxed">
+        <p className="text-muted-foreground text-base md:text-lg mb-10 max-w-xl leading-relaxed">
           Spoiler: it&apos;s a lot. Your CFO is going to like this.
         </p>
 

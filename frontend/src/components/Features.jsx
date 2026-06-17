@@ -57,13 +57,13 @@ export default function Features() {
     <section
       id="features"
       data-testid="features-section"
-      className="relative py-32 md:py-40 border-t border-[#ffffff0d]"
+      className="relative py-32 md:py-40 border-t border-border"
     >
       <div className="absolute inset-0 circuit-bg opacity-30" aria-hidden="true" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
         <div className="max-w-3xl mb-16 md:mb-24">
-          <span className="mono text-[10px] uppercase tracking-[0.25em] text-[#34d399] mb-4 block">
+          <span className="mono text-[10px] text-teal-600 mb-4 block">
             02 — Capabilities
           </span>
           <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight">
@@ -71,31 +71,31 @@ export default function Features() {
             <br />
             <span className="accent">stands out.</span>
           </h2>
-          <p className="text-[#b9b3a7] text-base md:text-lg max-w-xl mt-6 leading-relaxed">
+          <p className="text-muted-foreground text-base md:text-lg max-w-xl mt-6 leading-relaxed">
             Eight capabilities, one verified outcome — silicon that ships
             faster and works the first time.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#ffffff0d] border border-[#ffffff0d]">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border">
           {features.map((f, i) => {
             const Icon = f.icon;
             return (
               <div
                 key={f.name}
                 data-testid={`feature-card-${i}`}
-                className="feature-card bg-[#050505] hover:bg-[#0a0a0b]"
+                className="feature-card bg-background hover:bg-muted/50"
               >
                 <Icon
                   size={26}
                   strokeWidth={1.4}
-                  className="feature-icon text-[#34d399] mb-7"
+                  className="feature-icon text-teal-600 mb-7"
                 />
-                <h3 className="serif text-xl mb-3 text-[#f5f3ee]">{f.name}</h3>
-                <p className="text-sm text-[#b9b3a7] leading-relaxed">
+                <h3 className="serif text-xl mb-3 text-foreground">{f.name}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {f.desc}
                 </p>
-                <span className="mono text-[10px] uppercase tracking-[0.2em] text-[#6b6660] absolute top-5 right-5">
+                <span className="mono text-[10px] text-muted-foreground absolute top-5 right-5">
                   / {String(i + 1).padStart(2, "0")}
                 </span>
               </div>

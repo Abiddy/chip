@@ -5,7 +5,7 @@ export default function CTA() {
     <section
       id="cta"
       data-testid="cta-section"
-      className="relative py-32 md:py-44 border-t border-[#ffffff0d] overflow-hidden"
+      className="relative py-32 md:py-44 border-t border-border overflow-hidden"
     >
       {/* subtle amber glow */}
       <div className="absolute inset-0 pointer-events-none">
@@ -21,7 +21,7 @@ export default function CTA() {
       <div className="circuit-bg opacity-25" aria-hidden="true" />
 
       <div className="relative max-w-5xl mx-auto px-6 lg:px-10 text-center">
-        <span className="mono text-[10px] uppercase tracking-[0.25em] text-[#34d399] mb-6 block">
+        <span className="mono text-[10px] text-teal-600 mb-6 block">
           Ready when you are
         </span>
         <h2 className="serif text-5xl md:text-7xl leading-[0.98] tracking-tight mb-8">
@@ -29,7 +29,7 @@ export default function CTA() {
           <br />
           <span className="accent">verification.</span>
         </h2>
-        <p className="text-[#b9b3a7] text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
+        <p className="text-muted-foreground text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
           Join the analog teams shipping faster, cleaner silicon with ACE.
           Book a 30-minute demo and see your own design simulated in real
           time.
@@ -57,7 +57,7 @@ export default function CTA() {
           </a>
         </div>
 
-        <p className="mono text-[10px] uppercase tracking-[0.22em] text-[#6b6660] mt-12">
+        <p className="mono text-[10px] text-muted-foreground mt-12">
           No commitments · 30-minute walkthrough · Bring your own netlist
         </p>
       </div>
