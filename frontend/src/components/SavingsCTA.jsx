@@ -171,16 +171,6 @@ export default function SavingsCTA() {
       className="relative overflow-hidden bg-slate-50"
       style={{ minHeight: "560px" }}
     >
-      {/* soft green wash */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        aria-hidden="true"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(52,211,153,0.10) 0%, rgba(52,211,153,0.03) 35%, transparent 70%)",
-        }}
-      />
-
       {/* falling chips confetti */}
       <div
         className="absolute inset-0 pointer-events-none"

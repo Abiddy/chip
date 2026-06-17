@@ -462,7 +462,7 @@ button {
     animation-name: chip-fall;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-    filter: drop-shadow(0 0 4px rgba(52, 211, 153, 0.35));
+    filter: none;
 }
 
 @keyframes chip-fall {

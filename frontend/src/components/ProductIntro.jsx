@@ -87,16 +87,9 @@ function ChipViz() {
             <stop offset="50%" stopColor="#34d399" stopOpacity="0.9" />
             <stop offset="100%" stopColor="#34d399" stopOpacity="0" />
           </linearGradient>
-          <radialGradient id="halo" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#34d399" stopOpacity="0.35" />
-            <stop offset="100%" stopColor="#34d399" stopOpacity="0" />
-          </radialGradient>
         </defs>
 
         <rect width="800" height="420" fill="#f8fafc" />
-
-        {/* halo */}
-        <ellipse cx="400" cy="210" rx="260" ry="180" fill="url(#halo)" />
 
         {/* base grid */}
         <g stroke="#0f172a" strokeOpacity="0.06" strokeWidth="0.5">

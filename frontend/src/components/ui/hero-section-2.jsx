@@ -163,7 +163,9 @@ export function HeroSection() {
                     data-testid="hero-headline"
                     className="mx-auto mt-8 max-w-2xl text-balance text-5xl font-medium tracking-tight md:text-6xl lg:mt-16"
                   >
-                    Verification, at silicon speed.
+                    The Verification Solution
+                    <br />
+                    At Lightning Speed.
                   </h1>
                   <p
                     data-testid="hero-subline"
