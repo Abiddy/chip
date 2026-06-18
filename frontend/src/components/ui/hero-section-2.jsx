@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from "react";
 import { ChevronRight, Menu, X } from "lucide-react";
 import { useScroll } from "motion/react";
@@ -123,9 +124,9 @@ export function HeroHeader() {
                   </a>
                 </Button>
                 <Button asChild size="sm">
-                  <a href="https://calendly.com/lenseda" target="_blank" rel="noreferrer">
+                  <Link to="/reviews">
                     <span>Reviews</span>
-                  </a>
+                  </Link>
                 </Button>
               </div>
             </div>

@@ -2,4 +2,4 @@
 buildCommand = "npm install --include=dev && CI=true DISABLE_ESLINT_PLUGIN=true npm run build"
 
 [deploy]
-startCommand = "npm run serve"
+startCommand = "npm start"
