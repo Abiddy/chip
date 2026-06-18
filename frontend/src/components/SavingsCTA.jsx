@@ -215,20 +215,19 @@ export default function SavingsCTA() {
       />
 
       {/* content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-10 py-32 md:py-44 text-center flex flex-col items-center">
+      <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-10 py-24 md:py-32 text-center flex flex-col items-center">
         <span className="mono text-[10px] text-teal-600 mb-5 block">
           ROI · Savings Calculator
         </span>
         <h2
           data-testid="savings-heading"
-          className="serif text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-6 max-w-3xl"
+          className="serif text-3xl md:text-4xl leading-snug tracking-tight mb-4 max-w-2xl"
         >
-          You&apos;d be surprised how much
-          <br />
-          <span className="accent">we save you.</span>
+          Calculate Your Verification ROI
         </h2>
-        <p className="text-muted-foreground text-base md:text-lg mb-10 max-w-xl leading-relaxed">
-          Spoiler: it&apos;s a lot. Your CFO is going to like this.
+        <p className="text-muted-foreground text-sm md:text-base mb-8 max-w-lg leading-relaxed">
+          Estimate the time, compute, and cost savings ACE delivers across your
+          tape-out flow.
         </p>
 
         <a

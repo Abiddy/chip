@@ -124,7 +124,7 @@ export function HeroHeader() {
                 </Button>
                 <Button asChild size="sm">
                   <a href="https://calendly.com/lenseda" target="_blank" rel="noreferrer">
-                    <span>Launch workspace</span>
+                    <span>Reviews</span>
                   </a>
                 </Button>
               </div>
