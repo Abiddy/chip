@@ -44,9 +44,29 @@ Set the Railway service **Root Directory** to `frontend`.
 The server serves the React build and exposes:
 
 - `POST /api/reviews` — save demo feedback
+- `GET /api/reviews/published` — public published testimonials
+- `POST /api/admin/login` — admin password login
+- `GET /api/admin/reviews` — list all submissions (Bearer token)
+- `PATCH /api/admin/reviews/:id` — publish / unpublish (Bearer token)
 - `GET /api/health` — health check (includes DB status)
 
-### 3. View submissions
+### 3. Admin portal (`/answers`)
+
+Set an admin password on Railway:
+
+```bash
+ADMIN_PASSWORD=your-secure-password
+```
+
+Optional (recommended for production):
+
+```bash
+ADMIN_SECRET=another-long-random-string
+```
+
+Then visit `/answers`, sign in, and click **Publish** on submissions you want on the landing page. Published reviews appear in the **Customer Voices** section on the homepage.
+
+### 4. View submissions in SQL
 
 In Railway, open the Postgres service → **Data** tab, or connect with any SQL client:
 

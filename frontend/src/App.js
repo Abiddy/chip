@@ -2,6 +2,7 @@ import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Reviews from "./pages/Reviews";
+import Answers from "./pages/Answers";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/reviews" element={<Reviews />} />
+          <Route path="/answers" element={<Answers />} />
         </Routes>
       </BrowserRouter>
     </div>

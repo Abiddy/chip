@@ -4,6 +4,7 @@ import SavingsCTA from "../components/SavingsCTA";
 import Features from "../components/Features";
 import HowItWorks from "../components/HowItWorks";
 import Stats from "../components/Stats";
+import PublishedReviews from "../components/PublishedReviews";
 import CTA from "../components/CTA";
 import Footer from "../components/Footer";
 
@@ -18,6 +19,7 @@ export default function Landing() {
       <Features />
       <HowItWorks />
       <Stats />
+      <PublishedReviews />
       <SavingsCTA />
       <CTA />
       <Footer />

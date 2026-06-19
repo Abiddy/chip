@@ -1,7 +1,17 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-const { initDb, insertReviewSubmission, checkDbConnection } = require("./db");
+const {
+  initDb,
+  insertReviewSubmission,
+  listAllReviewSubmissions,
+  listPublishedReviewSubmissions,
+  setReviewPublished,
+  checkDbConnection,
+  formatPublicReview,
+  formatAdminReview,
+} = require("./db");
+const { getAdminToken, verifyAdminPassword, requireAdmin } = require("./auth");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -17,7 +27,7 @@ function isValidEmail(email) {
 app.get("/api/health", async (_req, res) => {
   try {
     const db = await checkDbConnection();
-    res.json({ ok: true, db });
+    res.json({ ok: true, db, adminConfigured: Boolean(process.env.ADMIN_PASSWORD) });
   } catch {
     res.status(503).json({ ok: false, db: false });
   }
@@ -65,6 +75,67 @@ app.post("/api/reviews", async (req, res) => {
   }
 });
 
+app.get("/api/reviews/published", async (_req, res) => {
+  if (!process.env.DATABASE_URL) {
+    return res.json({ reviews: [] });
+  }
+
+  try {
+    const rows = await listPublishedReviewSubmissions();
+    res.json({
+      reviews: rows.map(formatPublicReview).filter((review) => review.quote.trim()),
+    });
+  } catch (error) {
+    console.error("[reviews] published list failed:", error);
+    res.status(500).json({ message: "Failed to load published reviews." });
+  }
+});
+
+app.post("/api/admin/login", (req, res) => {
+  if (!process.env.ADMIN_PASSWORD) {
+    return res.status(503).json({
+      message: "Admin access is not configured. Set ADMIN_PASSWORD on Railway.",
+    });
+  }
+
+  const password = (req.body?.password || "").trim();
+  if (!verifyAdminPassword(password)) {
+    return res.status(401).json({ message: "Incorrect password." });
+  }
+
+  return res.json({ token: getAdminToken() });
+});
+
+app.get("/api/admin/reviews", requireAdmin, async (_req, res) => {
+  try {
+    const rows = await listAllReviewSubmissions();
+    res.json({ reviews: rows.map(formatAdminReview) });
+  } catch (error) {
+    console.error("[admin] list failed:", error);
+    res.status(500).json({ message: "Failed to load submissions." });
+  }
+});
+
+app.patch("/api/admin/reviews/:id", requireAdmin, async (req, res) => {
+  const { id } = req.params;
+  const { published } = req.body || {};
+
+  if (typeof published !== "boolean") {
+    return res.status(400).json({ message: "published must be a boolean." });
+  }
+
+  try {
+    const row = await setReviewPublished(id, published);
+    if (!row) {
+      return res.status(404).json({ message: "Submission not found." });
+    }
+    res.json({ review: formatAdminReview(row) });
+  } catch (error) {
+    console.error("[admin] publish toggle failed:", error);
+    res.status(500).json({ message: "Failed to update submission." });
+  }
+});
+
 if (SERVE_STATIC && fs.existsSync(BUILD_PATH)) {
   app.use(express.static(BUILD_PATH));
 
@@ -81,6 +152,9 @@ async function start() {
     console.log(`[server] listening on port ${PORT}`);
     if (SERVE_STATIC && fs.existsSync(BUILD_PATH)) {
       console.log("[server] serving static build");
+    }
+    if (!process.env.ADMIN_PASSWORD) {
+      console.warn("[admin] ADMIN_PASSWORD is not set — /answers login will be disabled.");
     }
   });
 }
