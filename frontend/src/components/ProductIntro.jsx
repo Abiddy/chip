@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 import AceFeatureCards from "./AceFeatureCards";
 import AceMetricsCards from "./AceMetricsCards";
 import SectionHeader, { SpecBadge } from "./SectionHeader";
+import SectionWatermark from "./SectionWatermark";
+
+const ACE_WATERMARK = `${process.env.PUBLIC_URL}/ace-logo-watermark.png`;
 
 const ACE_MODE_FEATURES = [
   "Selective scaling & dynamic trimming from schematic",
@@ -23,13 +26,15 @@ const ABS_MODE_FEATURES = [
 export default function ProductIntro() {
   return (
     <div id="product" data-testid="product-intro" className="relative overflow-hidden">
-      <div
-        className="absolute top-0 right-0 w-[600px] h-[600px] bg-teal-500/5 rounded-full blur-[120px] pointer-events-none"
-        aria-hidden="true"
-      />
       {/* Hero */}
       <section className="relative flex min-h-[70vh] items-center py-24 md:py-32 lg:min-h-0 lg:py-40">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center w-full">
+        <SectionWatermark
+          src={ACE_WATERMARK}
+          position="top-left"
+          size="sm"
+          imageClassName="opacity-[0.035] md:opacity-[0.05]"
+        />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center w-full">
           <div className="lg:col-span-5 lg:sticky lg:top-32 space-y-8">
             <SectionHeader
               label="01 — Our Flagship Product"
@@ -61,8 +66,14 @@ export default function ProductIntro() {
       </section>
 
       {/* Metrics */}
-      <section id="ace-metrics" className="pb-24 md:pb-32">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+      <section id="ace-metrics" className="relative pb-24 md:pb-32">
+        <SectionWatermark
+          src={ACE_WATERMARK}
+          position="top-right"
+          size="sm"
+          imageClassName="opacity-[0.03] md:opacity-[0.05]"
+        />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
           <SectionHeader
             label="01A — Engine Throughput"
             title={
@@ -77,8 +88,14 @@ export default function ProductIntro() {
       </section>
 
       {/* Operational Modes */}
-      <section id="ace-modes" className="pb-24 md:pb-32 bg-slate-50/50 border-y border-border">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-24">
+      <section id="ace-modes" className="relative pb-24 md:pb-32 bg-slate-50/50 border-y border-border overflow-hidden">
+        <SectionWatermark
+          src={ACE_WATERMARK}
+          position="bottom-left"
+          size="sm"
+          imageClassName="opacity-[0.035] md:opacity-[0.055]"
+        />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-24">
           <SectionHeader
             label="02 — Operational Modes"
             title={
@@ -152,9 +169,15 @@ export default function ProductIntro() {
           </div>
         </div>
       </section>
-      <section id="ace-impact" className="pb-32 md:pb-40">
+      <section id="ace-impact" className="relative pb-32 md:pb-40 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="bg-slate-900 text-white rounded-2xl p-10 md:p-16 relative overflow-hidden">
+            <SectionWatermark
+              src={ACE_WATERMARK}
+              position="top-left"
+              size="sm"
+              imageClassName="opacity-[0.08] md:opacity-[0.12]"
+            />
             <div className="relative z-10 max-w-3xl">
               <span className="mono text-[10px] text-teal-400 mb-6 block tracking-[0.2em]">
                 Efficiency & Automation

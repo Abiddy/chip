@@ -15,10 +15,10 @@ export default function Landing() {
     >
       <HeroSection />
       <ProductIntro />
-      <SavingsCTA />
       <Features />
       <HowItWorks />
       <Stats />
+      <SavingsCTA />
       <CTA />
       <Footer />
     </main>

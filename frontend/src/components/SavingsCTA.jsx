@@ -1,5 +1,8 @@
 import { useMemo } from "react";
 import { ArrowUpRight } from "lucide-react";
+import SectionWatermark from "./SectionWatermark";
+
+const LENS_WATERMARK = `${process.env.PUBLIC_URL}/lens-logo-watermark.png`;
 
 // Three subtle chip variants so the confetti feels organic
 function ChipSvg({ variant, size }) {
@@ -171,6 +174,13 @@ export default function SavingsCTA() {
       className="relative overflow-hidden bg-slate-50"
       style={{ minHeight: "560px" }}
     >
+      <SectionWatermark
+        src={LENS_WATERMARK}
+        position="center"
+        size="sm"
+        blend="screen"
+        imageClassName="opacity-[0.06] md:opacity-[0.1]"
+      />
       {/* falling chips confetti */}
       <div
         className="absolute inset-0 pointer-events-none"

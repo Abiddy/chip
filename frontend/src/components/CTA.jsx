@@ -1,4 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
+import SectionWatermark from "./SectionWatermark";
+
+const ACE_WATERMARK = `${process.env.PUBLIC_URL}/ace-logo-watermark.png`;
 
 export default function CTA() {
   return (
@@ -7,6 +10,12 @@ export default function CTA() {
       data-testid="cta-section"
       className="relative py-32 md:py-44 border-t border-border overflow-hidden"
     >
+      <SectionWatermark
+        src={ACE_WATERMARK}
+        position="top-right"
+        size="sm"
+        imageClassName="opacity-[0.03] md:opacity-[0.05]"
+      />
       {/* subtle amber glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div

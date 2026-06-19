@@ -3,10 +3,11 @@ import LensLogo from "./LensLogo";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
-  { label: "Product", href: "#product" },
-  { label: "Company", href: "#company" },
-  { label: "Customers", href: "#customers" },
-  { label: "Resources", href: "#resources" },
+  { label: "ACE", href: "#product" },
+  { label: "Capabilities", href: "#features" },
+  { label: "Workflow", href: "#how" },
+  { label: "Performance", href: "#performance" },
+  { label: "ROI", href: "#savings" },
 ];
 
 export default function Nav() {

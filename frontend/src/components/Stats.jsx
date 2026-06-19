@@ -7,6 +7,9 @@ import {
   Zap,
 } from "lucide-react";
 import SectionHeader, { SpecBadge } from "./SectionHeader";
+import SectionWatermark from "./SectionWatermark";
+
+const LENS_WATERMARK = `${process.env.PUBLIC_URL}/lens-logo-watermark.png`;
 
 const kpis = [
   {
@@ -69,6 +72,13 @@ export default function Stats() {
           backgroundSize: "40px 40px",
         }}
         aria-hidden="true"
+      />
+      <SectionWatermark
+        src={LENS_WATERMARK}
+        position="bottom-left"
+        size="default"
+        blend="screen"
+        imageClassName="opacity-[0.07] md:opacity-[0.11]"
       />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10">

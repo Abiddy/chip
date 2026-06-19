@@ -1,5 +1,8 @@
 import { ArrowRight, CheckCircle2, Cog, Upload } from "lucide-react";
 import SectionHeader, { SpecBadge } from "./SectionHeader";
+import SectionWatermark from "./SectionWatermark";
+
+const LENS_WATERMARK = `${process.env.PUBLIC_URL}/lens-logo-watermark.png`;
 
 const steps = [
   {
@@ -46,6 +49,13 @@ export default function HowItWorks() {
           backgroundSize: "40px 40px",
         }}
         aria-hidden="true"
+      />
+      <SectionWatermark
+        src={LENS_WATERMARK}
+        position="top-left"
+        size="sm"
+        blend="screen"
+        imageClassName="opacity-[0.08] md:opacity-[0.12]"
       />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10">

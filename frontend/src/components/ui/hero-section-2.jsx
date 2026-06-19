@@ -29,10 +29,11 @@ const transitionVariants = {
 };
 
 const menuItems = [
-  { name: "Product", href: "#product" },
-  { name: "Company", href: "#company" },
-  { name: "Customers", href: "#customers" },
-  { name: "Resources", href: "#resources" },
+  { name: "ACE", href: "#product" },
+  { name: "Capabilities", href: "#features" },
+  { name: "Workflow", href: "#how" },
+  { name: "Performance", href: "#performance" },
+  { name: "ROI", href: "#savings" },
 ];
 
 const partners = [
