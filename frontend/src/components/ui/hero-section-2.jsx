@@ -64,7 +64,7 @@ export function HeroHeader() {
       <nav
         data-state={menuState && "active"}
         className={cn(
-          "group fixed z-20 w-full border-b border-border/60 transition-colors duration-150",
+          "group fixed z-50 w-full border-b border-border/60 transition-colors duration-150",
           scrolled && "bg-background/80 backdrop-blur-3xl"
         )}
       >
@@ -72,7 +72,7 @@ export function HeroHeader() {
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
             <div className="flex w-full items-center justify-between gap-12 lg:w-auto">
               <a href="#" aria-label="home" className="flex items-center space-x-2">
-                <LensLogo className="h-7" />
+                <LensLogo className="h-8" />
               </a>
 
               <button
@@ -144,7 +144,7 @@ export function HeroSection() {
       <HeroHeader />
       <main className="overflow-hidden">
         <section data-testid="hero-section">
-          <div className="relative pt-24">
+          <div className="relative pt-28 md:pt-32">
             <div className="absolute inset-0 -z-10 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,var(--background)_75%)]" />
             <ContainerScroll
               titleComponent={
@@ -163,7 +163,7 @@ export function HeroSection() {
                 >
                   <h1
                     data-testid="hero-headline"
-                    className="mx-auto mt-8 max-w-2xl text-balance text-5xl font-medium tracking-tight md:text-6xl lg:mt-16"
+                    className="mx-auto mt-4 max-w-2xl text-balance text-5xl font-medium tracking-tight md:mt-6 md:text-6xl"
                   >
                     The Verification Solution
                     <br />
@@ -209,7 +209,7 @@ export function HeroSection() {
                 width={1400}
                 height={720}
                 draggable={false}
-                className="mx-auto h-full w-full rounded-2xl object-cover object-left-top"
+                className="mx-auto h-full w-full object-contain"
               />
             </ContainerScroll>
           </div>
