@@ -1,248 +1,212 @@
-import { ArrowUpRight } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+} from "lucide-react";
+import { Link } from "react-router-dom";
+import AceFeatureCards from "./AceFeatureCards";
+import AceMetricsCards from "./AceMetricsCards";
+import SectionHeader, { SpecBadge } from "./SectionHeader";
+
+const ACE_MODE_FEATURES = [
+  "Selective scaling & dynamic trimming from schematic",
+  "What-if analysis on parasitics and coupling capacitances",
+  "Zero-loss parasitic filtering without re-extraction",
+];
+
+const ABS_MODE_FEATURES = [
+  "Generates reduced-complexity sub-circuits for SPICE or GLS",
+  "Preserves critical accuracy and analog loading",
+  "Automated test bench generation — no custom layouts",
+];
 
 export default function ProductIntro() {
   return (
-    <section
-      id="product"
-      data-testid="product-intro"
-      className="relative py-32 md:py-40"
-    >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-        {/* Left — sticky meta */}
-        <div className="lg:col-span-4 lg:sticky lg:top-32">
-          <span className="mono text-[10px] text-teal-600 mb-4 block">
-            01 — The Engine
-          </span>
-          <h2 className="serif text-4xl md:text-5xl leading-[1.05] mb-6">
-            Meet <span className="accent">ACE.</span>
-          </h2>
-          <p className="text-muted-foreground leading-relaxed mb-6 max-w-md">
-            ACE isn&apos;t another EDA tool grafted onto legacy stacks.
-            It&apos;s a clean-sheet analog verification engine, purpose-built
-            for the deep-node era — where every nanosecond and every nanometer
-            counts.
-          </p>
-          <a
-            href="#features"
-            data-testid="product-link"
-            className="inline-flex items-center gap-2 text-foreground border-b border-teal-600 pb-1 hover:text-teal-700 transition-colors"
-          >
-            Explore the platform
-            <ArrowUpRight size={14} />
-          </a>
+    <div id="product" data-testid="product-intro" className="relative overflow-hidden">
+      <div
+        className="absolute top-0 right-0 w-[600px] h-[600px] bg-teal-500/5 rounded-full blur-[120px] pointer-events-none"
+        aria-hidden="true"
+      />
+      {/* Hero */}
+      <section className="relative flex min-h-[70vh] items-center py-24 md:py-32 lg:min-h-0 lg:py-40">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center w-full">
+          <div className="lg:col-span-5 lg:sticky lg:top-32 space-y-8">
+            <SectionHeader
+              label="01 — Our Flagship Product"
+              title={
+                <h2 className="serif text-4xl md:text-5xl leading-[1.08]">
+                  Meet ACE.{" "}
+                  <span className="accent block md:inline mt-1 md:mt-0">
+                    The Bridge Between Extraction and Simulation.
+                  </span>
+                </h2>
+              }
+              description="ACE bridges the gap between extraction and simulation to enable high-fidelity verification with significantly faster turnaround times. A clean-sheet engine, purpose-built for the deep-node era — where every nanosecond and every nanometer counts."
+              className="mb-0"
+            />
+            <a
+              href="#ace-metrics"
+              data-testid="product-link"
+              className="inline-flex items-center gap-2 text-foreground border-b border-teal-600 pb-1 hover:text-teal-700 transition-colors mono text-[11px]"
+            >
+              Explore the platform
+              <ArrowRight size={14} />
+            </a>
+          </div>
+
+          <div className="lg:col-span-7 flex h-full min-h-[360px] items-center justify-center self-center">
+            <AceFeatureCards />
+          </div>
         </div>
+      </section>
 
-        {/* Right — visual + copy */}
-        <div className="lg:col-span-8">
-          <div className="relative rounded-xl border border-border bg-gradient-to-br from-slate-50 to-white overflow-hidden shadow-sm">
-            {/* simulated waveform / chip viz */}
-            <ChipViz />
+      {/* Metrics */}
+      <section id="ace-metrics" className="pb-24 md:pb-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <SectionHeader
+            label="01A — Engine Throughput"
+            title={
+              <h3 className="serif text-3xl md:text-4xl leading-tight">
+                Built for production-scale parasitic datasets.
+              </h3>
+            }
+            className="mb-12"
+          />
+          <AceMetricsCards />
+        </div>
+      </section>
 
-            <div className="p-8 md:p-10 border-t border-border">
-              <div className="grid sm:grid-cols-3 gap-6">
-                {[
-                  {
-                    k: "Simulation",
-                    v: "Faster runs without simplification — full SPICE-grade fidelity, accelerated.",
-                  },
-                  {
-                    k: "Debugging",
-                    v: "AI-driven root-cause traces. Skip the false alarms, find the real bug.",
-                  },
-                  {
-                    k: "Integration",
-                    v: "Drops into your existing tape-out flow. No rewrite. No friction.",
-                  },
-                ].map((c) => (
-                  <div key={c.k}>
-                    <div className="mono text-[10px] text-teal-600 mb-2">
-                      {c.k}
-                    </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {c.v}
-                    </p>
-                  </div>
+      {/* Operational Modes */}
+      <section id="ace-modes" className="pb-24 md:pb-32 bg-slate-50/50 border-y border-border">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-24">
+          <SectionHeader
+            label="02 — Operational Modes"
+            title={
+              <h3 className="serif text-3xl md:text-4xl leading-tight">
+                Two modes. One verification engine.
+              </h3>
+            }
+            description="Process-agnostic technology tested from 180nm to 5nm — operate in ACE mode for analog STA or ABS mode for transceiver and digital GLS."
+            className="mb-12"
+          />
+          <div className="flex flex-col lg:flex-row gap-6">
+            {/* ACE Mode */}
+            <div className="flex-1 p-8 md:p-10 border border-border rounded-xl bg-white relative overflow-hidden hover:border-teal-500/40 hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] transition-all">
+              <div className="absolute top-4 right-4">
+                <SpecBadge className="rounded-full px-3 py-1">
+                  +200× Faster
+                </SpecBadge>
+              </div>
+              <span className="mono text-[10px] text-teal-600 block mb-4">
+                Mode: ACE · Analog STA
+              </span>
+              <h3 className="serif text-2xl md:text-3xl mb-4">
+                ACE Mode (Analog STA)
+              </h3>
+              <p className="text-muted-foreground mb-8 leading-relaxed">
+                Enables &ldquo;what-if&rdquo; analysis by allowing designers to
+                selectively scale, trim, or filter parasitics and coupling
+                capacitances directly from the schematic —{" "}
+                <strong className="text-foreground font-medium">
+                  +200× faster
+                </strong>{" "}
+                than traditional re-extraction.
+              </p>
+              <ul className="space-y-4">
+                {ACE_MODE_FEATURES.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <Check
+                      size={18}
+                      className="text-teal-600 mt-0.5 shrink-0"
+                      strokeWidth={2.5}
+                    />
+                    <span className="text-sm md:text-base">{item}</span>
+                  </li>
                 ))}
+              </ul>
+            </div>
+
+            {/* ABS Mode */}
+            <div className="flex-1 p-8 md:p-10 border border-border rounded-xl bg-white hover:border-teal-500/30 hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] transition-all">
+              <span className="mono text-[10px] text-muted-foreground block mb-4">
+                Mode: ABS · Reduced Model
+              </span>
+              <h3 className="serif text-2xl md:text-3xl mb-4">
+                ABS Mode (Reduced Model)
+              </h3>
+              <p className="text-muted-foreground mb-8 leading-relaxed">
+                Engineered for large-scale digital and transceiver blocks.
+                Generates high-fidelity, reduced-complexity sub-circuits for
+                SPICE or GLS while eliminating the overhead of non-essential
+                parasitics.
+              </p>
+              <ul className="space-y-4">
+                {ABS_MODE_FEATURES.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span className="mt-1.5 size-1.5 rounded-full bg-muted-foreground shrink-0" />
+                    <span className="text-sm md:text-base">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="ace-impact" className="pb-32 md:pb-40">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="bg-slate-900 text-white rounded-2xl p-10 md:p-16 relative overflow-hidden">
+            <div className="relative z-10 max-w-3xl">
+              <span className="mono text-[10px] text-teal-400 mb-6 block tracking-[0.2em]">
+                Efficiency & Automation
+              </span>
+              <h2 className="serif text-3xl md:text-5xl leading-[1.1] mb-8">
+                Reduce your verification cycle from weeks to hours.
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="w-12 h-0.5 bg-teal-400" />
+                    <h4 className="serif text-xl">Time Savings</h4>
+                  </div>
+                  <p className="text-slate-400 leading-relaxed">
+                    Primary impact on simulation and extraction time — with
+                    negligible accuracy sacrificed. Parallelized processing
+                    eliminates bottlenecks so teams focus on design, not waiting
+                    for netlists.
+                  </p>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="w-12 h-0.5 bg-teal-400" />
+                    <h4 className="serif text-xl">Full Automation</h4>
+                  </div>
+                  <p className="text-slate-400 leading-relaxed">
+                    Full automation of layout activities assists designers
+                    during verification — removing manual hand-offs and reducing
+                    error potential in deep-node sign-off.
+                  </p>
+                </div>
+              </div>
+              <div className="mt-12 flex flex-wrap gap-4">
+                <a
+                  href="#cta"
+                  className="inline-flex items-center gap-2 bg-teal-400 text-slate-900 px-8 py-4 rounded-lg font-semibold text-sm hover:bg-teal-300 transition-colors"
+                >
+                  Schedule Demo
+                  <ArrowUpRight size={16} />
+                </a>
+                <Link
+                  to="/reviews"
+                  className="inline-flex items-center gap-2 border border-slate-600 text-slate-300 px-8 py-4 rounded-lg font-semibold text-sm hover:bg-slate-800 transition-colors"
+                >
+                  Share Demo Feedback
+                  <ArrowRight size={16} />
+                </Link>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
-
-function ChipViz() {
-  return (
-    <div className="relative h-[320px] md:h-[420px] w-full overflow-hidden">
-      {/* circuit grid */}
-      <svg
-        className="absolute inset-0 w-full h-full"
-        viewBox="0 0 800 420"
-        preserveAspectRatio="xMidYMid slice"
-      >
-        <defs>
-          <linearGradient id="trace" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#34d399" stopOpacity="0" />
-            <stop offset="50%" stopColor="#34d399" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#34d399" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-
-        <rect width="800" height="420" fill="#f8fafc" />
-
-        {/* base grid */}
-        <g stroke="#0f172a" strokeOpacity="0.06" strokeWidth="0.5">
-          {Array.from({ length: 20 }).map((_, i) => (
-            <line
-              key={`v-${i}`}
-              x1={i * 40}
-              y1="0"
-              x2={i * 40}
-              y2="420"
-            />
-          ))}
-          {Array.from({ length: 11 }).map((_, i) => (
-            <line
-              key={`h-${i}`}
-              x1="0"
-              y1={i * 40}
-              x2="800"
-              y2={i * 40}
-            />
-          ))}
-        </g>
-
-        {/* circuit traces */}
-        <g
-          fill="none"
-          stroke="#34d399"
-          strokeOpacity="0.55"
-          strokeWidth="1"
-          strokeLinecap="round"
-        >
-          <path d="M 40 80 L 200 80 L 200 200 L 320 200" />
-          <path d="M 40 200 L 120 200 L 120 320 L 240 320" />
-          <path d="M 480 80 L 600 80 L 600 200 L 760 200" />
-          <path d="M 480 320 L 600 320 L 600 240" />
-          <path d="M 320 80 L 480 80" />
-          <path d="M 320 320 L 480 320" />
-        </g>
-
-        {/* chip die */}
-        <g>
-          <rect
-            x="320"
-            y="160"
-            width="160"
-            height="100"
-            rx="6"
-            fill="#ffffff"
-            stroke="#0d9488"
-            strokeOpacity="0.7"
-            strokeWidth="1.2"
-          />
-          <rect
-            x="335"
-            y="175"
-            width="130"
-            height="70"
-            rx="2"
-            fill="none"
-            stroke="#34d399"
-            strokeOpacity="0.3"
-            strokeDasharray="2 2"
-          />
-          <text
-            x="400"
-            y="215"
-            textAnchor="middle"
-            fontSize="11"
-            fontFamily="Inter"
-            fill="#0f766e"
-            letterSpacing="2"
-          >
-            ACE / 12nm
-          </text>
-          {/* pins */}
-          {Array.from({ length: 6 }).map((_, i) => (
-            <g key={i}>
-              <line
-                x1={335 + i * 22}
-                y1="160"
-                x2={335 + i * 22}
-                y2="150"
-                stroke="#34d399"
-                strokeOpacity="0.5"
-              />
-              <line
-                x1={335 + i * 22}
-                y1="260"
-                x2={335 + i * 22}
-                y2="270"
-                stroke="#34d399"
-                strokeOpacity="0.5"
-              />
-            </g>
-          ))}
-        </g>
-
-        {/* moving signal */}
-        <rect
-          x="0"
-          y="79"
-          width="200"
-          height="2"
-          fill="url(#trace)"
-        >
-          <animate
-            attributeName="x"
-            from="-200"
-            to="800"
-            dur="4s"
-            repeatCount="indefinite"
-          />
-        </rect>
-        <rect
-          x="0"
-          y="319"
-          width="160"
-          height="2"
-          fill="url(#trace)"
-        >
-          <animate
-            attributeName="x"
-            from="-160"
-            to="800"
-            dur="5s"
-            begin="1s"
-            repeatCount="indefinite"
-          />
-        </rect>
-
-        {/* nodes */}
-        {[
-          [120, 200],
-          [200, 200],
-          [200, 80],
-          [320, 80],
-          [480, 80],
-          [600, 200],
-          [600, 320],
-          [240, 320],
-          [600, 240],
-        ].map(([x, y], i) => (
-          <circle key={i} cx={x} cy={y} r="3" fill="#34d399" />
-        ))}
-      </svg>
-
-      {/* HUD top-left */}
-      <div className="absolute top-4 left-4 mono text-[10px] text-muted-foreground">
-        <span className="text-teal-600">●</span> live · run #4138 · pass
-      </div>
-      <div className="absolute top-4 right-4 mono text-[10px] text-muted-foreground">
-        node 12nm · 150× · 0 false alarms
-      </div>
+      </section>
     </div>
   );
 }

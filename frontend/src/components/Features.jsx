@@ -1,13 +1,16 @@
 import {
+  ArrowRight,
+  ArrowUpRight,
   Cpu,
-  HardDrive,
-  ShieldCheck,
-  Layers,
   Gauge,
-  Sparkles,
+  HardDrive,
+  Layers,
   LineChart,
   Plug,
+  ShieldCheck,
+  Sparkles,
 } from "lucide-react";
+import SectionHeader, { SpecBadge } from "./SectionHeader";
 
 const features = [
   {
@@ -33,7 +36,8 @@ const features = [
   {
     icon: Gauge,
     name: "Lightning-fast runs",
-    desc: "150× faster simulation cycles. Sweep more corners, run more scenarios, ship in fewer revisions.",
+    desc: "Sweep more corners, run more scenarios, and ship in fewer revisions with optimized engine cycles.",
+    badge: "+150× Faster",
   },
   {
     icon: Sparkles,
@@ -43,7 +47,7 @@ const features = [
   {
     icon: LineChart,
     name: "Insightful simulation",
-    desc: "Deep visibility into every node, every transition. See what your circuit is actually doing.",
+    desc: "Deep visibility into every node, every transition. See what your circuit is actually doing in real-time.",
   },
   {
     icon: Plug,
@@ -57,50 +61,85 @@ export default function Features() {
     <section
       id="features"
       data-testid="features-section"
-      className="relative py-32 md:py-40 border-t border-border"
+      className="relative py-32 md:py-40 border-t border-border overflow-hidden"
     >
-      <div className="absolute inset-0 circuit-bg opacity-30" aria-hidden="true" />
+      <div
+        className="absolute inset-0 pointer-events-none opacity-40"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(108,122,117,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(108,122,117,0.05) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
+        aria-hidden="true"
+      />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-teal-500/5 rounded-full blur-[120px] -z-10 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="max-w-3xl mb-16 md:mb-24">
-          <span className="mono text-[10px] text-teal-600 mb-4 block">
-            02 — Capabilities
-          </span>
-          <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight">
-            Why ACE
-            <br />
-            <span className="accent">stands out.</span>
-          </h2>
-          <p className="text-muted-foreground text-base md:text-lg max-w-xl mt-6 leading-relaxed">
-            Eight capabilities, one verified outcome — silicon that ships
-            faster and works the first time.
-          </p>
-        </div>
+        <SectionHeader
+          label="02 — Capabilities"
+          title={
+            <h2 className="serif text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
+              Why ACE <span className="accent">stands out.</span>
+            </h2>
+          }
+          description="Eight capabilities, one verified outcome — silicon that ships faster and works the first time. Engineered for the next generation of analog complexity."
+        />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-l border-t border-border">
           {features.map((f, i) => {
             const Icon = f.icon;
             return (
               <div
                 key={f.name}
                 data-testid={`feature-card-${i}`}
-                className="feature-card bg-background hover:bg-muted/50"
+                className="group relative bg-white p-8 border-r border-b border-border transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] hover:border-slate-300 hover:-translate-y-0.5"
               >
-                <Icon
-                  size={26}
-                  strokeWidth={1.4}
-                  className="feature-icon text-teal-600 mb-7"
-                />
-                <h3 className="serif text-xl mb-3 text-foreground">{f.name}</h3>
+                <div className="flex justify-between items-start mb-12">
+                  <Icon
+                    size={32}
+                    strokeWidth={1.4}
+                    className="text-teal-600"
+                  />
+                  <span className="mono text-[10px] text-muted-foreground">
+                    / {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h3 className="serif text-xl md:text-2xl mb-4">{f.name}</h3>
+                {f.badge && (
+                  <SpecBadge className="mb-4">{f.badge}</SpecBadge>
+                )}
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {f.desc}
                 </p>
-                <span className="mono text-[10px] text-muted-foreground absolute top-5 right-5">
-                  / {String(i + 1).padStart(2, "0")}
-                </span>
               </div>
             );
           })}
+        </div>
+
+        <div className="mt-20 flex flex-col md:flex-row items-center justify-between gap-6 p-10 bg-slate-900 rounded-xl text-white">
+          <div>
+            <h4 className="serif text-xl md:text-2xl mb-2">Ready to benchmark?</h4>
+            <p className="text-slate-400 text-sm md:text-base">
+              Compare ACE against your legacy engine in a production-scale
+              simulation.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-4">
+            <a
+              href="#cta"
+              className="inline-flex items-center gap-2 bg-teal-500 text-white px-8 py-3 rounded-lg mono text-[11px] hover:bg-teal-600 transition-colors"
+            >
+              Request Benchmark
+              <ArrowRight size={14} />
+            </a>
+            <a
+              href="#cta"
+              className="inline-flex items-center gap-2 border border-white/20 text-white px-8 py-3 rounded-lg mono text-[11px] hover:bg-white/10 transition-colors"
+            >
+              Watch Demo
+              <ArrowUpRight size={14} />
+            </a>
+          </div>
         </div>
       </div>
     </section>
