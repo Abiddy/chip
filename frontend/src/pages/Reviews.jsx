@@ -374,13 +374,15 @@ export default function Reviews() {
       onKeyDown={handleKeyDown}
     >
       <header className="flex items-center justify-between border-b border-border px-6 py-4">
-        <Link to="/" className="flex items-center">
+        <Link to="/" aria-label="Lens" className="inline-flex items-center gap-2.5">
           <img
             src={LOGO_SRC}
-            alt="Lens"
+            alt=""
+            aria-hidden="true"
             className="h-7 w-auto select-none"
             draggable="false"
           />
+          <span className="serif text-base font-semibold tracking-tight">LENS</span>
         </Link>
         <Link
           to="/"

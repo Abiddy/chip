@@ -31,17 +31,17 @@ export default function Nav() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-[72px]">
-        <a
-          href="#"
-          data-testid="nav-logo"
-          className="flex items-center group"
-        >
+        <a href="#" aria-label="Lens" data-testid="nav-logo" className="inline-flex items-center gap-2.5 group">
           <img
             src={LOGO_SRC}
-            alt="Lens"
+            alt=""
+            aria-hidden="true"
             className="h-8 w-auto select-none transition-opacity duration-300 group-hover:opacity-80"
             draggable="false"
           />
+          <span className="serif text-lg font-semibold tracking-tight text-foreground">
+            LENS
+          </span>
         </a>
 
         <nav className="hidden md:flex items-center gap-9">

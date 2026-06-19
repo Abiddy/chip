@@ -24,13 +24,17 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-12 gap-12 mb-16">
           <div className="lg:col-span-5">
-            <a href="#" className="mb-4 inline-flex items-center">
+            <a href="#" aria-label="Lens" className="mb-4 inline-flex items-center gap-2.5">
               <img
                 src={LOGO_SRC}
-                alt="Lens"
+                alt=""
+                aria-hidden="true"
                 className="h-10 w-auto select-none"
                 draggable="false"
               />
+              <span className="serif text-xl font-semibold tracking-tight text-foreground">
+                LENS
+              </span>
             </a>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
               Analog verification, at silicon speed. Built for teams shipping

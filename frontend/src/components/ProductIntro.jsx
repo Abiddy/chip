@@ -6,7 +6,7 @@ import {
   Layers,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import AceFeatureCards from "./AceFeatureCards";
+import AceProductShowcase from "./AceProductShowcase";
 import AceMetricsCards from "./AceMetricsCards";
 import SectionHeader from "./SectionHeader";
 import SectionWatermark from "./SectionWatermark";
@@ -28,42 +28,44 @@ const ABS_MODE_FEATURES = [
 
 export default function ProductIntro() {
   return (
-    <div id="product" data-testid="product-intro" className="relative overflow-hidden">
+    <div id="product" data-testid="product-intro" className="relative">
       {/* Hero */}
-      <section className="relative flex min-h-[70vh] items-center py-24 md:py-32 lg:min-h-0 lg:py-40">
+      <section className="relative overflow-hidden py-24 md:py-32 lg:py-40">
         <SectionWatermark
           src={ACE_WATERMARK}
           position="top-left"
           size="sm"
           imageClassName="opacity-[0.035] md:opacity-[0.05]"
         />
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center w-full">
-          <div className="lg:col-span-5 lg:sticky lg:top-32 space-y-8">
-            <SectionHeader
-              label="01 — Our Flagship Product"
-              title={
-                <h2 className="serif text-4xl md:text-5xl leading-[1.08]">
-                  Meet ACE.{" "}
-                  <span className="accent block md:inline mt-1 md:mt-0">
-                    The Bridge Between Extraction and Simulation.
-                  </span>
-                </h2>
-              }
-              description="ACE bridges the gap between extraction and simulation to enable high-fidelity verification with significantly faster turnaround times. A clean-sheet engine, purpose-built for the deep-node era — where every nanosecond and every nanometer counts."
-              className="mb-0"
-            />
-            <a
-              href="#ace-metrics"
-              data-testid="product-link"
-              className="inline-flex items-center gap-2 text-foreground border-b border-teal-600 pb-1 hover:text-teal-700 transition-colors mono text-[11px]"
-            >
-              Explore the platform
-              <ArrowRight size={14} />
-            </a>
-          </div>
+        <div className="relative mx-auto w-full max-w-7xl px-6 lg:px-10">
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="space-y-8 lg:col-span-5 lg:sticky lg:top-32">
+              <SectionHeader
+                label="01 — Our Flagship Product"
+                title={
+                  <h2 className="serif text-4xl md:text-5xl leading-[1.08]">
+                    Meet ACE.{" "}
+                    <span className="accent block md:inline mt-1 md:mt-0">
+                      The Bridge Between Extraction and Simulation.
+                    </span>
+                  </h2>
+                }
+                description="ACE bridges the gap between extraction and simulation to enable high-fidelity verification with significantly faster turnaround times. A clean-sheet engine, purpose-built for the deep-node era — where every nanosecond and every nanometer counts."
+                className="mb-0"
+              />
+              <a
+                href="#ace-metrics"
+                data-testid="product-link"
+                className="inline-flex items-center gap-2 text-foreground border-b border-teal-600 pb-1 hover:text-teal-700 transition-colors mono text-[11px]"
+              >
+                Explore the platform
+                <ArrowRight size={14} />
+              </a>
+            </div>
 
-          <div className="lg:col-span-7 flex h-full min-h-[360px] items-center justify-center self-center">
-            <AceFeatureCards />
+            <div className="lg:col-span-7">
+              <AceProductShowcase />
+            </div>
           </div>
         </div>
       </section>

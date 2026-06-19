@@ -72,13 +72,17 @@ export function HeroHeader() {
         <div className="mx-auto max-w-5xl px-6 transition-all duration-300">
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
             <div className="flex w-full items-center justify-between gap-12 lg:w-auto">
-              <a href="#" aria-label="home" className="flex items-center gap-2.5">
+              <a href="#" aria-label="Lens" className="inline-flex items-center gap-2.5">
                 <img
                   src={LOGO_SRC}
-                  alt="Lens"
+                  alt=""
+                  aria-hidden="true"
                   className="h-8 w-auto select-none"
                   draggable="false"
                 />
+                <span className="serif text-lg font-semibold tracking-tight text-foreground">
+                  LENS
+                </span>
               </a>
 
               <button
