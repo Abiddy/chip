@@ -16,21 +16,23 @@ import {
   validateStep,
 } from "@/data/reviewFormSteps";
 
-const LOGO_SRC = `${process.env.PUBLIC_URL}/lens-logo.svg`;
-const STORAGE_KEY = "lens-review-submissions";
+const LOGO_SRC = `${process.env.PUBLIC_URL}/lens-logo.png`;
 const INTRO_STEP = FORM_STEPS.find((s) => s.type === "intro");
 
-function saveMockSubmission(data) {
-  const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-  const submission = {
-    ...data,
-    id: crypto.randomUUID(),
-    submittedAt: new Date().toISOString(),
-    status: "pending",
-    formType: "ace-demo-feedback",
-  };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify([submission, ...existing]));
-  return submission;
+async function submitReview(data) {
+  const response = await fetch("/api/reviews", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
+  const payload = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(payload.message || "Failed to submit feedback.");
+  }
+
+  return payload;
 }
 
 function QuestionLabel({ step }) {
@@ -324,6 +326,8 @@ function FormStepBlock({
 export default function Reviews() {
   const formStartRef = useRef(null);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
   const [form, setForm] = useState(INITIAL_FORM);
   const [invalidStepIds, setInvalidStepIds] = useState([]);
   const sections = useMemo(() => getFormSections(), []);
@@ -376,7 +380,7 @@ export default function Reviews() {
     formStartRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const failures = validateAllForm(form);
     if (failures.length > 0) {
       setInvalidStepIds(failures);
@@ -385,9 +389,21 @@ export default function Reviews() {
         ?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
-    saveMockSubmission(form);
-    setSubmitted(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    setSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      await submitReview(form);
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error ? error.message : "Failed to submit feedback."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -396,15 +412,13 @@ export default function Reviews() {
       data-testid="reviews-page"
     >
       <header className="sticky top-0 z-50 flex items-center justify-between border-b border-border bg-background/95 px-6 py-4 backdrop-blur-sm">
-        <Link to="/" aria-label="Lens" className="inline-flex items-center gap-2.5">
+        <Link to="/" aria-label="Home" className="inline-flex items-center">
           <img
             src={LOGO_SRC}
-            alt=""
-            aria-hidden="true"
-            className="h-7 w-auto select-none"
+            alt="Lens"
+            className="h-9 w-auto object-contain select-none"
             draggable="false"
           />
-          <span className="serif text-base font-semibold tracking-tight">LENS</span>
         </Link>
         <Link
           to="/"
@@ -504,14 +518,18 @@ export default function Reviews() {
                 <p className="mb-8 text-muted-foreground">
                   Name, company, and email required · all other fields optional
                 </p>
+                {submitError && (
+                  <p className="mb-4 text-sm text-destructive">{submitError}</p>
+                )}
                 <Button
                   type="button"
                   onClick={handleSubmit}
+                  disabled={submitting}
                   size="lg"
                   className="rounded-xl px-10"
                 >
-                  Submit feedback
-                  <ArrowRight size={16} />
+                  {submitting ? "Submitting..." : "Submit feedback"}
+                  {!submitting && <ArrowRight size={16} />}
                 </Button>
               </div>
             </section>

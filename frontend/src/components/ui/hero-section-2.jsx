@@ -7,7 +7,7 @@ import { AnimatedGroup } from "@/components/ui/animated-group";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { cn } from "@/lib/utils";
 
-const LOGO_SRC = `${process.env.PUBLIC_URL}/lens-logo.svg`;
+const LOGO_SRC = `${process.env.PUBLIC_URL}/lens-logo.png`;
 
 const transitionVariants = {
   item: {
@@ -72,18 +72,14 @@ export function HeroHeader() {
         <div className="mx-auto max-w-5xl px-6 transition-all duration-300">
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
             <div className="flex w-full items-center justify-between gap-12 lg:w-auto">
-              {/* <a href="#" aria-label="Lens" className="inline-flex items-center gap-2.5">
+              <a href="#" aria-label="Home" className="inline-flex items-center">
                 <img
                   src={LOGO_SRC}
-                  alt=""
-                  aria-hidden="true"
-                  className="h-8 w-auto select-none"
+                  alt="Lens"
+                  className="h-9 w-auto object-contain select-none"
                   draggable="false"
                 />
-                <span className="serif text-lg font-semibold tracking-tight text-foreground">
-                  LENS
-                </span>
-              </a> */}
+              </a>
 
               <button
                 onClick={() => setMenuState(!menuState)}

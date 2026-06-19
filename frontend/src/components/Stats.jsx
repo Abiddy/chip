@@ -11,7 +11,7 @@ import SectionWatermark from "./SectionWatermark";
 import SectionWithMockup from "@/components/ui/section-with-mockup";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 
-const LENS_WATERMARK = `${process.env.PUBLIC_URL}/lens-logo-watermark.png`;
+const LENS_WATERMARK = `${process.env.PUBLIC_URL}/lens-logo.png`;
 const WORKSPACE_UI = `${process.env.PUBLIC_URL}/ace-workspace-ui.png`;
 
 const kpis = [

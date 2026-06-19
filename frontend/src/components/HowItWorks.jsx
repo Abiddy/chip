@@ -3,7 +3,7 @@ import SectionHeader from "./SectionHeader";
 import SectionWatermark from "./SectionWatermark";
 import { BentoGrid } from "@/components/ui/bento-grid";
 
-const LENS_WATERMARK = `${process.env.PUBLIC_URL}/lens-logo-watermark.png`;
+const LENS_WATERMARK = `${process.env.PUBLIC_URL}/lens-logo.png`;
 
 const steps = [
   {

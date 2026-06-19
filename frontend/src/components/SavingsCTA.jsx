@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { ArrowUpRight } from "lucide-react";
 import SectionWatermark from "./SectionWatermark";
 
-const LENS_WATERMARK = `${process.env.PUBLIC_URL}/lens-logo-watermark.png`;
+const LENS_WATERMARK = `${process.env.PUBLIC_URL}/lens-logo.png`;
 
 // Three subtle chip variants so the confetti feels organic
 function ChipSvg({ variant, size }) {

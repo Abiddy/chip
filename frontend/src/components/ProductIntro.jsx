@@ -105,7 +105,7 @@ export default function ProductIntro() {
           <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
             <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
               <div className="space-y-6">
-                <span className="mono text-[10px] text-teal-600 tracking-[0.2em]">
+                <span className="mono block text-[10px] text-teal-600 tracking-[0.2em]">
                   Mode 01 — ACE
                 </span>
                 <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight">
@@ -177,11 +177,11 @@ export default function ProductIntro() {
                 </div>
               </div>
 
-              <div className="space-y-6 lg:order-2 lg:text-right">
-                <span className="mono text-[10px] text-teal-600 tracking-[0.2em]">
+              <div className="flex flex-col space-y-6 lg:order-2 lg:items-end lg:text-right">
+                <span className="mono block text-[10px] text-teal-600 tracking-[0.2em]">
                   Mode 02 — ABS
                 </span>
-                <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight lg:ml-auto lg:inline-block">
+                <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight">
                   <GradientText theme="abs" className="bg-slate-50/50">
                     ABS Mode
                   </GradientText>

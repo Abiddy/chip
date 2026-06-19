@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
-const LOGO_SRC = `${process.env.PUBLIC_URL}/lens-logo.svg`;
+const LOGO_SRC = `${process.env.PUBLIC_URL}/lens-logo.png`;
 
 const navItems = [
   { label: "ACE", href: "#product" },

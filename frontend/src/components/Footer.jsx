@@ -1,4 +1,4 @@
-const LOGO_SRC = `${process.env.PUBLIC_URL}/lens-logo.svg`;
+const LOGO_SRC = `${process.env.PUBLIC_URL}/lens-logo.png`;
 
 const cols = [
   {
@@ -24,17 +24,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-12 gap-12 mb-16">
           <div className="lg:col-span-5">
-            <a href="#" aria-label="Lens" className="mb-4 inline-flex items-center gap-2.5">
+            <a href="#" aria-label="Home" className="mb-4 inline-flex items-center">
               <img
                 src={LOGO_SRC}
-                alt=""
-                aria-hidden="true"
-                className="h-10 w-auto select-none"
+                alt="Lens"
+                className="h-10 w-auto object-contain select-none"
                 draggable="false"
               />
-              <span className="serif text-xl font-semibold tracking-tight text-foreground">
-                LENS
-              </span>
             </a>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
               Analog verification, at silicon speed. Built for teams shipping
@@ -90,22 +86,14 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="mt-20 overflow-hidden">
-        <div
+      <div className="mt-20 flex justify-center overflow-hidden px-6">
+        <img
+          src={LOGO_SRC}
+          alt=""
           aria-hidden="true"
-          className="select-none text-center leading-none whitespace-nowrap font-semibold tracking-tight"
-          style={{
-            fontSize: "clamp(8rem, 22vw, 22rem)",
-            background:
-              "linear-gradient(180deg, #e2e8f0 0%, #ffffff 80%)",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            color: "transparent",
-            letterSpacing: "-0.04em",
-          }}
-        >
-          LENS
-        </div>
+          draggable={false}
+          className="h-24 w-auto select-none opacity-[0.12] object-contain"
+        />
       </div>
     </footer>
   );
