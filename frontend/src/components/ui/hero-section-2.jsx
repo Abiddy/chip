@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import { ChevronRight, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useScroll } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { AnimatedGroup } from "@/components/ui/animated-group";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
+import TrustedBySection from "@/components/TrustedBySection";
 import { cn } from "@/lib/utils";
 
 const LOGO_SRC = `${process.env.PUBLIC_URL}/lens-logo.png`;
@@ -35,17 +36,6 @@ const menuItems = [
   { name: "Workflow", href: "#how" },
   { name: "Performance", href: "#performance" },
   { name: "ROI", href: "#savings" },
-];
-
-const partners = [
-  "TENSILE",
-  "AXIOM-SI",
-  "NORTHFIELD",
-  "QUANTA LABS",
-  "VERTEX MICRO",
-  "CASCADE EDA",
-  "ION FOUNDRY",
-  "HELIX SEMI",
 ];
 
 export function HeroHeader() {
@@ -209,47 +199,21 @@ export function HeroSection() {
                 </AnimatedGroup>
               }
             >
-              <img
-                src={`${process.env.PUBLIC_URL}/ace-hero-banner.png`}
-                alt="ACE — Accelerated Circuit Exploration"
-                width={1400}
-                height={720}
-                draggable={false}
-                className="mx-auto h-full w-full object-cover object-right"
-              />
+              <div className="flex h-full w-full items-center justify-center bg-background">
+                <img
+                  src={`${process.env.PUBLIC_URL}/ace-hero-banner.png`}
+                  alt="ACE Design Workspace"
+                  width={1024}
+                  height={576}
+                  draggable={false}
+                  className="h-full w-full object-cover object-top"
+                />
+              </div>
             </ContainerScroll>
           </div>
         </section>
 
-        <section
-          id="customers"
-          data-testid="trusted-by"
-          className="bg-background pb-16 pt-16 md:pb-32"
-        >
-          <div className="group relative m-auto max-w-5xl px-6">
-            <div className="absolute inset-0 z-10 flex scale-95 items-center justify-center opacity-0 duration-500 group-hover:scale-100 group-hover:opacity-100">
-              <a
-                href="#customers"
-                className="block text-sm duration-150 hover:opacity-75"
-              >
-                <span>Meet our customers</span>
-                <ChevronRight className="ml-1 inline-block size-3" />
-              </a>
-            </div>
-            <p className="mb-10 text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-              Trusted by silicon teams shipping at advanced nodes
-            </p>
-            <div className="mx-auto grid max-w-2xl grid-cols-2 gap-x-12 gap-y-8 transition-all duration-500 group-hover:opacity-50 sm:grid-cols-4 sm:gap-x-16 sm:gap-y-14 group-hover:blur-[2px]">
-              {partners.map((partner) => (
-                <div key={partner} className="flex">
-                  <span className="mx-auto text-sm font-semibold tracking-wide text-muted-foreground/70">
-                    {partner}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <TrustedBySection />
       </main>
     </>
   );

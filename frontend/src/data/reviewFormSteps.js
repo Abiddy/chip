@@ -34,6 +34,32 @@ export const INITIAL_FORM = {
   followUpContact: "",
 };
 
+/** Demo Feedback fields that may be published on the landing page (admin-controlled). */
+export const PUBLISHABLE_REVIEW_FIELDS = [
+  {
+    field: "positiveFeedback",
+    label: "What stood out most positively in the demo?",
+    shortLabel: "Positive feedback",
+  },
+  {
+    field: "concerns",
+    label: "What concerns, gaps, or missing capabilities did you notice?",
+    shortLabel: "Concerns & gaps",
+  },
+  {
+    field: "comparison",
+    label: "How does ACE compare to how you handle this today?",
+    shortLabel: "Comparison",
+  },
+];
+
+export const PUBLISHABLE_FIELD_KEYS = new Set(
+  PUBLISHABLE_REVIEW_FIELDS.map(({ field }) => field)
+);
+
+export const PUBLISH_DISCLAIMER =
+  "Your response may be selected and featured on our website with attribution (name and company). Contact details are never published without your permission.";
+
 export const FORM_STEPS = [
   {
     id: "intro",
@@ -208,6 +234,7 @@ export const FORM_STEPS = [
     type: "textarea",
     field: "positiveFeedback",
     label: "What stood out most positively in the demo?",
+    publishable: true,
   },
   {
     id: "concerns",
@@ -217,6 +244,7 @@ export const FORM_STEPS = [
     type: "textarea",
     field: "concerns",
     label: "What concerns, gaps, or missing capabilities did you notice?",
+    publishable: true,
   },
   {
     id: "comparison",
@@ -226,6 +254,7 @@ export const FORM_STEPS = [
     type: "textarea",
     field: "comparison",
     label: "How does ACE compare to how you handle this today?",
+    publishable: true,
   },
   // 6. Next Steps
   {

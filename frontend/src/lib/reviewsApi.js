@@ -55,10 +55,10 @@ export async function fetchAdminReviews() {
   return adminFetch("/api/admin/reviews");
 }
 
-export async function setReviewPublished(id, published) {
+export async function setReviewFieldPublished(id, field, published) {
   return adminFetch(`/api/admin/reviews/${id}`, {
     method: "PATCH",
-    body: JSON.stringify({ published }),
+    body: JSON.stringify({ field, published }),
   });
 }
 

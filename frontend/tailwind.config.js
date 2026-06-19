@@ -104,11 +104,20 @@ module.exports = {
   				'0%, 100%': { bottom: '0', right: '0' },
   				'50%': { bottom: '25%', right: '40%' },
   				'90%': { bottom: '50%', right: '25%' }
+  			},
+  			marquee: {
+  				to: { transform: 'translateX(-50%)' }
+  			},
+  			'marquee-reverse': {
+  				from: { transform: 'translateX(-50%)' },
+  				to: { transform: 'translateX(0)' }
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			marquee: 'marquee var(--duration, 30s) linear infinite',
+  			'marquee-reverse': 'marquee-reverse var(--duration, 30s) linear infinite'
   		}
   	}
   },

@@ -2,17 +2,14 @@ import {
   Activity,
   ArrowRight,
   CheckCircle2,
-  Gauge,
   Shield,
   Zap,
 } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 import SectionWatermark from "./SectionWatermark";
-import SectionWithMockup from "@/components/ui/section-with-mockup";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 
 const LENS_WATERMARK = `${process.env.PUBLIC_URL}/lens-logo.png`;
-const WORKSPACE_UI = `${process.env.PUBLIC_URL}/ace-workspace-ui.png`;
 
 const kpis = [
   {
@@ -47,25 +44,6 @@ const kpis = [
     icon: <Shield className="size-4 text-sky-500" />,
     status: "Noise Rejection",
     tags: ["Signal-Aware", "Debug"],
-  },
-];
-
-const interfaceFeatures = [
-  {
-    icon: <Gauge className="size-4 text-blue-500" />,
-    title: "Hierarchical Waveform Viewer",
-    description:
-      "Instantly navigate complex SoC signals with hardware-accelerated rendering.",
-    status: "Live",
-    tags: ["Waveforms", "SoC"],
-  },
-  {
-    icon: <Activity className="size-4 text-emerald-500" />,
-    title: "Node Correlation Heatmaps",
-    description:
-      "Identify high-power and high-leakage nodes directly on the floorplan.",
-    status: "Active",
-    tags: ["Heatmaps", "Floorplan"],
   },
 ];
 
@@ -171,19 +149,6 @@ export default function Stats() {
             </a>
           </BentoCard>
         </BentoGrid>
-
-        <SectionWithMockup
-          label="05 — The Interface"
-          title="Designed for Technical Clarity"
-          description="Stop digging through log files. Interactive visualization provides real-time insights into netlist topology and simulation bottlenecks."
-          primaryImageSrc={WORKSPACE_UI}
-          secondaryImageSrc={WORKSPACE_UI}
-        >
-          <BentoGrid
-            items={interfaceFeatures}
-            className="grid-cols-1 gap-3 w-full"
-          />
-        </SectionWithMockup>
       </div>
     </section>
   );

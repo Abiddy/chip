@@ -12,6 +12,7 @@ import { GradientText } from "@/components/ui/gradient-text";
 
 const ACE_WATERMARK = `${process.env.PUBLIC_URL}/ace-logo-watermark.png`;
 const ABS_SYMBOL_SRC = `${process.env.PUBLIC_URL}/ace-abs-symbol.png`;
+const ACE_MODE_WORKSPACE_SRC = `${process.env.PUBLIC_URL}/ace-workspace-ui.png`;
 
 const ACE_MODE_FEATURES = [
   "Selective scaling & dynamic trimming from schematic",
@@ -100,100 +101,121 @@ export default function ProductIntro() {
           imageClassName="opacity-[0.035] md:opacity-[0.055]"
         />
 
-        {/* ACE Mode — title left, description right */}
-        <div className="relative border-b border-border bg-background py-24 md:py-32 lg:py-40">
+        {/* ACE Mode — title + description stacked left, workspace bleeds right */}
+        <div className="relative overflow-hidden border-b border-border bg-background py-24 md:py-32 lg:py-40">
           <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
-            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-              <div className="space-y-6">
-                <span className="mono block text-[10px] text-teal-600 tracking-[0.2em]">
-                  Mode 01 — ACE
-                </span>
-                <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight">
-                  <GradientText theme="ace" className="bg-background">
-                    ACE Mode
-                  </GradientText>
-                </h2>
-                <p className="text-xl md:text-2xl text-muted-foreground font-medium">
-                  Analog STA
-                </p>
-                <SpecBadge className="rounded-full px-4 py-1.5 text-xs">
-                  +200× Faster
-                </SpecBadge>
+            <div className="relative lg:min-h-[520px]">
+              <div className="relative z-10 max-w-xl space-y-10">
+                <div className="space-y-6">
+                  <span className="mono block text-[10px] text-teal-600 tracking-[0.2em]">
+                    Mode 01 — ACE
+                  </span>
+                  <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight">
+                    <GradientText theme="ace" className="bg-background">
+                      ACE Mode
+                    </GradientText>
+                  </h2>
+                  <p className="text-xl md:text-2xl text-muted-foreground font-medium">
+                    Analog STA
+                  </p>
+                  <SpecBadge className="rounded-full px-4 py-1.5 text-xs">
+                    +200× Faster
+                  </SpecBadge>
+                </div>
+
+                <div className="space-y-8">
+                  <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                    Enables &ldquo;what-if&rdquo; analysis by allowing designers to
+                    selectively scale, trim, or filter parasitics and coupling
+                    capacitances directly from the schematic —{" "}
+                    <strong className="font-medium text-foreground">
+                      +200× faster
+                    </strong>{" "}
+                    than traditional re-extraction.
+                  </p>
+                  <ul className="space-y-4">
+                    {ACE_MODE_FEATURES.map((item) => (
+                      <li key={item} className="flex items-start gap-3">
+                        <Check
+                          size={18}
+                          className="text-teal-600 mt-0.5 shrink-0"
+                          strokeWidth={2.5}
+                        />
+                        <span className="text-sm md:text-base">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
-              <div className="space-y-8">
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                  Enables &ldquo;what-if&rdquo; analysis by allowing designers to
-                  selectively scale, trim, or filter parasitics and coupling
-                  capacitances directly from the schematic —{" "}
-                  <strong className="font-medium text-foreground">
-                    +200× faster
-                  </strong>{" "}
-                  than traditional re-extraction.
-                </p>
-                <ul className="space-y-4">
-                  {ACE_MODE_FEATURES.map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <Check
-                        size={18}
-                        className="text-teal-600 mt-0.5 shrink-0"
-                        strokeWidth={2.5}
-                      />
-                      <span className="text-sm md:text-base">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+              <div className="ace-mode-bleed mt-10 lg:mt-0">
+                <img
+                  src={ACE_MODE_WORKSPACE_SRC}
+                  alt="ACE Mode workspace — Nets Tree zone selection"
+                  width={1024}
+                  height={576}
+                  draggable={false}
+                  className="h-[260px] w-full object-cover object-left-top sm:h-[340px] lg:h-full lg:min-h-[480px]"
+                />
               </div>
             </div>
           </div>
         </div>
 
-        {/* ABS Mode — description left, title right */}
-        <div className="relative bg-slate-50/50 py-24 md:py-32 lg:py-40">
+        {/* ABS Mode — title + description stacked right, screenshot bleeds left & below */}
+        <div className="abs-mode-section relative overflow-hidden bg-slate-50/50 py-24 md:py-32 lg:py-40">
           <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
-            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-              <div className="space-y-8 lg:order-1">
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                  Engineered for large-scale digital and transceiver blocks.
-                  Generates high-fidelity, reduced-complexity sub-circuits for
-                  SPICE or GLS while eliminating the overhead of non-essential
-                  parasitics.
-                </p>
-                <ul className="space-y-4">
-                  {ABS_MODE_FEATURES.map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <span className="mt-1.5 size-1.5 rounded-full bg-teal-600 shrink-0" />
-                      <span className="text-sm md:text-base">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-xl">
-                  <img
-                    src={ABS_SYMBOL_SRC}
-                    alt="ABS abstraction symbol generated in ACE"
-                    className="w-full object-cover object-top"
-                    draggable={false}
-                  />
+            <div className="relative lg:min-h-[560px]">
+              <div className="relative z-10 ml-auto max-w-xl space-y-10 lg:text-right">
+                <div className="space-y-6">
+                  <span className="mono block text-[10px] text-teal-600 tracking-[0.2em]">
+                    Mode 02 — ABS
+                  </span>
+                  <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight">
+                    <GradientText theme="abs" className="bg-slate-50/50">
+                      ABS Mode
+                    </GradientText>
+                  </h2>
+                  <p className="text-xl md:text-2xl text-muted-foreground font-medium">
+                    Reduced Model
+                  </p>
+                  <div className="lg:flex lg:justify-end">
+                    <SpecBadge className="rounded-full px-4 py-1.5 text-xs">
+                      Active
+                    </SpecBadge>
+                  </div>
+                </div>
+
+                <div className="space-y-8">
+                  <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                    Engineered for large-scale digital and transceiver blocks.
+                    Generates high-fidelity, reduced-complexity sub-circuits for
+                    SPICE or GLS while eliminating the overhead of non-essential
+                    parasitics.
+                  </p>
+                  <ul className="space-y-4">
+                    {ABS_MODE_FEATURES.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-3 lg:flex-row-reverse lg:justify-end lg:text-right"
+                      >
+                        <span className="mt-1.5 size-1.5 rounded-full bg-teal-600 shrink-0" />
+                        <span className="text-sm md:text-base">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
 
-              <div className="flex flex-col space-y-6 lg:order-2 lg:items-end lg:text-right">
-                <span className="mono block text-[10px] text-teal-600 tracking-[0.2em]">
-                  Mode 02 — ABS
-                </span>
-                <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight">
-                  <GradientText theme="abs" className="bg-slate-50/50">
-                    ABS Mode
-                  </GradientText>
-                </h2>
-                <p className="text-xl md:text-2xl text-muted-foreground font-medium">
-                  Reduced Model
-                </p>
-                <div className="lg:flex lg:justify-end">
-                  <SpecBadge className="rounded-full px-4 py-1.5 text-xs">
-                    Active
-                  </SpecBadge>
-                </div>
+              <div className="abs-mode-bleed mt-10 lg:mt-0">
+                <img
+                  src={ABS_SYMBOL_SRC}
+                  alt="ABS Mode — abstraction symbol generated in ACE"
+                  width={1024}
+                  height={531}
+                  draggable={false}
+                  className="h-[260px] w-full object-cover object-right-top sm:h-[340px] lg:h-full lg:min-h-[520px]"
+                />
               </div>
             </div>
           </div>

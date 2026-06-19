@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,6 +10,7 @@ import {
   FEATURES,
   FORM_STEPS,
   INITIAL_FORM,
+  PUBLISH_DISCLAIMER,
   TOTAL_QUESTIONS,
   getFormSections,
   validateAllForm,
@@ -242,6 +243,13 @@ function FormStepBlock({
 
       {step.subheading && (
         <p className="mb-6 text-sm text-muted-foreground">{step.subheading}</p>
+      )}
+
+      {step.publishable && (
+        <p className="mb-5 flex items-start gap-2.5 rounded-lg border border-border/70 bg-muted/35 px-4 py-3 text-sm leading-relaxed text-muted-foreground">
+          <Globe size={15} className="mt-0.5 shrink-0 text-teal-700" aria-hidden />
+          <span>{PUBLISH_DISCLAIMER}</span>
+        </p>
       )}
 
       {step.hint && (

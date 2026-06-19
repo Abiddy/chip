@@ -52,9 +52,16 @@ export default function PublishedReviews() {
               <div className="space-y-4">
                 <div className="flex items-start gap-2">
                   <Quote size={16} className="mt-1 shrink-0 text-teal-600" />
-                  <p className="line-clamp-6 text-base font-medium leading-relaxed text-gray-900">
-                    {review.quote}
-                  </p>
+                  <div>
+                    <p className="line-clamp-6 text-base font-medium leading-relaxed text-gray-900">
+                      {review.quote}
+                    </p>
+                    {review.fieldLabel && (
+                      <p className="mt-3 text-xs font-medium uppercase tracking-wider text-teal-700/80">
+                        {review.fieldLabel}
+                      </p>
+                    )}
+                  </div>
                 </div>
                 <div>
                   <p className="font-semibold text-gray-900">{review.name}</p>

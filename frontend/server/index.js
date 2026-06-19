@@ -6,10 +6,11 @@ const {
   insertReviewSubmission,
   listAllReviewSubmissions,
   listPublishedReviewSubmissions,
-  setReviewPublished,
+  setReviewFieldPublished,
   checkDbConnection,
-  formatPublicReview,
+  formatPublishedQuotes,
   formatAdminReview,
+  PUBLISHABLE_FIELDS,
 } = require("./db");
 const { getAdminToken, verifyAdminPassword, requireAdmin } = require("./auth");
 
@@ -83,7 +84,7 @@ app.get("/api/reviews/published", async (_req, res) => {
   try {
     const rows = await listPublishedReviewSubmissions();
     res.json({
-      reviews: rows.map(formatPublicReview).filter((review) => review.quote.trim()),
+      reviews: formatPublishedQuotes(rows),
     });
   } catch (error) {
     console.error("[reviews] published list failed:", error);
@@ -118,14 +119,20 @@ app.get("/api/admin/reviews", requireAdmin, async (_req, res) => {
 
 app.patch("/api/admin/reviews/:id", requireAdmin, async (req, res) => {
   const { id } = req.params;
-  const { published } = req.body || {};
+  const { field, published } = req.body || {};
+
+  if (!PUBLISHABLE_FIELDS.includes(field)) {
+    return res.status(400).json({
+      message: `field must be one of: ${PUBLISHABLE_FIELDS.join(", ")}.`,
+    });
+  }
 
   if (typeof published !== "boolean") {
     return res.status(400).json({ message: "published must be a boolean." });
   }
 
   try {
-    const row = await setReviewPublished(id, published);
+    const row = await setReviewFieldPublished(id, field, published);
     if (!row) {
       return res.status(404).json({ message: "Submission not found." });
     }
