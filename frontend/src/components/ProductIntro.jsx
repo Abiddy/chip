@@ -2,17 +2,15 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
-  Gauge,
-  Layers,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import AceProductShowcase from "./AceProductShowcase";
 import AceMetricsCards from "./AceMetricsCards";
-import SectionHeader from "./SectionHeader";
+import SectionHeader, { SpecBadge } from "./SectionHeader";
 import SectionWatermark from "./SectionWatermark";
-import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 
 const ACE_WATERMARK = `${process.env.PUBLIC_URL}/ace-logo-watermark.png`;
+const ABS_SYMBOL_SRC = `${process.env.PUBLIC_URL}/ace-abs-symbol.png`;
 
 const ACE_MODE_FEATURES = [
   "Selective scaling & dynamic trimming from schematic",
@@ -93,66 +91,107 @@ export default function ProductIntro() {
       </section>
 
       {/* Operational Modes */}
-      <section id="ace-modes" className="relative pb-24 md:pb-32 bg-slate-50/50 border-y border-border overflow-hidden">
+      <section id="ace-modes" className="relative border-y border-border overflow-hidden">
         <SectionWatermark
           src={ACE_WATERMARK}
           position="bottom-left"
           size="sm"
           imageClassName="opacity-[0.035] md:opacity-[0.055]"
         />
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-24">
-          <SectionHeader
-            label="02 — Operational Modes"
-            title={
-              <h3 className="serif text-3xl md:text-4xl leading-tight">
-                Two modes. One verification engine.
-              </h3>
-            }
-            description="Process-agnostic technology tested from 180nm to 5nm — operate in ACE mode for analog STA or ABS mode for transceiver and digital GLS."
-            className="mb-12"
-          />
-          <BentoGrid className="grid-cols-1 lg:grid-cols-2 gap-3">
-            <BentoCard
-              title="ACE Mode (Analog STA)"
-              meta="Mode: ACE"
-              description='Enables "what-if" analysis by allowing designers to selectively scale, trim, or filter parasitics and coupling capacitances directly from the schematic — +200× faster than traditional re-extraction.'
-              icon={<Gauge className="size-4 text-blue-500" />}
-              status="+200× Faster"
-              tags={["Analog STA", "What-If"]}
-              hasPersistentHover
-            >
-              <ul className="space-y-3 pt-1">
-                {ACE_MODE_FEATURES.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-gray-600">
-                    <Check
-                      size={16}
-                      className="text-teal-600 mt-0.5 shrink-0"
-                      strokeWidth={2.5}
-                    />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </BentoCard>
 
-            <BentoCard
-              title="ABS Mode (Reduced Model)"
-              meta="Mode: ABS"
-              description="Engineered for large-scale digital and transceiver blocks. Generates high-fidelity, reduced-complexity sub-circuits for SPICE or GLS while eliminating the overhead of non-essential parasitics."
-              icon={<Layers className="size-4 text-emerald-500" />}
-              status="Active"
-              tags={["GLS", "Abstraction"]}
-            >
-              <ul className="space-y-3 pt-1">
-                {ABS_MODE_FEATURES.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-gray-600">
-                    <span className="mt-1.5 size-1.5 rounded-full bg-gray-400 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </BentoCard>
-          </BentoGrid>
+        {/* ACE Mode — title left, description right */}
+        <div className="relative border-b border-border bg-background py-24 md:py-32 lg:py-40">
+          <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
+            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+              <div className="space-y-6">
+                <span className="mono text-[10px] text-teal-600 tracking-[0.2em]">
+                  Mode 01 — ACE
+                </span>
+                <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight">
+                  ACE Mode
+                </h2>
+                <p className="text-xl md:text-2xl text-muted-foreground font-medium">
+                  Analog STA
+                </p>
+                <SpecBadge className="rounded-full px-4 py-1.5 text-xs">
+                  +200× Faster
+                </SpecBadge>
+              </div>
+
+              <div className="space-y-8">
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                  Enables &ldquo;what-if&rdquo; analysis by allowing designers to
+                  selectively scale, trim, or filter parasitics and coupling
+                  capacitances directly from the schematic —{" "}
+                  <strong className="font-medium text-foreground">
+                    +200× faster
+                  </strong>{" "}
+                  than traditional re-extraction.
+                </p>
+                <ul className="space-y-4">
+                  {ACE_MODE_FEATURES.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <Check
+                        size={18}
+                        className="text-teal-600 mt-0.5 shrink-0"
+                        strokeWidth={2.5}
+                      />
+                      <span className="text-sm md:text-base">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ABS Mode — description left, title right */}
+        <div className="relative bg-slate-50/50 py-24 md:py-32 lg:py-40">
+          <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
+            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+              <div className="space-y-8 lg:order-1">
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                  Engineered for large-scale digital and transceiver blocks.
+                  Generates high-fidelity, reduced-complexity sub-circuits for
+                  SPICE or GLS while eliminating the overhead of non-essential
+                  parasitics.
+                </p>
+                <ul className="space-y-4">
+                  {ABS_MODE_FEATURES.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-1.5 size-1.5 rounded-full bg-teal-600 shrink-0" />
+                      <span className="text-sm md:text-base">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-xl">
+                  <img
+                    src={ABS_SYMBOL_SRC}
+                    alt="ABS abstraction symbol generated in ACE"
+                    className="w-full object-cover object-top"
+                    draggable={false}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-6 lg:order-2 lg:text-right">
+                <span className="mono text-[10px] text-teal-600 tracking-[0.2em]">
+                  Mode 02 — ABS
+                </span>
+                <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight">
+                  ABS Mode
+                </h2>
+                <p className="text-xl md:text-2xl text-muted-foreground font-medium">
+                  Reduced Model
+                </p>
+                <div className="lg:flex lg:justify-end">
+                  <SpecBadge className="rounded-full px-4 py-1.5 text-xs">
+                    Active
+                  </SpecBadge>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <section id="ace-impact" className="relative pb-32 md:pb-40 overflow-hidden">
