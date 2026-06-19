@@ -5,6 +5,7 @@ export const FEATURES = [
   { key: "zoneCoupling", label: "Zone-based / surgical coupling control" },
   { key: "circuitAbstraction", label: "Circuit abstraction to portable .SUBCKT" },
   { key: "scalability", label: "Scalability to 100 GB+ datasets" },
+  { key: "uiUsability", label: "Intuitive, easy-to-use UI & workflow" },
   { key: "pdkAgnostic", label: "PDK-agnostic / node-agnostic deployment" },
   { key: "flowIntegration", label: "Integration into existing StarRC / Quantus flow" },
 ];
@@ -24,6 +25,7 @@ export const INITIAL_FORM = {
   applicationsOther: "",
   topApplication: "",
   featureRatings: {},
+  topPriorityFeature: "",
   positiveFeedback: "",
   concerns: "",
   comparison: "",
@@ -102,7 +104,6 @@ export const FORM_STEPS = [
       "100 GB – 1 TB",
       "> 1 TB",
     ],
-    required: true,
   },
   {
     id: "techNodes",
@@ -122,7 +123,6 @@ export const FORM_STEPS = [
       "7 nm / 5 nm",
       "Other",
     ],
-    required: true,
   },
   {
     id: "tools",
@@ -143,7 +143,6 @@ export const FORM_STEPS = [
       "HSPICE",
       "Other",
     ],
-    required: true,
   },
   // 3. Most Likely Applications
   {
@@ -166,7 +165,6 @@ export const FORM_STEPS = [
       "Regression / CI integration for verification",
       "Other",
     ],
-    required: true,
   },
   {
     id: "topApplication",
@@ -178,8 +176,6 @@ export const FORM_STEPS = [
     label:
       "Which single application would deliver the most value to your team, and why?",
     placeholder: "Tell us about the highest-impact use case...",
-    required: true,
-    minLength: 15,
   },
   // 4. Feature Importance
   {
@@ -188,26 +184,36 @@ export const FORM_STEPS = [
     sectionTitle: "Feature Importance",
     questionNum: 11,
     type: "featureMatrix",
+    label: "Rate how valuable each capability is to you",
+    subheading: "1 = not relevant, 5 = critical",
+  },
+  {
+    id: "topPriorityFeature",
+    section: "4",
+    sectionTitle: "Feature Importance",
+    questionNum: 12,
+    type: "textarea",
+    field: "topPriorityFeature",
     label:
-      "Rate how valuable each capability is to you (1 = not relevant, 5 = critical)",
+      "If we could deliver one capability first, which would create the most value for your team — and why?",
+    placeholder:
+      "e.g. Multi-corner generation without re-extraction would cut our sign-off cycle significantly...",
   },
   // 5. Demo Feedback
   {
     id: "positiveFeedback",
     section: "5",
     sectionTitle: "Demo Feedback",
-    questionNum: 12,
+    questionNum: 13,
     type: "textarea",
     field: "positiveFeedback",
     label: "What stood out most positively in the demo?",
-    required: true,
-    minLength: 10,
   },
   {
     id: "concerns",
     section: "5",
     sectionTitle: "Demo Feedback",
-    questionNum: 13,
+    questionNum: 14,
     type: "textarea",
     field: "concerns",
     label: "What concerns, gaps, or missing capabilities did you notice?",
@@ -216,7 +222,7 @@ export const FORM_STEPS = [
     id: "comparison",
     section: "5",
     sectionTitle: "Demo Feedback",
-    questionNum: 14,
+    questionNum: 15,
     type: "textarea",
     field: "comparison",
     label: "How does ACE compare to how you handle this today?",
@@ -226,7 +232,7 @@ export const FORM_STEPS = [
     id: "nextSteps",
     section: "6",
     sectionTitle: "Next Steps",
-    questionNum: 15,
+    questionNum: 16,
     type: "multi",
     field: "nextSteps",
     label: "What would you like to happen next?",
@@ -238,7 +244,6 @@ export const FORM_STEPS = [
       "Share with colleagues internally — send materials",
       "Not a fit right now",
     ],
-    required: true,
   },
   // 6. Next Steps (questions 16–17)
   {
@@ -246,8 +251,8 @@ export const FORM_STEPS = [
     section: "6",
     sectionTitle: "Next Steps",
     type: "group",
-    questionStart: 16,
-    questionEnd: 17,
+    questionStart: 17,
+    questionEnd: 18,
     fields: [
       {
         type: "textarea",
@@ -265,7 +270,41 @@ export const FORM_STEPS = [
   },
 ];
 
-export const TOTAL_QUESTIONS = 17;
+export const TOTAL_QUESTIONS = 18;
+
+export function getFormSections() {
+  const sections = [];
+
+  for (const step of FORM_STEPS) {
+    if (step.type === "intro") continue;
+
+    const last = sections[sections.length - 1];
+    if (!last || last.section !== step.section) {
+      sections.push({
+        section: step.section,
+        sectionTitle: step.sectionTitle,
+        steps: [step],
+      });
+    } else {
+      last.steps.push(step);
+    }
+  }
+
+  return sections;
+}
+
+export function validateAllForm(form) {
+  const invalidStepIds = [];
+
+  for (const step of FORM_STEPS) {
+    if (step.type === "intro") continue;
+    if (!validateStep(step, form)) {
+      invalidStepIds.push(step.id);
+    }
+  }
+
+  return invalidStepIds;
+}
 
 function validateField(field, form) {
   if (field.type === "text" || field.type === "email") {
@@ -318,9 +357,7 @@ export function validateStep(step, form) {
   }
 
   if (step.type === "featureMatrix") {
-    return FEATURES.every(
-      (f) => form.featureRatings[f.key] >= 1 && form.featureRatings[f.key] <= 5
-    );
+    return true;
   }
 
   return true;

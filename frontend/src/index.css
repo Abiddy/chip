@@ -552,6 +552,31 @@ button {
         --input: 214 32% 91%;
         --ring: 173 58% 39%;
         --radius: 0.75rem;
+
+        /* GradientText — default palette */
+        --color-1: 330 100% 40%;
+        --color-2: 140 100% 55%;
+        --color-3: 210 100% 30%;
+        --color-4: 60 100% 70%;
+        --color-5: 295 100% 45%;
+    }
+
+    /* ACE — light blue / light purple */
+    .gradient-text-ace {
+        --color-1: 205 95% 72%;
+        --color-2: 255 85% 78%;
+        --color-3: 225 90% 80%;
+        --color-4: 270 75% 82%;
+        --color-5: 240 80% 75%;
+    }
+
+    /* ABS — light green / light blue */
+    .gradient-text-abs {
+        --color-1: 155 60% 72%;
+        --color-2: 175 70% 75%;
+        --color-3: 195 85% 78%;
+        --color-4: 165 55% 68%;
+        --color-5: 185 65% 70%;
     }
 }
 

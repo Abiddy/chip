@@ -30,52 +30,7 @@ export default function Nav() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-[72px]">
-        <a href="#" aria-label="Lens" data-testid="nav-logo" className="inline-flex items-center gap-2.5 group">
-          <img
-            src={LOGO_SRC}
-            alt=""
-            aria-hidden="true"
-            className="h-8 w-auto select-none transition-opacity duration-300 group-hover:opacity-80"
-            draggable="false"
-          />
-          <span className="serif text-lg font-semibold tracking-tight text-foreground">
-            LENS
-          </span>
-        </a>
-
-        <nav className="hidden md:flex items-center gap-9">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              data-testid={`nav-link-${item.label.toLowerCase()}`}
-              className="text-sm text-[#b9b3a7] hover:text-[#f5f3ee] transition-colors duration-300 relative group"
-            >
-              {item.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#34d399] group-hover:w-full transition-all duration-300" />
-            </a>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-3">
-          <a
-            href="#cta"
-            data-testid="nav-book-demo"
-            className="hidden md:inline-flex btn-primary text-sm"
-          >
-            Book a demo
-          </a>
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            data-testid="nav-mobile-toggle"
-            className="md:hidden text-[#f5f3ee] p-2"
-            aria-label="menu"
-          >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-      </div>
+  
 
       {mobileOpen && (
         <div

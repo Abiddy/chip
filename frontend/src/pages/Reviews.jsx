@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,27 +11,14 @@ import {
   FORM_STEPS,
   INITIAL_FORM,
   TOTAL_QUESTIONS,
+  getFormSections,
+  validateAllForm,
   validateStep,
 } from "@/data/reviewFormSteps";
 
 const LOGO_SRC = `${process.env.PUBLIC_URL}/lens-logo.svg`;
-
 const STORAGE_KEY = "lens-review-submissions";
-
-const slideVariants = {
-  enter: (direction) => ({
-    x: direction > 0 ? 80 : -80,
-    opacity: 0,
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-  },
-  exit: (direction) => ({
-    x: direction > 0 ? -80 : 80,
-    opacity: 0,
-  }),
-};
+const INTRO_STEP = FORM_STEPS.find((s) => s.type === "intro");
 
 function saveMockSubmission(data) {
   const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
@@ -47,9 +33,7 @@ function saveMockSubmission(data) {
   return submission;
 }
 
-function SectionLabel({ step }) {
-  if (step.type === "intro") return null;
-
+function QuestionLabel({ step }) {
   let questionLabel;
   if (step.questionStart && step.questionEnd) {
     questionLabel =
@@ -60,15 +44,10 @@ function SectionLabel({ step }) {
     questionLabel = `Question ${step.questionNum} of ${TOTAL_QUESTIONS}`;
   }
 
+  if (!questionLabel) return null;
+
   return (
-    <div className="mb-3">
-      <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
-        {step.section}. {step.sectionTitle}
-      </p>
-      {questionLabel && (
-        <p className="mt-1 text-sm text-muted-foreground">{questionLabel}</p>
-      )}
-    </div>
+    <p className="mb-2 text-sm text-muted-foreground">{questionLabel}</p>
   );
 }
 
@@ -123,7 +102,6 @@ function MultiSelectOptions({ step, form, update, toggleMulti }) {
       })}
       {showOther && (
         <Input
-          autoFocus
           value={form[step.otherField]}
           onChange={(e) => update(step.otherField, e.target.value)}
           placeholder="Please specify..."
@@ -164,26 +142,31 @@ function FeatureMatrix({ form, updateFeatureRating }) {
           </div>
         </div>
       ))}
-      <p className="text-xs text-muted-foreground">
-        1 = not relevant · 5 = critical
-      </p>
     </div>
   );
 }
 
-function GroupFields({ fields, form, update }) {
+function GroupFields({ fields, form, update, invalidFields }) {
   return (
     <div className="space-y-5">
       {fields.map((field) => (
         <div key={field.field}>
-          <label className="mb-2 block text-sm font-medium">{field.label}</label>
+          <label className="mb-2 block text-sm font-medium">
+            {field.label}
+            {field.required && (
+              <span className="ml-1 text-muted-foreground">*</span>
+            )}
+          </label>
           {(field.type === "text" || field.type === "email") && (
             <Input
               type={field.type === "email" ? "email" : "text"}
               value={form[field.field]}
               onChange={(e) => update(field.field, e.target.value)}
               placeholder={field.placeholder}
-              className="h-12 text-base"
+              className={cn(
+                "h-12 text-base",
+                invalidFields.has(field.field) && "border-destructive"
+              )}
             />
           )}
           {field.type === "textarea" && (
@@ -191,7 +174,10 @@ function GroupFields({ fields, form, update }) {
               value={form[field.field]}
               onChange={(e) => update(field.field, e.target.value)}
               placeholder={field.placeholder}
-              className="min-h-[100px] resize-none text-base"
+              className={cn(
+                "min-h-[100px] resize-none text-base",
+                invalidFields.has(field.field) && "border-destructive"
+              )}
             />
           )}
         </div>
@@ -200,65 +186,91 @@ function GroupFields({ fields, form, update }) {
   );
 }
 
-function StepContent({ step, form, update, toggleMulti, updateFeatureRating }) {
-  if (step.type === "intro") {
+function FormStepBlock({
+  step,
+  form,
+  update,
+  toggleMulti,
+  updateFeatureRating,
+  hasError,
+  invalidFields,
+}) {
+  if (step.type === "group") {
     return (
-      <div className="text-center">
-        <p className="mb-3 text-sm font-medium uppercase tracking-widest text-muted-foreground">
-          LENS ACE Demo
-        </p>
-        <h1 className="mb-4 text-4xl font-semibold tracking-tight md:text-5xl">
-          {step.title}
-        </h1>
-        <p className="mx-auto mb-4 max-w-md text-lg text-muted-foreground">
-          {step.description}
-        </p>
-        {step.hint && (
-          <p className="text-sm text-muted-foreground">{step.hint}</p>
+      <div
+        id={`step-${step.id}`}
+        className={cn(
+          "scroll-mt-24 rounded-xl transition-colors",
+          hasError && "ring-2 ring-destructive/30 ring-offset-2"
+        )}
+      >
+        <QuestionLabel step={step} />
+        <GroupFields
+          fields={step.fields}
+          form={form}
+          update={update}
+          invalidFields={invalidFields}
+        />
+        {hasError && (
+          <p className="mt-3 text-sm text-destructive">
+            Please fill in name, company, and email.
+          </p>
         )}
       </div>
     );
   }
 
-  if (step.type === "group") {
-    return (
-      <div>
-        <SectionLabel step={step} />
-        <GroupFields fields={step.fields} form={form} update={update} />
-      </div>
-    );
-  }
-
   return (
-    <div>
-      <SectionLabel step={step} />
-      <h2 className="mb-6 text-2xl font-semibold tracking-tight md:text-3xl">
+    <div
+      id={`step-${step.id}`}
+      className={cn(
+        "scroll-mt-24 rounded-xl transition-colors",
+        hasError && "ring-2 ring-destructive/30 ring-offset-2"
+      )}
+    >
+      <QuestionLabel step={step} />
+      <h3
+        className={cn(
+          "text-xl font-semibold tracking-tight md:text-2xl",
+          step.subheading ? "mb-2" : "mb-5"
+        )}
+      >
         {step.label}
-      </h2>
+      </h3>
+
+      {step.subheading && (
+        <p className="mb-6 text-sm text-muted-foreground">{step.subheading}</p>
+      )}
 
       {step.hint && (
-        <p className="-mt-4 mb-4 text-sm text-muted-foreground">{step.hint}</p>
+        <p className={cn("-mt-3 mb-4 text-sm text-muted-foreground", step.subheading && "mt-0")}>
+          {step.hint}
+        </p>
       )}
 
       {(step.type === "text" || step.type === "email") && (
         <Input
-          autoFocus
           type={step.type === "email" ? "email" : "text"}
           value={form[step.field]}
           onChange={(e) => update(step.field, e.target.value)}
           placeholder={step.placeholder}
-          className="h-12 text-base"
+          className={cn(
+            "h-12 text-base",
+            hasError && "border-destructive"
+          )}
         />
       )}
 
       {step.type === "textarea" && (
         <>
           <Textarea
-            autoFocus
             value={form[step.field]}
             onChange={(e) => update(step.field, e.target.value)}
             placeholder={step.placeholder}
-            className="min-h-[140px] resize-none text-base md:text-lg"
+            className={cn(
+              "min-h-[120px] resize-none text-base",
+              hasError && "border-destructive"
+            )}
           />
           {step.minLength && step.required && (
             <p className="mt-2 text-xs text-muted-foreground">
@@ -297,32 +309,50 @@ function StepContent({ step, form, update, toggleMulti, updateFeatureRating }) {
           updateFeatureRating={updateFeatureRating}
         />
       )}
+
+      {hasError && (
+        <p className="mt-3 text-sm text-destructive">
+          {step.id === "yourDetails"
+            ? "Please fill in name, company, and email."
+            : "Please complete this question before submitting."}
+        </p>
+      )}
     </div>
   );
 }
 
 export default function Reviews() {
-  const [stepIndex, setStepIndex] = useState(0);
-  const [direction, setDirection] = useState(1);
+  const formStartRef = useRef(null);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState(INITIAL_FORM);
+  const [invalidStepIds, setInvalidStepIds] = useState([]);
+  const sections = useMemo(() => getFormSections(), []);
 
-  const step = FORM_STEPS[stepIndex];
-  const totalSteps = FORM_STEPS.length;
-  const isLastStep = stepIndex === totalSteps - 1;
-  const progress = submitted ? 100 : ((stepIndex + 1) / totalSteps) * 100;
-  const isTextareaStep = step?.type === "textarea";
-  const isFeatureStep = step?.type === "featureMatrix";
-  const isGroupStep = step?.type === "group";
-  const isScrollableStep = isFeatureStep || isGroupStep;
-  const allowEnterContinue =
-    !isTextareaStep &&
-    !isFeatureStep &&
-    step?.type !== "multi" &&
-    !(isGroupStep && step.id === "pilotAndFollowUp");
+  const invalidFields = useMemo(() => {
+    const fields = new Set();
+    for (const step of FORM_STEPS) {
+      if (step.type === "group") {
+        for (const field of step.fields) {
+          if (!validateFieldForForm(field, form)) {
+            fields.add(field.field);
+          }
+        }
+      }
+    }
+    return fields;
+  }, [form]);
 
   const update = (field, value) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
+    setForm((prev) => {
+      const next = { ...prev, [field]: value };
+      setInvalidStepIds((ids) =>
+        ids.filter((id) => {
+          const step = FORM_STEPS.find((s) => s.id === id);
+          return step ? !validateStep(step, next) : false;
+        })
+      );
+      return next;
+    });
   };
 
   const toggleMulti = (field, option) => {
@@ -342,38 +372,30 @@ export default function Reviews() {
     }));
   };
 
-  const canContinue = () => validateStep(step, form);
+  const scrollToForm = () => {
+    formStartRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
-  const goNext = () => {
-    if (isLastStep) {
-      saveMockSubmission(form);
-      setSubmitted(true);
+  const handleSubmit = () => {
+    const failures = validateAllForm(form);
+    if (failures.length > 0) {
+      setInvalidStepIds(failures);
+      document
+        .getElementById(`step-${failures[0]}`)
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
-    setDirection(1);
-    setStepIndex((i) => i + 1);
-  };
-
-  const goBack = () => {
-    if (stepIndex === 0) return;
-    setDirection(-1);
-    setStepIndex((i) => i - 1);
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" && !e.shiftKey && allowEnterContinue && canContinue()) {
-      e.preventDefault();
-      goNext();
-    }
+    saveMockSubmission(form);
+    setSubmitted(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <div
-      className="flex min-h-screen flex-col bg-background text-foreground"
+      className="min-h-screen bg-background text-foreground"
       data-testid="reviews-page"
-      onKeyDown={handleKeyDown}
     >
-      <header className="flex items-center justify-between border-b border-border px-6 py-4">
+      <header className="sticky top-0 z-50 flex items-center justify-between border-b border-border bg-background/95 px-6 py-4 backdrop-blur-sm">
         <Link to="/" aria-label="Lens" className="inline-flex items-center gap-2.5">
           <img
             src={LOGO_SRC}
@@ -392,100 +414,133 @@ export default function Reviews() {
         </Link>
       </header>
 
-      <div className="h-1 w-full bg-muted">
-        <motion.div
-          className="h-full bg-foreground"
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-        />
-      </div>
-
-      <main
-        className={cn(
-          "relative mx-auto flex w-full max-w-2xl flex-1 flex-col px-6 py-12",
-          isScrollableStep ? "justify-start overflow-y-auto" : "justify-center"
-        )}
-      >
-        <AnimatePresence mode="wait" custom={direction}>
-          {submitted ? (
-            <motion.div
-              key="success"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center"
-            >
-              <div className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-                <Check size={32} />
-              </div>
-              <h1 className="mb-3 text-3xl font-semibold tracking-tight">
-                Thank you!
-              </h1>
-              <p className="mb-8 text-muted-foreground">
-                Your feedback has been saved. We really appreciate you taking
-                the time after the demo — it directly shapes our roadmap.
+      {submitted ? (
+        <main className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-2xl flex-col items-center justify-center px-6 py-16 text-center">
+          <div className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+            <Check size={32} />
+          </div>
+          <h1 className="mb-3 text-3xl font-semibold tracking-tight">
+            Thank you!
+          </h1>
+          <p className="mb-8 max-w-md text-muted-foreground">
+            Your feedback has been saved. We really appreciate you taking the
+            time after the demo — it directly shapes our roadmap.
+          </p>
+          <Button asChild variant="outline">
+            <Link to="/">Return to homepage</Link>
+          </Button>
+        </main>
+      ) : (
+        <>
+          {/* Intro */}
+          <section className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-6 py-20 text-center">
+            <p className="mb-3 text-sm font-medium uppercase tracking-widest text-muted-foreground">
+              LENS ACE Demo
+            </p>
+            <h1 className="mb-4 max-w-xl text-4xl font-semibold tracking-tight md:text-5xl">
+              {INTRO_STEP.title}
+            </h1>
+            <p className="mx-auto mb-4 max-w-md text-lg text-muted-foreground">
+              {INTRO_STEP.description}
+            </p>
+            {INTRO_STEP.hint && (
+              <p className="mb-10 text-sm text-muted-foreground">
+                {INTRO_STEP.hint}
               </p>
-              <Button asChild variant="outline">
-                <Link to="/">Return to homepage</Link>
-              </Button>
-            </motion.div>
-          ) : (
-            <motion.div
-              key={step.id}
-              custom={direction}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.35, ease: "easeInOut" }}
-              className="w-full"
-            >
-              <StepContent
-                step={step}
-                form={form}
-                update={update}
-                toggleMulti={toggleMulti}
-                updateFeatureRating={updateFeatureRating}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {!submitted && (
-          <div className="mt-12 flex items-center justify-between">
+            )}
             <Button
               type="button"
-              variant="ghost"
-              onClick={goBack}
-              disabled={stepIndex === 0}
-              className={cn(stepIndex === 0 && "invisible")}
-            >
-              <ArrowLeft size={16} />
-              Back
-            </Button>
-            <Button
-              type="button"
-              onClick={goNext}
-              disabled={!canContinue()}
+              onClick={scrollToForm}
               size="lg"
-              className="rounded-xl px-8"
+              className="rounded-xl px-10"
             >
-              {isLastStep ? "Submit" : stepIndex === 0 ? "Start" : "Continue"}
+              Start
               <ArrowRight size={16} />
             </Button>
-          </div>
-        )}
-      </main>
+          </section>
 
-      <footer className="px-6 py-4 text-center text-xs text-muted-foreground">
-        {submitted ? (
-          "Submission complete"
-        ) : (
-          <>
-            Step {stepIndex + 1} of {totalSteps}
-            {allowEnterContinue && " · Press Enter to continue"}
-          </>
-        )}
+          {/* Grouped form sections */}
+          <div ref={formStartRef} className="border-t border-border">
+            {sections.map((group, groupIndex) => (
+              <section
+                key={group.section}
+                id={`section-${group.section}`}
+                className={cn(
+                  "scroll-mt-20 border-b border-border px-6 py-16 md:py-20",
+                  groupIndex % 2 === 1 && "bg-muted/30"
+                )}
+              >
+                <div className="mx-auto max-w-2xl">
+                  <div className="mb-10">
+                    <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+                      {group.section}. {group.sectionTitle}
+                    </p>
+                  </div>
+
+                  <div className="space-y-14">
+                    {group.steps.map((step) => (
+                      <FormStepBlock
+                        key={step.id}
+                        step={step}
+                        form={form}
+                        update={update}
+                        toggleMulti={toggleMulti}
+                        updateFeatureRating={updateFeatureRating}
+                        hasError={invalidStepIds.includes(step.id)}
+                        invalidFields={invalidFields}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </section>
+            ))}
+
+            {/* Submit */}
+            <section className="px-6 py-16 md:py-20">
+              <div className="mx-auto max-w-2xl text-center">
+                <h2 className="mb-3 text-2xl font-semibold tracking-tight">
+                  Ready to submit?
+                </h2>
+                <p className="mb-8 text-muted-foreground">
+                  Name, company, and email required · all other fields optional
+                </p>
+                <Button
+                  type="button"
+                  onClick={handleSubmit}
+                  size="lg"
+                  className="rounded-xl px-10"
+                >
+                  Submit feedback
+                  <ArrowRight size={16} />
+                </Button>
+              </div>
+            </section>
+          </div>
+        </>
+      )}
+
+      <footer className="border-t border-border px-6 py-4 text-center text-xs text-muted-foreground">
+        {submitted ? "Submission complete" : "LENS ACE Demo Feedback"}
       </footer>
     </div>
   );
+}
+
+function validateFieldForForm(field, form) {
+  if (field.type === "text" || field.type === "email") {
+    const value = (form[field.field] || "").trim();
+    if (!field.required) return true;
+    if (field.type === "email") {
+      return value.length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    }
+    return value.length > 0;
+  }
+
+  if (field.type === "textarea") {
+    const value = (form[field.field] || "").trim();
+    if (!field.required) return true;
+    return value.length >= (field.minLength || 1);
+  }
+
+  return true;
 }

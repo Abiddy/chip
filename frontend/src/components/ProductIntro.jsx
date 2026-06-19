@@ -8,6 +8,7 @@ import AceProductShowcase from "./AceProductShowcase";
 import AceMetricsCards from "./AceMetricsCards";
 import SectionHeader, { SpecBadge } from "./SectionHeader";
 import SectionWatermark from "./SectionWatermark";
+import { GradientText } from "@/components/ui/gradient-text";
 
 const ACE_WATERMARK = `${process.env.PUBLIC_URL}/ace-logo-watermark.png`;
 const ABS_SYMBOL_SRC = `${process.env.PUBLIC_URL}/ace-abs-symbol.png`;
@@ -108,7 +109,9 @@ export default function ProductIntro() {
                   Mode 01 — ACE
                 </span>
                 <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight">
-                  ACE Mode
+                  <GradientText theme="ace" className="bg-background">
+                    ACE Mode
+                  </GradientText>
                 </h2>
                 <p className="text-xl md:text-2xl text-muted-foreground font-medium">
                   Analog STA
@@ -178,8 +181,10 @@ export default function ProductIntro() {
                 <span className="mono text-[10px] text-teal-600 tracking-[0.2em]">
                   Mode 02 — ABS
                 </span>
-                <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight">
-                  ABS Mode
+                <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight lg:ml-auto lg:inline-block">
+                  <GradientText theme="abs" className="bg-slate-50/50">
+                    ABS Mode
+                  </GradientText>
                 </h2>
                 <p className="text-xl md:text-2xl text-muted-foreground font-medium">
                   Reduced Model
