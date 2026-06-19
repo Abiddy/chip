@@ -162,28 +162,26 @@ export default function ProductIntro() {
           </div>
         </div>
 
-        {/* ABS Mode — title + description stacked right, screenshot bleeds left & below */}
+        {/* ABS Mode — title + description right-aligned, screenshot bleeds left */}
         <div className="abs-mode-section relative overflow-hidden bg-slate-50/50 py-24 md:py-32 lg:py-40">
           <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
-            <div className="relative lg:min-h-[560px]">
-              <div className="relative z-10 ml-auto max-w-xl space-y-10 lg:text-right">
-                <div className="space-y-6">
+            <div className="relative lg:min-h-[500px]">
+              <div className="relative z-10 ml-auto w-full max-w-xl space-y-10 text-right lg:max-w-[46%] lg:pl-10">
+                <div className="flex flex-col items-end space-y-6">
                   <span className="mono block text-[10px] text-teal-600 tracking-[0.2em]">
                     Mode 02 — ABS
                   </span>
-                  <h2 className="serif text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight">
-                    <GradientText theme="abs" className="bg-slate-50/50">
+                  <h2 className="serif w-full text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight">
+                    <span className="bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">
                       ABS Mode
-                    </GradientText>
+                    </span>
                   </h2>
                   <p className="text-xl md:text-2xl text-muted-foreground font-medium">
                     Reduced Model
                   </p>
-                  <div className="lg:flex lg:justify-end">
-                    <SpecBadge className="rounded-full px-4 py-1.5 text-xs">
-                      Active
-                    </SpecBadge>
-                  </div>
+                  <SpecBadge className="rounded-full px-4 py-1.5 text-xs">
+                    Active
+                  </SpecBadge>
                 </div>
 
                 <div className="space-y-8">
@@ -197,10 +195,10 @@ export default function ProductIntro() {
                     {ABS_MODE_FEATURES.map((item) => (
                       <li
                         key={item}
-                        className="flex items-start gap-3 lg:flex-row-reverse lg:justify-end lg:text-right"
+                        className="flex items-start justify-end gap-3 text-right"
                       >
-                        <span className="mt-1.5 size-1.5 rounded-full bg-teal-600 shrink-0" />
                         <span className="text-sm md:text-base">{item}</span>
+                        <span className="mt-2 size-1.5 shrink-0 rounded-full bg-teal-600" />
                       </li>
                     ))}
                   </ul>
@@ -214,7 +212,7 @@ export default function ProductIntro() {
                   width={1024}
                   height={531}
                   draggable={false}
-                  className="h-[260px] w-full object-cover object-right-top sm:h-[340px] lg:h-full lg:min-h-[520px]"
+                  className="h-[260px] w-full bg-white object-contain object-left-top sm:h-[340px] lg:h-full lg:min-h-[480px]"
                 />
               </div>
             </div>
