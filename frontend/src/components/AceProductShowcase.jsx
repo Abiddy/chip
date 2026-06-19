@@ -88,15 +88,7 @@ export default function AceProductShowcase() {
       </div>
 
       {/* Workspace image — bleeds right */}
-      <div
-        className="
-          relative z-0 overflow-hidden rounded-2xl border border-border shadow-2xl
-          lg:absolute lg:top-16 lg:bottom-16
-          lg:left-[90px] lg:rounded-l-2xl lg:rounded-r-none
-          lg:w-[calc(100%-70px+max(0px,(100vw-100%)/2))]
-          lg:-mr-[max(0px,calc((100vw-100%)/2))]
-        "
-      >
+      <div className="ace-workspace-bleed">
         <img
           src={WORKSPACE_SRC}
           alt="ACE Design Workspace"

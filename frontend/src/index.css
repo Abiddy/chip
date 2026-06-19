@@ -563,3 +563,28 @@ button {
         @apply bg-background text-foreground;
     }
 }
+
+/* Right-edge bleed for ACE workspace image — avoid Tailwind max() calc (breaks postcss-calc in CI) */
+.ace-workspace-bleed {
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    border-radius: 1rem;
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+@media (min-width: 1024px) {
+    .ace-workspace-bleed {
+        position: absolute;
+        top: 4rem;
+        bottom: 4rem;
+        left: 90px;
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        width: calc(100% - 70px + 50vw - 50%);
+        margin-right: calc(50% - 50vw);
+    }
+}
