@@ -1,4 +1,4 @@
-import LensLogo from "./LensLogo";
+const LOGO_SRC = `${process.env.PUBLIC_URL}/lens-logo.svg`;
 
 const cols = [
   {
@@ -24,8 +24,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-12 gap-12 mb-16">
           <div className="lg:col-span-5">
-            <a href="#" className="flex items-center mb-4">
-              <LensLogo className="h-10" />
+            <a href="#" className="mb-4 inline-flex items-center">
+              <img
+                src={LOGO_SRC}
+                alt="Lens"
+                className="h-10 w-auto select-none"
+                draggable="false"
+              />
             </a>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
               Analog verification, at silicon speed. Built for teams shipping

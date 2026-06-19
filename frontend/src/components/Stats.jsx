@@ -6,54 +6,66 @@ import {
   Shield,
   Zap,
 } from "lucide-react";
-import SectionHeader, { SpecBadge } from "./SectionHeader";
+import SectionHeader from "./SectionHeader";
 import SectionWatermark from "./SectionWatermark";
+import SectionWithMockup from "@/components/ui/section-with-mockup";
+import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 
 const LENS_WATERMARK = `${process.env.PUBLIC_URL}/lens-logo-watermark.png`;
+const WORKSPACE_UI = `${process.env.PUBLIC_URL}/ace-workspace-ui.png`;
 
 const kpis = [
   {
-    value: "150×",
-    badge: "+200% Efficiency",
     title: "Faster simulation",
-    spec: "VS. LEGACY SPICE FLOWS ON IDENTICAL NETLISTS",
-    icon: Zap,
+    meta: "150×",
+    description: "VS. LEGACY SPICE FLOWS ON IDENTICAL NETLISTS",
+    icon: <Zap className="size-4 text-blue-500" />,
+    status: "+200% Efficiency",
+    tags: ["Speed", "SPICE"],
+    hasPersistentHover: true,
   },
   {
-    value: "100%",
-    badge: "Full Coverage",
     title: "Verification accuracy",
-    spec: "ZERO COMPROMISE ON SIGNAL FIDELITY AT 12 NM",
-    icon: CheckCircle2,
-    filled: true,
+    meta: "100%",
+    description: "ZERO COMPROMISE ON SIGNAL FIDELITY AT 12 NM",
+    icon: <CheckCircle2 className="size-4 text-emerald-500" />,
+    status: "Full Coverage",
+    tags: ["Accuracy", "12nm"],
   },
   {
-    value: "180nm",
-    badge: "Node Readiness",
     title: "Through 5nm",
-    spec: "PROCESS-AGNOSTIC — VALIDATED 180 NM TO 5 NM",
-    icon: Activity,
-    pulse: true,
+    meta: "180nm",
+    description: "PROCESS-AGNOSTIC — VALIDATED 180 NM TO 5 NM",
+    icon: <Activity className="size-4 text-purple-500" />,
+    status: "Node Readiness",
+    tags: ["Nodes", "Process"],
   },
   {
-    value: "0",
-    badge: "Noise Rejection",
     title: "False alarms",
-    spec: "SIGNAL-AWARE ENGINE IGNORES NOISE, FINDS BUGS",
-    icon: Shield,
+    meta: "0",
+    description: "SIGNAL-AWARE ENGINE IGNORES NOISE, FINDS BUGS",
+    icon: <Shield className="size-4 text-sky-500" />,
+    status: "Noise Rejection",
+    tags: ["Signal-Aware", "Debug"],
   },
 ];
 
 const interfaceFeatures = [
   {
-    icon: Gauge,
+    icon: <Gauge className="size-4 text-blue-500" />,
     title: "Hierarchical Waveform Viewer",
-    desc: "Instantly navigate complex SoC signals with hardware-accelerated rendering.",
+    description:
+      "Instantly navigate complex SoC signals with hardware-accelerated rendering.",
+    status: "Live",
+    tags: ["Waveforms", "SoC"],
   },
   {
-    icon: Activity,
+    icon: <Activity className="size-4 text-emerald-500" />,
     title: "Node Correlation Heatmaps",
-    desc: "Identify high-power and high-leakage nodes directly on the floorplan.",
+    description:
+      "Identify high-power and high-leakage nodes directly on the floorplan.",
+    status: "Active",
+    tags: ["Heatmaps", "Floorplan"],
   },
 ];
 
@@ -92,104 +104,59 @@ export default function Stats() {
           description="Experience the next generation of analog and mixed-signal verification. ACE leverages massive parallelization to deliver SPICE-level accuracy at extreme speeds."
         />
 
-        {/* KPI Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 border border-border bg-white/50 backdrop-blur-sm rounded-lg overflow-hidden shadow-sm mb-24">
-          {kpis.map((k, i) => {
-            const Icon = k.icon;
-            return (
-              <div
-                key={i}
-                data-testid={`stat-${i}`}
-                className="group p-8 border-b md:border-b-0 md:border-r border-border last:border-r-0 hover:bg-slate-50 transition-colors"
-              >
-                <div className="mb-8">
-                  <span className="serif text-4xl md:text-5xl block mb-2 leading-none group-hover:text-teal-600 transition-colors">
-                    {k.value}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    {k.pulse && (
-                      <span className="size-2 rounded-full bg-teal-500 animate-pulse" />
-                    )}
-                    {k.filled && (
-                      <Icon size={14} className="text-teal-600 fill-teal-600" />
-                    )}
-                    <SpecBadge>{k.badge}</SpecBadge>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <h3 className="font-medium text-sm">{k.title}</h3>
-                  <p className="mono text-[10px] text-muted-foreground leading-relaxed">
-                    {k.spec}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <BentoGrid
+          items={kpis}
+          className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-24"
+        />
 
-        {/* Mode Comparison */}
-        <div className="flex flex-col lg:flex-row gap-6 mb-24">
-          <div className="flex-1 bg-white border border-border rounded-lg p-8 md:p-10 shadow-sm hover:border-teal-500/40 transition-colors">
-            <header className="flex justify-between items-start mb-8">
-              <div>
-                <span className="mono text-[10px] text-teal-600 block mb-2 tracking-[0.2em]">
-                  Mode: ACE Fast-Silicon
-                </span>
-                <h3 className="serif text-2xl md:text-3xl">
-                  Dynamic Scaling Engine
-                </h3>
-              </div>
-              <Zap size={36} strokeWidth={1.2} className="text-teal-600" />
-            </header>
-            <p className="text-muted-foreground mb-10 leading-relaxed">
-              Proprietary acceleration for critical path analysis. Enables
-              what-if analysis by scaling, trimming, and filtering parasitics
-              directly from the schematic — +200× faster than re-extraction.
-            </p>
-            <div className="space-y-3">
+        <BentoGrid className="grid-cols-1 lg:grid-cols-2 gap-3 mb-24">
+          <BentoCard
+            title="Dynamic Scaling Engine"
+            meta="Mode: ACE Fast-Silicon"
+            description="Proprietary acceleration for critical path analysis. Enables what-if analysis by scaling, trimming, and filtering parasitics directly from the schematic — +200× faster than re-extraction."
+            icon={<Zap className="size-4 text-blue-500" />}
+            status="Live"
+            tags={["Parallel", "Scaling"]}
+            hasPersistentHover
+          >
+            <div className="space-y-2 pt-1">
               {[
                 ["Parallel Threads", "Up to 256×"],
                 ["Re-extraction Bypass", "+200× vs legacy"],
               ].map(([label, val]) => (
                 <div
                   key={label}
-                  className="flex justify-between items-center py-3 border-b border-border/60"
+                  className="flex justify-between items-center py-2 border-b border-gray-100 last:border-0"
                 >
-                  <span className="mono text-[10px] text-muted-foreground">
-                    {label}
+                  <span className="text-xs text-gray-500">{label}</span>
+                  <span className="text-xs font-semibold text-gray-900">
+                    {val}
                   </span>
-                  <span className="mono text-[11px] font-semibold">{val}</span>
                 </div>
               ))}
             </div>
-          </div>
+          </BentoCard>
 
-          <div className="flex-1 bg-slate-900 text-white border border-transparent rounded-lg p-8 md:p-10 shadow-xl">
-            <header className="flex justify-between items-start mb-8">
-              <div>
-                <span className="mono text-[10px] text-teal-400 block mb-2 tracking-[0.2em]">
-                  Mode: ABS Deep-Node
-                </span>
-                <h3 className="serif text-2xl md:text-3xl">Absolute Precision</h3>
-              </div>
-              <Activity size={36} strokeWidth={1.2} className="text-teal-400" />
-            </header>
-            <p className="text-slate-400 mb-10 leading-relaxed">
-              Optimized for transceiver and digital GLS blocks. Generates
-              high-fidelity reduced sub-circuits for SPICE while preserving
-              critical electrical accuracy and analog loading.
-            </p>
-            <div className="space-y-3">
+          <BentoCard
+            title="Absolute Precision"
+            meta="Mode: ABS Deep-Node"
+            description="Optimized for transceiver and digital GLS blocks. Generates high-fidelity reduced sub-circuits for SPICE while preserving critical electrical accuracy and analog loading."
+            icon={<Activity className="size-4 text-teal-500" />}
+            status="Beta"
+            tags={["GLS", "Sub-circuit"]}
+            cta="Request License →"
+          >
+            <div className="space-y-2 pt-1">
               {[
                 ["Sub-circuit Generation", "Automated .SUBCKT"],
                 ["Layout Overhead", "Eliminated"],
               ].map(([label, val]) => (
                 <div
                   key={label}
-                  className="flex justify-between items-center py-3 border-b border-slate-700"
+                  className="flex justify-between items-center py-2 border-b border-gray-100 last:border-0"
                 >
-                  <span className="mono text-[10px] text-slate-500">{label}</span>
-                  <span className="mono text-[11px] font-semibold text-teal-400">
+                  <span className="text-xs text-gray-500">{label}</span>
+                  <span className="text-xs font-semibold text-teal-600">
                     {val}
                   </span>
                 </div>
@@ -197,51 +164,26 @@ export default function Stats() {
             </div>
             <a
               href="#cta"
-              className="mt-10 inline-flex items-center gap-2 border border-slate-600 px-6 py-3 rounded-lg mono text-[11px] hover:bg-slate-800 transition-colors"
+              className="mt-4 inline-flex items-center gap-2 text-xs text-teal-600 hover:text-teal-700 transition-colors"
             >
               Request Evaluation License
-              <ArrowRight size={14} />
+              <ArrowRight size={12} />
             </a>
-          </div>
-        </div>
+          </BentoCard>
+        </BentoGrid>
 
-        {/* Interface */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-5">
-            <SectionHeader
-              label="05 — The Interface"
-              title={
-                <h3 className="serif text-3xl md:text-4xl leading-tight">
-                  Designed for Technical Clarity
-                </h3>
-              }
-              description="Stop digging through log files. Interactive visualization provides real-time insights into netlist topology and simulation bottlenecks."
-              className="mb-8"
-            />
-            <ul className="space-y-6">
-              {interfaceFeatures.map((f) => {
-                const Icon = f.icon;
-                return (
-                  <li key={f.title} className="flex items-start gap-4">
-                    <Icon size={20} className="text-teal-600 mt-1 shrink-0" />
-                    <div>
-                      <h4 className="font-medium mb-1">{f.title}</h4>
-                      <p className="text-sm text-muted-foreground">{f.desc}</p>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          <div className="lg:col-span-7 relative group">
-            <div className="absolute inset-0 bg-teal-500/10 rounded-xl -rotate-2 scale-[1.02] group-hover:rotate-0 transition-transform duration-700" />
-            <img
-              src="/ace-workspace-mock.png"
-              alt="ACE verification workspace showing nodal diagram and waveform analysis"
-              className="relative z-10 rounded-xl shadow-2xl border border-border w-full object-cover aspect-[4/3]"
-            />
-          </div>
-        </div>
+        <SectionWithMockup
+          label="05 — The Interface"
+          title="Designed for Technical Clarity"
+          description="Stop digging through log files. Interactive visualization provides real-time insights into netlist topology and simulation bottlenecks."
+          primaryImageSrc={WORKSPACE_UI}
+          secondaryImageSrc={WORKSPACE_UI}
+        >
+          <BentoGrid
+            items={interfaceFeatures}
+            className="grid-cols-1 gap-3 w-full"
+          />
+        </SectionWithMockup>
       </div>
     </section>
   );

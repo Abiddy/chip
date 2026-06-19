@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import LensLogo from "./LensLogo";
 import { Menu, X } from "lucide-react";
+
+const LOGO_SRC = `${process.env.PUBLIC_URL}/lens-logo.svg`;
 
 const navItems = [
   { label: "ACE", href: "#product" },
@@ -35,7 +36,12 @@ export default function Nav() {
           data-testid="nav-logo"
           className="flex items-center group"
         >
-          <LensLogo className="h-8 transition-opacity duration-300 group-hover:opacity-80" />
+          <img
+            src={LOGO_SRC}
+            alt="Lens"
+            className="h-8 w-auto select-none transition-opacity duration-300 group-hover:opacity-80"
+            draggable="false"
+          />
         </a>
 
         <nav className="hidden md:flex items-center gap-9">

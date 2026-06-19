@@ -1,75 +1,46 @@
 import { CheckCircle2, Gauge, Network, Zap } from "lucide-react";
-import {
-  CursorCard,
-  CursorCardsContainer,
-} from "@/components/ui/cursor-cards";
+import { BentoGrid } from "@/components/ui/bento-grid";
 
 const METRICS = [
   {
-    label: "Performance Scale",
-    value: "300GB+",
-    spec: "DSPF File Capacity",
-    icon: Gauge,
-    tag: "Stable Load",
+    title: "Performance Scale",
+    meta: "300GB+",
+    description: "DSPF file capacity — stable load at production scale.",
+    icon: <Gauge className="size-4 text-blue-500" />,
+    status: "Stable Load",
+    tags: ["Capacity", "DSPF"],
   },
   {
-    label: "Engine Throughput",
-    value: "1GB / 10s",
-    spec: "Parser Velocity",
-    icon: Zap,
-    tag: "Peak Speed",
+    title: "Engine Throughput",
+    meta: "1GB / 10s",
+    description: "Parser velocity at peak speed on large netlists.",
+    icon: <Zap className="size-4 text-emerald-500" />,
+    status: "Peak Speed",
+    tags: ["Parser", "Throughput"],
   },
   {
-    label: "Parasitic Processing",
-    value: "2 Million",
-    spec: "Parasitics / Second",
-    icon: Network,
-    tag: "Concurrent Nodes",
+    title: "Parasitic Processing",
+    meta: "2 Million",
+    description: "Parasitics processed per second across concurrent nodes.",
+    icon: <Network className="size-4 text-purple-500" />,
+    status: "Concurrent",
+    tags: ["Parasitics", "Scale"],
   },
   {
-    label: "Process Agnostic",
-    value: "180nm — 5nm",
-    spec: "Nodes Supported",
-    icon: CheckCircle2,
-    tag: "Validated",
+    title: "Process Agnostic",
+    meta: "180nm — 5nm",
+    description: "Nodes supported and validated across process generations.",
+    icon: <CheckCircle2 className="size-4 text-sky-500" />,
+    status: "Validated",
+    tags: ["Nodes", "Process"],
   },
 ];
 
-const CARD_BORDER = "#e5e5e5";
-const TEAL_PRIMARY = "#5EEAD4";
-const TEAL_SECONDARY = "#0D9488";
-
 export default function AceMetricsCards() {
   return (
-    <CursorCardsContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {METRICS.map((m) => {
-        const Icon = m.icon;
-        return (
-          <CursorCard
-            key={m.label}
-            borderColor={CARD_BORDER}
-            primaryHue={TEAL_PRIMARY}
-            secondaryHue={TEAL_SECONDARY}
-            className="h-full min-h-[220px] rounded-xl shadow-md"
-          >
-            <div className="flex h-full flex-col justify-between p-6 md:p-8">
-              <span className="mono text-[10px] text-muted-foreground">
-                {m.label}
-              </span>
-              <div className="my-6">
-                <p className="serif text-2xl md:text-3xl mb-2">{m.value}</p>
-                <p className="mono text-[11px] text-muted-foreground normal-case tracking-normal">
-                  {m.spec}
-                </p>
-              </div>
-              <div className="border-t border-border pt-4 flex items-center gap-2">
-                <Icon size={16} className="text-teal-600" />
-                <span className="mono text-[10px] text-teal-600">{m.tag}</span>
-              </div>
-            </div>
-          </CursorCard>
-        );
-      })}
-    </CursorCardsContainer>
+    <BentoGrid
+      items={METRICS}
+      className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"
+    />
   );
 }

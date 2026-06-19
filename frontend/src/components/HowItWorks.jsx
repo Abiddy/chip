@@ -1,36 +1,38 @@
 import { ArrowRight, CheckCircle2, Cog, Upload } from "lucide-react";
-import SectionHeader, { SpecBadge } from "./SectionHeader";
+import SectionHeader from "./SectionHeader";
 import SectionWatermark from "./SectionWatermark";
+import { BentoGrid } from "@/components/ui/bento-grid";
 
 const LENS_WATERMARK = `${process.env.PUBLIC_URL}/lens-logo-watermark.png`;
 
 const steps = [
   {
-    n: "01",
-    phase: "Phase I",
-    icon: Upload,
     title: "Drop in your netlist",
-    desc: "Bring your existing SPICE or Verilog-A files. ACE plugs into your flow with zero rewrites and respects your toolchain.",
-    badge: "Compatible",
-    bg: "bg-slate-50",
+    meta: "Phase I",
+    description:
+      "Bring your existing SPICE or Verilog-A files. ACE plugs into your flow with zero rewrites and respects your toolchain.",
+    icon: <Upload className="size-4 text-blue-500" />,
+    status: "Compatible",
+    tags: ["SPICE", "Netlist"],
   },
   {
-    n: "02",
-    phase: "Phase II",
-    icon: Cog,
     title: "Run with intelligence",
-    desc: "ACE simulates with full SPICE accuracy at 150× speed, then routes signal anomalies through an AI debug layer.",
-    badge: "+150× Speed",
-    bg: "bg-white",
+    meta: "Phase II",
+    description:
+      "ACE simulates with full SPICE accuracy at 150× speed, then routes signal anomalies through an AI debug layer.",
+    icon: <Cog className="size-4 text-emerald-500" />,
+    status: "+150× Speed",
+    tags: ["AI", "Simulation"],
+    hasPersistentHover: true,
   },
   {
-    n: "03",
-    phase: "Phase III",
-    icon: CheckCircle2,
     title: "Tape out with confidence",
-    desc: "Pass-fail verdicts you can trust. Clean coverage reports. Zero false alarms. Get back to designing, not chasing flags.",
-    badge: "0.0% Error",
-    bg: "bg-slate-50",
+    meta: "Phase III",
+    description:
+      "Pass-fail verdicts you can trust. Clean coverage reports. Zero false alarms. Get back to designing, not chasing flags.",
+    icon: <CheckCircle2 className="size-4 text-purple-500" />,
+    status: "0.0% Error",
+    tags: ["Sign-off", "Coverage"],
   },
 ];
 
@@ -78,42 +80,10 @@ export default function HowItWorks() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 relative">
-          <div className="hidden md:block absolute top-[40%] left-0 w-full h-px bg-border/60 -z-10" />
-
-          {steps.map((s, i) => {
-            const Icon = s.icon;
-            return (
-              <div
-                key={s.n}
-                data-testid={`workflow-step-${i}`}
-                className={`relative ${s.bg} border border-border p-8 md:p-10 transition-all duration-500 hover:z-10 hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] hover:-translate-y-1`}
-              >
-                <div className="absolute top-8 right-8 text-teal-600">
-                  <Icon size={32} strokeWidth={1.4} />
-                </div>
-                <span
-                  className="serif text-[120px] absolute -bottom-4 -right-2 leading-none opacity-[0.07] text-teal-800 pointer-events-none select-none"
-                  aria-hidden="true"
-                >
-                  {s.n}
-                </span>
-                <div className="relative z-10">
-                  <span className="mono text-[10px] text-teal-600 mb-12 block">
-                    {s.phase}
-                  </span>
-                  <h3 className="serif text-2xl md:text-3xl mb-4">{s.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed max-w-[280px]">
-                    {s.desc}
-                  </p>
-                  <div className="mt-12">
-                    <SpecBadge>{s.badge}</SpecBadge>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <BentoGrid
+          items={steps}
+          className="grid-cols-1 md:grid-cols-3 gap-3"
+        />
 
         <div className="mt-24 bg-slate-900 rounded-lg p-10 md:p-12 relative overflow-hidden">
           <div className="relative z-10 max-w-xl">

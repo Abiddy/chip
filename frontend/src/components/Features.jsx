@@ -10,52 +10,78 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
-import SectionHeader, { SpecBadge } from "./SectionHeader";
+import SectionHeader from "./SectionHeader";
 import SectionWatermark from "./SectionWatermark";
+import { BentoGrid } from "@/components/ui/bento-grid";
 
 const LENS_WATERMARK = `${process.env.PUBLIC_URL}/lens-logo-watermark.png`;
 
 const features = [
   {
-    icon: Cpu,
-    name: "Built for AMS",
-    desc: "Engineered ground-up for analog and mixed-signal design — not retrofitted from digital legacy tools.",
+    title: "Built for AMS",
+    description:
+      "Engineered ground-up for analog and mixed-signal design — not retrofitted from digital legacy tools.",
+    icon: <Cpu className="size-4 text-blue-500" />,
+    status: "01",
+    tags: ["AMS", "Analog"],
   },
   {
-    icon: HardDrive,
-    name: "Low memory footprint",
-    desc: "Run massive nets on a single workstation. Forget heavyweight server clusters for routine verification.",
+    title: "Low memory footprint",
+    description:
+      "Run massive nets on a single workstation. Forget heavyweight server clusters for routine verification.",
+    icon: <HardDrive className="size-4 text-emerald-500" />,
+    status: "02",
+    tags: ["Memory", "Workstation"],
   },
   {
-    icon: ShieldCheck,
-    name: "Minimal false alarms",
-    desc: "Signal-aware analysis catches the real bugs and ignores the noise — so engineers stop chasing ghosts.",
+    title: "Minimal false alarms",
+    description:
+      "Signal-aware analysis catches the real bugs and ignores the noise — so engineers stop chasing ghosts.",
+    icon: <ShieldCheck className="size-4 text-purple-500" />,
+    status: "03",
+    tags: ["Signal-Aware", "Accuracy"],
   },
   {
-    icon: Layers,
-    name: "Multi-node operation",
-    desc: "From 28 nm down to 3 nm. ACE adapts to your process and scales with your design complexity.",
+    title: "Multi-node operation",
+    description:
+      "From 28 nm down to 3 nm. ACE adapts to your process and scales with your design complexity.",
+    icon: <Layers className="size-4 text-sky-500" />,
+    status: "04",
+    tags: ["28nm", "3nm"],
   },
   {
-    icon: Gauge,
-    name: "Lightning-fast runs",
-    desc: "Sweep more corners, run more scenarios, and ship in fewer revisions with optimized engine cycles.",
-    badge: "+150× Faster",
+    title: "Lightning-fast runs",
+    meta: "+150× Faster",
+    description:
+      "Sweep more corners, run more scenarios, and ship in fewer revisions with optimized engine cycles.",
+    icon: <Gauge className="size-4 text-blue-500" />,
+    status: "05",
+    tags: ["Speed", "Corners"],
+    hasPersistentHover: true,
   },
   {
-    icon: Sparkles,
-    name: "AI-driven debugging",
-    desc: "Trace failures back to their root cause automatically. From red flag to fix without manual hunting.",
+    title: "AI-driven debugging",
+    description:
+      "Trace failures back to their root cause automatically. From red flag to fix without manual hunting.",
+    icon: <Sparkles className="size-4 text-emerald-500" />,
+    status: "06",
+    tags: ["AI", "Debug"],
   },
   {
-    icon: LineChart,
-    name: "Insightful simulation",
-    desc: "Deep visibility into every node, every transition. See what your circuit is actually doing in real-time.",
+    title: "Insightful simulation",
+    description:
+      "Deep visibility into every node, every transition. See what your circuit is actually doing in real-time.",
+    icon: <LineChart className="size-4 text-purple-500" />,
+    status: "07",
+    tags: ["Visibility", "Real-time"],
   },
   {
-    icon: Plug,
-    name: "Easy integration",
-    desc: "Drop-in compatibility with Cadence, Synopsys, and Siemens flows. No rewrite. No retraining.",
+    title: "Easy integration",
+    description:
+      "Drop-in compatibility with Cadence, Synopsys, and Siemens flows. No rewrite. No retraining.",
+    icon: <Plug className="size-4 text-sky-500" />,
+    status: "08",
+    tags: ["Cadence", "Synopsys"],
   },
 ];
 
@@ -95,36 +121,10 @@ export default function Features() {
           description="Eight capabilities, one verified outcome — silicon that ships faster and works the first time. Engineered for the next generation of analog complexity."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-l border-t border-border">
-          {features.map((f, i) => {
-            const Icon = f.icon;
-            return (
-              <div
-                key={f.name}
-                data-testid={`feature-card-${i}`}
-                className="group relative bg-white p-8 border-r border-b border-border transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] hover:border-slate-300 hover:-translate-y-0.5"
-              >
-                <div className="flex justify-between items-start mb-12">
-                  <Icon
-                    size={32}
-                    strokeWidth={1.4}
-                    className="text-teal-600"
-                  />
-                  <span className="mono text-[10px] text-muted-foreground">
-                    / {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
-                <h3 className="serif text-xl md:text-2xl mb-4">{f.name}</h3>
-                {f.badge && (
-                  <SpecBadge className="mb-4">{f.badge}</SpecBadge>
-                )}
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {f.desc}
-                </p>
-              </div>
-            );
-          })}
-        </div>
+        <BentoGrid
+          items={features}
+          className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3"
+        />
 
         <div className="mt-20 flex flex-col md:flex-row items-center justify-between gap-6 p-10 bg-slate-900 rounded-xl text-white">
           <div>

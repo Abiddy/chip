@@ -1,34 +1,39 @@
-import DisplayCards from "@/components/ui/display-cards";
 import { Bug, Gauge, Plug } from "lucide-react";
+import { BentoGrid } from "@/components/ui/bento-grid";
 
-const ACE_FEATURE_CARDS = [
+const ACE_FEATURE_ITEMS = [
   {
-    icon: <Gauge className="size-4 text-teal-200" />,
     title: "Simulation",
     description:
       "Faster runs without simplification — full SPICE-grade fidelity, accelerated.",
-    titleClassName: "text-teal-600",
+    icon: <Gauge className="size-4 text-blue-500" />,
+    status: "Live",
+    tags: ["SPICE", "Fidelity"],
+    hasPersistentHover: true,
   },
   {
-    icon: <Bug className="size-4 text-teal-200" />,
     title: "Debugging",
     description:
       "AI-driven root-cause traces. Skip the false alarms, find the real bug.",
-    titleClassName: "text-teal-600",
+    icon: <Bug className="size-4 text-emerald-500" />,
+    status: "Active",
+    tags: ["AI", "Root Cause"],
   },
   {
-    icon: <Plug className="size-4 text-teal-200" />,
     title: "Integration",
     description:
       "Drops into your existing tape-out flow. No rewrite. No friction.",
-    titleClassName: "text-teal-600",
+    icon: <Plug className="size-4 text-purple-500" />,
+    status: "Ready",
+    tags: ["Cadence", "Synopsys"],
   },
 ];
 
 export default function AceFeatureCards() {
   return (
-    <div className="flex h-full w-full items-center justify-center overflow-visible">
-      <DisplayCards cards={ACE_FEATURE_CARDS} />
-    </div>
+    <BentoGrid
+      items={ACE_FEATURE_ITEMS}
+      className="grid-cols-1 gap-3 w-full max-w-md mx-auto"
+    />
   );
 }

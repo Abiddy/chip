@@ -2,12 +2,15 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
+  Gauge,
+  Layers,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import AceFeatureCards from "./AceFeatureCards";
 import AceMetricsCards from "./AceMetricsCards";
-import SectionHeader, { SpecBadge } from "./SectionHeader";
+import SectionHeader from "./SectionHeader";
 import SectionWatermark from "./SectionWatermark";
+import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 
 const ACE_WATERMARK = `${process.env.PUBLIC_URL}/ace-logo-watermark.png`;
 
@@ -106,67 +109,48 @@ export default function ProductIntro() {
             description="Process-agnostic technology tested from 180nm to 5nm — operate in ACE mode for analog STA or ABS mode for transceiver and digital GLS."
             className="mb-12"
           />
-          <div className="flex flex-col lg:flex-row gap-6">
-            {/* ACE Mode */}
-            <div className="flex-1 p-8 md:p-10 border border-border rounded-xl bg-white relative overflow-hidden hover:border-teal-500/40 hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] transition-all">
-              <div className="absolute top-4 right-4">
-                <SpecBadge className="rounded-full px-3 py-1">
-                  +200× Faster
-                </SpecBadge>
-              </div>
-              <span className="mono text-[10px] text-teal-600 block mb-4">
-                Mode: ACE · Analog STA
-              </span>
-              <h3 className="serif text-2xl md:text-3xl mb-4">
-                ACE Mode (Analog STA)
-              </h3>
-              <p className="text-muted-foreground mb-8 leading-relaxed">
-                Enables &ldquo;what-if&rdquo; analysis by allowing designers to
-                selectively scale, trim, or filter parasitics and coupling
-                capacitances directly from the schematic —{" "}
-                <strong className="text-foreground font-medium">
-                  +200× faster
-                </strong>{" "}
-                than traditional re-extraction.
-              </p>
-              <ul className="space-y-4">
+          <BentoGrid className="grid-cols-1 lg:grid-cols-2 gap-3">
+            <BentoCard
+              title="ACE Mode (Analog STA)"
+              meta="Mode: ACE"
+              description='Enables "what-if" analysis by allowing designers to selectively scale, trim, or filter parasitics and coupling capacitances directly from the schematic — +200× faster than traditional re-extraction.'
+              icon={<Gauge className="size-4 text-blue-500" />}
+              status="+200× Faster"
+              tags={["Analog STA", "What-If"]}
+              hasPersistentHover
+            >
+              <ul className="space-y-3 pt-1">
                 {ACE_MODE_FEATURES.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
+                  <li key={item} className="flex items-start gap-3 text-sm text-gray-600">
                     <Check
-                      size={18}
+                      size={16}
                       className="text-teal-600 mt-0.5 shrink-0"
                       strokeWidth={2.5}
                     />
-                    <span className="text-sm md:text-base">{item}</span>
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </BentoCard>
 
-            {/* ABS Mode */}
-            <div className="flex-1 p-8 md:p-10 border border-border rounded-xl bg-white hover:border-teal-500/30 hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] transition-all">
-              <span className="mono text-[10px] text-muted-foreground block mb-4">
-                Mode: ABS · Reduced Model
-              </span>
-              <h3 className="serif text-2xl md:text-3xl mb-4">
-                ABS Mode (Reduced Model)
-              </h3>
-              <p className="text-muted-foreground mb-8 leading-relaxed">
-                Engineered for large-scale digital and transceiver blocks.
-                Generates high-fidelity, reduced-complexity sub-circuits for
-                SPICE or GLS while eliminating the overhead of non-essential
-                parasitics.
-              </p>
-              <ul className="space-y-4">
+            <BentoCard
+              title="ABS Mode (Reduced Model)"
+              meta="Mode: ABS"
+              description="Engineered for large-scale digital and transceiver blocks. Generates high-fidelity, reduced-complexity sub-circuits for SPICE or GLS while eliminating the overhead of non-essential parasitics."
+              icon={<Layers className="size-4 text-emerald-500" />}
+              status="Active"
+              tags={["GLS", "Abstraction"]}
+            >
+              <ul className="space-y-3 pt-1">
                 {ABS_MODE_FEATURES.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <span className="mt-1.5 size-1.5 rounded-full bg-muted-foreground shrink-0" />
-                    <span className="text-sm md:text-base">{item}</span>
+                  <li key={item} className="flex items-start gap-3 text-sm text-gray-600">
+                    <span className="mt-1.5 size-1.5 rounded-full bg-gray-400 shrink-0" />
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
-            </div>
-          </div>
+            </BentoCard>
+          </BentoGrid>
         </div>
       </section>
       <section id="ace-impact" className="relative pb-32 md:pb-40 overflow-hidden">

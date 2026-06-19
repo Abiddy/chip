@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
-import LensLogo from "@/components/LensLogo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { BentoCard } from "@/components/ui/bento-grid";
 import {
   FEATURES,
   FORM_STEPS,
@@ -14,6 +14,8 @@ import {
   TOTAL_QUESTIONS,
   validateStep,
 } from "@/data/reviewFormSteps";
+
+const LOGO_SRC = `${process.env.PUBLIC_URL}/lens-logo.svg`;
 
 const STORAGE_KEY = "lens-review-submissions";
 
@@ -72,18 +74,20 @@ function SectionLabel({ step }) {
 
 function OptionCard({ selected, onClick, children }) {
   return (
-    <button
+    <BentoCard
+      as="button"
       type="button"
       onClick={onClick}
+      hideFooter
       className={cn(
-        "w-full rounded-xl border p-4 text-left transition-all",
+        "w-full cursor-pointer",
         selected
-          ? "border-foreground bg-muted/50 ring-1 ring-foreground"
-          : "border-border hover:border-foreground/40"
+          ? "border-foreground/30 ring-1 ring-foreground shadow-[0_2px_12px_rgba(0,0,0,0.06)] -translate-y-0.5"
+          : "hover:border-gray-200"
       )}
     >
       {children}
-    </button>
+    </BentoCard>
   );
 }
 
@@ -370,8 +374,13 @@ export default function Reviews() {
       onKeyDown={handleKeyDown}
     >
       <header className="flex items-center justify-between border-b border-border px-6 py-4">
-        <Link to="/" className="flex items-center gap-2">
-          <LensLogo className="h-7" />
+        <Link to="/" className="flex items-center">
+          <img
+            src={LOGO_SRC}
+            alt="Lens"
+            className="h-7 w-auto select-none"
+            draggable="false"
+          />
         </Link>
         <Link
           to="/"
