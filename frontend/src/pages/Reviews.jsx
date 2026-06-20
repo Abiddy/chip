@@ -428,12 +428,12 @@ export default function Reviews() {
             draggable="false"
           />
         </Link>
-        <Link
-          to="/"
+        <a
+          href="https://lenseda.com/"
           className="text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
-          Back to site
-        </Link>
+          Go to Lens
+        </a>
       </header>
 
       {submitted ? (

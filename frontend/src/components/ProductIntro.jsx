@@ -219,63 +219,64 @@ export default function ProductIntro() {
           </div>
         </div>
       </section>
-      <section id="ace-impact" className="relative pb-32 md:pb-40 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="bg-slate-900 text-white rounded-2xl p-10 md:p-16 relative overflow-hidden">
-            <SectionWatermark
-              src={ACE_WATERMARK}
-              position="top-left"
-              size="sm"
-              imageClassName="opacity-[0.08] md:opacity-[0.12]"
-            />
-            <div className="relative z-10 max-w-3xl">
-              <span className="mono text-[10px] text-teal-400 mb-6 block tracking-[0.2em]">
-                Efficiency & Automation
-              </span>
-              <h2 className="serif text-3xl md:text-5xl leading-[1.1] mb-8">
-                Reduce your verification cycle from weeks to hours.
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <span className="w-12 h-0.5 bg-teal-400" />
-                    <h4 className="serif text-xl">Time Savings</h4>
-                  </div>
-                  <p className="text-slate-400 leading-relaxed">
-                    Primary impact on simulation and extraction time — with
-                    negligible accuracy sacrificed. Parallelized processing
-                    eliminates bottlenecks so teams focus on design, not waiting
-                    for netlists.
-                  </p>
+      <section
+        id="ace-impact"
+        className="relative overflow-hidden bg-slate-900 py-24 text-white md:py-32 lg:py-40"
+      >
+        <SectionWatermark
+          src={ACE_WATERMARK}
+          position="top-left"
+          size="sm"
+          imageClassName="opacity-[0.08] md:opacity-[0.12]"
+        />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="relative z-10 max-w-3xl">
+            <span className="mono mb-6 block text-[10px] tracking-[0.2em] text-teal-400">
+              Efficiency & Automation
+            </span>
+            <h2 className="serif mb-8 text-3xl leading-[1.1] md:text-5xl">
+              Reduce your verification cycle from weeks to hours.
+            </h2>
+            <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <span className="h-0.5 w-12 bg-teal-400" />
+                  <h4 className="serif text-xl">Time Savings</h4>
                 </div>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <span className="w-12 h-0.5 bg-teal-400" />
-                    <h4 className="serif text-xl">Full Automation</h4>
-                  </div>
-                  <p className="text-slate-400 leading-relaxed">
-                    Full automation of layout activities assists designers
-                    during verification — removing manual hand-offs and reducing
-                    error potential in deep-node sign-off.
-                  </p>
+                <p className="leading-relaxed text-slate-400">
+                  Primary impact on simulation and extraction time — with
+                  negligible accuracy sacrificed. Parallelized processing
+                  eliminates bottlenecks so teams focus on design, not waiting
+                  for netlists.
+                </p>
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <span className="h-0.5 w-12 bg-teal-400" />
+                  <h4 className="serif text-xl">Full Automation</h4>
                 </div>
+                <p className="leading-relaxed text-slate-400">
+                  Full automation of layout activities assists designers
+                  during verification — removing manual hand-offs and reducing
+                  error potential in deep-node sign-off.
+                </p>
               </div>
-              <div className="mt-12 flex flex-wrap gap-4">
-                <a
-                  href="#cta"
-                  className="inline-flex items-center gap-2 bg-teal-400 text-slate-900 px-8 py-4 rounded-lg font-semibold text-sm hover:bg-teal-300 transition-colors"
-                >
-                  Schedule Demo
-                  <ArrowUpRight size={16} />
-                </a>
-                <Link
-                  to="/reviews"
-                  className="inline-flex items-center gap-2 border border-slate-600 text-slate-300 px-8 py-4 rounded-lg font-semibold text-sm hover:bg-slate-800 transition-colors"
-                >
-                  Share Demo Feedback
-                  <ArrowRight size={16} />
-                </Link>
-              </div>
+            </div>
+            <div className="mt-12 flex flex-wrap gap-4">
+              <a
+                href="#cta"
+                className="inline-flex items-center gap-2 rounded-lg bg-teal-400 px-8 py-4 text-sm font-semibold text-slate-900 transition-colors hover:bg-teal-300"
+              >
+                Schedule Demo
+                <ArrowUpRight size={16} />
+              </a>
+              <Link
+                to="/reviews"
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-600 px-8 py-4 text-sm font-semibold text-slate-300 transition-colors hover:bg-slate-800"
+              >
+                Share Demo Feedback
+                <ArrowRight size={16} />
+              </Link>
             </div>
           </div>
         </div>

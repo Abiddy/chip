@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import React from "react";
 import { Menu, X } from "lucide-react";
 import { useScroll } from "motion/react";
@@ -121,9 +120,9 @@ export function HeroHeader() {
                   </a>
                 </Button>
                 <Button asChild size="sm">
-                  <Link to="/reviews">
-                    <span>Reviews</span>
-                  </Link>
+                  <a href="#savings" data-testid="nav-calculate-savings">
+                    <span>Calculate Your Savings</span>
+                  </a>
                 </Button>
               </div>
             </div>
