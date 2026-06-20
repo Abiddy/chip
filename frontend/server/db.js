@@ -134,6 +134,14 @@ async function setReviewFieldPublished(id, field, published) {
   return result.rows[0] || null;
 }
 
+async function deleteReviewSubmission(id) {
+  const result = await pool.query(
+    `DELETE FROM review_submissions WHERE id = $1 RETURNING id`,
+    [id]
+  );
+  return result.rows[0] || null;
+}
+
 async function checkDbConnection() {
   if (!process.env.DATABASE_URL) return false;
   await pool.query("SELECT 1");
@@ -212,6 +220,7 @@ module.exports = {
   listAllReviewSubmissions,
   listPublishedReviewSubmissions,
   setReviewFieldPublished,
+  deleteReviewSubmission,
   checkDbConnection,
   formatPublishedQuotes,
   formatAdminReview,

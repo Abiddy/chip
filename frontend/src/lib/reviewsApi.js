@@ -62,6 +62,12 @@ export async function setReviewFieldPublished(id, field, published) {
   });
 }
 
+export async function deleteReview(id) {
+  return adminFetch(`/api/admin/reviews/${id}`, {
+    method: "DELETE",
+  });
+}
+
 export async function fetchPublishedReviews() {
   const response = await fetch("/api/reviews/published");
   const payload = await response.json().catch(() => ({}));

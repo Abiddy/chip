@@ -7,6 +7,7 @@ const {
   listAllReviewSubmissions,
   listPublishedReviewSubmissions,
   setReviewFieldPublished,
+  deleteReviewSubmission,
   checkDbConnection,
   formatPublishedQuotes,
   formatAdminReview,
@@ -114,6 +115,21 @@ app.get("/api/admin/reviews", requireAdmin, async (_req, res) => {
   } catch (error) {
     console.error("[admin] list failed:", error);
     res.status(500).json({ message: "Failed to load submissions." });
+  }
+});
+
+app.delete("/api/admin/reviews/:id", requireAdmin, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const row = await deleteReviewSubmission(id);
+    if (!row) {
+      return res.status(404).json({ message: "Submission not found." });
+    }
+    res.json({ ok: true, id: row.id });
+  } catch (error) {
+    console.error("[admin] delete failed:", error);
+    res.status(500).json({ message: "Failed to delete submission." });
   }
 });
 

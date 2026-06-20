@@ -15,10 +15,28 @@ import {
   Lock,
   LogOut,
   Mail,
+  Trash2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import {
   Card,
   CardContent,
@@ -29,6 +47,7 @@ import {
 import { cn } from "@/lib/utils";
 import {
   clearAdminToken,
+  deleteReview,
   fetchAdminReviews,
   getAdminToken,
   loginAdmin,
@@ -75,7 +94,7 @@ function StatCard({ label, value, hint, accent = "default" }) {
   );
 }
 
-function ReviewCard({ review, onToggleFieldPublish, updatingKey }) {
+function ReviewCard({ review, onToggleFieldPublish, onDelete, updatingKey, deletingId }) {
   const [expanded, setExpanded] = useState(false);
   const publishedFields = review.publishedFields || {};
 
@@ -179,6 +198,45 @@ function ReviewCard({ review, onToggleFieldPublish, updatingKey }) {
               {expanded ? "Hide full response" : "View full response"}
               {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
             </Button>
+
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  disabled={deletingId === review.id}
+                  className="border-destructive/30 text-destructive hover:bg-destructive/5 hover:text-destructive"
+                >
+                  {deletingId === review.id ? (
+                    <Loader2 size={14} className="animate-spin" />
+                  ) : (
+                    <Trash2 size={14} />
+                  )}
+                  Delete
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Delete this submission?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This permanently removes{" "}
+                    <strong>{review.name}&rsquo;s</strong> feedback from the database.
+                    Any published quotes from this submission will also be removed from
+                    the landing page. This action cannot be undone.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                    onClick={() => onDelete(review.id)}
+                  >
+                    Delete submission
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
 
@@ -192,67 +250,82 @@ function ReviewCard({ review, onToggleFieldPublish, updatingKey }) {
             </p>
           </div>
 
-          <div className="space-y-4">
+          <Accordion type="multiple" className="rounded-lg border border-border/60 bg-white px-4">
             {PUBLISHABLE_REVIEW_FIELDS.map(({ field, label, shortLabel }) => {
               const answer = (review.payload?.[field] || "").trim();
               const isLive = Boolean(publishedFields[field]);
               const updateKey = `${review.id}:${field}`;
 
               return (
-                <div
+                <AccordionItem
                   key={field}
-                  className={cn(
-                    "rounded-lg border bg-white p-4",
-                    isLive ? "border-emerald-200/80" : "border-border/60"
-                  )}
+                  value={field}
+                  className={cn("border-border/60", isLive && "border-emerald-200/80")}
                 >
-                  <div className="mb-3 flex flex-wrap items-start justify-between gap-3">
-                    <div>
-                      <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                        {shortLabel}
-                      </p>
-                      <p className="mt-1 text-sm font-medium text-foreground/90">{label}</p>
+                  <AccordionTrigger className="py-4 hover:no-underline">
+                    <div className="flex flex-1 items-start justify-between gap-3 pr-2 text-left">
+                      <div className="min-w-0">
+                        <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                          {shortLabel}
+                        </p>
+                        <p className="mt-1 text-sm font-medium text-foreground/90">{label}</p>
+                        {answer ? (
+                          <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
+                            {answer}
+                          </p>
+                        ) : (
+                          <p className="mt-2 text-sm italic text-muted-foreground">
+                            No response provided
+                          </p>
+                        )}
+                      </div>
+                      {isLive && (
+                        <Badge
+                          variant="outline"
+                          className="shrink-0 border-emerald-300 text-emerald-700"
+                        >
+                          Live
+                        </Badge>
+                      )}
                     </div>
-                    {isLive && (
-                      <Badge variant="outline" className="border-emerald-300 text-emerald-700">
-                        Live
-                      </Badge>
-                    )}
-                  </div>
-
-                  {answer ? (
-                    <p className="mb-4 whitespace-pre-wrap text-sm leading-relaxed text-foreground/90">
-                      {answer}
-                    </p>
-                  ) : (
-                    <p className="mb-4 text-sm italic text-muted-foreground">No response provided.</p>
-                  )}
-
-                  <Button
-                    type="button"
-                    size="sm"
-                    variant={isLive ? "outline" : "default"}
-                    disabled={!answer || updatingKey === updateKey}
-                    onClick={() => onToggleFieldPublish(review.id, field, !isLive)}
-                  >
-                    {updatingKey === updateKey ? (
-                      <Loader2 size={14} className="animate-spin" />
-                    ) : isLive ? (
-                      <>
-                        <EyeOff size={14} />
-                        Unpublish
-                      </>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-4">
+                    {answer ? (
+                      <p className="mb-4 whitespace-pre-wrap text-sm leading-relaxed text-foreground/90">
+                        {answer}
+                      </p>
                     ) : (
-                      <>
-                        <Eye size={14} />
-                        Publish to site
-                      </>
+                      <p className="mb-4 text-sm italic text-muted-foreground">
+                        No response provided.
+                      </p>
                     )}
-                  </Button>
-                </div>
+
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant={isLive ? "outline" : "default"}
+                      disabled={!answer || updatingKey === updateKey}
+                      onClick={() => onToggleFieldPublish(review.id, field, !isLive)}
+                    >
+                      {updatingKey === updateKey ? (
+                        <Loader2 size={14} className="animate-spin" />
+                      ) : isLive ? (
+                        <>
+                          <EyeOff size={14} />
+                          Unpublish
+                        </>
+                      ) : (
+                        <>
+                          <Eye size={14} />
+                          Publish to site
+                        </>
+                      )}
+                    </Button>
+                  </AccordionContent>
+                </AccordionItem>
               );
             })}
-          </div>
+          </Accordion>
         </div>
 
         {expanded && privateDetailFields.length > 0 && (
@@ -286,6 +359,7 @@ export default function Answers() {
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState(null);
   const [updatingKey, setUpdatingKey] = useState(null);
+  const [deletingId, setDeletingId] = useState(null);
   const [filter, setFilter] = useState("all");
 
   const loadReviews = useCallback(async () => {
@@ -345,6 +419,18 @@ export default function Answers() {
       setLoadError(error.message);
     } finally {
       setUpdatingKey(null);
+    }
+  };
+
+  const handleDeleteReview = async (id) => {
+    setDeletingId(id);
+    try {
+      await deleteReview(id);
+      setReviews((current) => current.filter((review) => review.id !== id));
+    } catch (error) {
+      setLoadError(error.message);
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -551,7 +637,9 @@ export default function Answers() {
                     key={review.id}
                     review={review}
                     updatingKey={updatingKey}
+                    deletingId={deletingId}
                     onToggleFieldPublish={handleToggleFieldPublish}
+                    onDelete={handleDeleteReview}
                   />
                 ))}
               </div>
