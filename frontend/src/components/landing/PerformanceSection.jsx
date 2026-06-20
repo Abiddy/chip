@@ -1,23 +1,30 @@
+import { Database, Gauge, Layers, ShieldCheck } from "lucide-react";
+import { DashedFeatureGrid } from "@/components/ui/dashed-feature-grid";
+
 const METRICS = [
   {
     label: "Performance",
     value: "150×",
     description: "Faster than legacy SPICE flows on identical netlists.",
+    icon: Gauge,
   },
   {
     label: "Test Coverage",
     value: "100%",
     description: "Zero compromise on signal fidelity at 12 nm and below.",
+    icon: ShieldCheck,
   },
   {
     label: "Throughput",
     value: "5nm",
     description: "Process-agnostic — validated from 180 nm through 5 nm.",
+    icon: Layers,
   },
   {
     label: "Data Processed",
     value: "100GB+",
     description: "Stable load at production-scale parasitic datasets.",
+    icon: Database,
   },
 ];
 
@@ -35,27 +42,14 @@ export default function PerformanceSection() {
           </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {METRICS.map(({ label, value, description }) => (
-            <div
-              key={label}
-              className="overflow-hidden rounded-xl border border-neutral-200 bg-white"
-            >
-              <div className="h-1 bg-teal-600" />
-              <div className="p-6">
-                <p className="text-xs font-medium uppercase tracking-wider text-neutral-400">
-                  {label}
-                </p>
-                <p className="mt-3 text-4xl font-semibold tracking-tight text-neutral-900">
-                  {value}
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-neutral-500">
-                  {description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <DashedFeatureGrid
+          items={METRICS.map(({ label, value, description, icon }) => ({
+            label,
+            title: value,
+            description,
+            icon,
+          }))}
+        />
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import { GradientText } from "@/components/ui/gradient-text";
 
 const WORKSPACE = `${process.env.PUBLIC_URL}/ace-workspace-ui.png`;
 
@@ -16,8 +17,10 @@ export default function AceModeSection() {
           <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-teal-600">
             Analog RTL
           </p>
-          <h2 className="text-4xl font-semibold tracking-tight text-neutral-900 md:text-5xl">
-            Mode
+          <h2 className="serif text-5xl leading-[0.95] tracking-tight md:text-6xl lg:text-7xl">
+            <GradientText theme="ace" className="bg-neutral-50">
+              ACE Mode
+            </GradientText>
           </h2>
           <p className="mt-6 text-base leading-relaxed text-neutral-500 md:text-lg">
             Enables &ldquo;what-if&rdquo; analysis by allowing designers to

@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import { GradientText } from "@/components/ui/gradient-text";
 
 const ABS_IMG = `${process.env.PUBLIC_URL}/ace-abs-symbol.png`;
 
@@ -26,8 +27,10 @@ export default function AbsModeSection() {
           <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-teal-600">
             Analog Simulation
           </p>
-          <h2 className="text-4xl font-semibold tracking-tight text-teal-600 md:text-5xl">
-            ABS Mode
+          <h2 className="serif text-5xl leading-[0.95] tracking-tight md:text-6xl lg:text-7xl">
+            <GradientText theme="abs" className="bg-white">
+              ABS Mode
+            </GradientText>
           </h2>
           <p className="mt-3 text-xl font-medium text-neutral-800">
             Accelerated Behavioral Simulation
