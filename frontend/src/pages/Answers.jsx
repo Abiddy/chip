@@ -53,7 +53,10 @@ import {
   loginAdmin,
   setReviewFieldPublished,
 } from "@/lib/reviewsApi";
-import { PUBLISHABLE_REVIEW_FIELDS } from "@/data/reviewFormSteps";
+import {
+  PUBLISHABLE_REVIEW_FIELDS,
+  getAdminReviewDetailSections,
+} from "@/data/reviewFormSteps";
 
 const LOGO_SRC = `${process.env.PUBLIC_URL}/lens-logo.png`;
 
@@ -95,7 +98,7 @@ function StatCard({ label, value, hint, accent = "default" }) {
 }
 
 function ReviewCard({ review, onToggleFieldPublish, onDelete, updatingKey, deletingId }) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
   const publishedFields = review.publishedFields || {};
 
   const previewQuote = PUBLISHABLE_REVIEW_FIELDS.map(({ field }) => {
@@ -103,19 +106,7 @@ function ReviewCard({ review, onToggleFieldPublish, onDelete, updatingKey, delet
     return (review.payload?.[field] || "").trim();
   }).find(Boolean);
 
-  const privateDetailFields = [
-    ["Title", review.title],
-    ["Team", review.payload?.team],
-    ["Dataset size", review.payload?.datasetSize],
-    ["Tech nodes", (review.payload?.techNodes || []).join(", ")],
-    ["Tools", (review.payload?.tools || []).join(", ")],
-    ["Applications", (review.payload?.applications || []).join(", ")],
-    ["Top application", review.payload?.topApplication],
-    ["Priority feature", review.payload?.topPriorityFeature],
-    ["Next steps", (review.payload?.nextSteps || []).join(", ")],
-    ["Pilot dataset", review.payload?.pilotDataset],
-    ["Follow-up contact", review.payload?.followUpContact],
-  ].filter(([, value]) => value);
+  const detailSections = getAdminReviewDetailSections(review.payload);
 
   const liveCount = PUBLISHABLE_REVIEW_FIELDS.filter(
     ({ field }) => publishedFields[field] && (review.payload?.[field] || "").trim()
@@ -328,21 +319,39 @@ function ReviewCard({ review, onToggleFieldPublish, onDelete, updatingKey, delet
           </Accordion>
         </div>
 
-        {expanded && privateDetailFields.length > 0 && (
+        {expanded && (
           <div className="border-t border-border bg-white px-6 py-6">
             <p className="mb-4 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
               Full response (private)
             </p>
-            <div className="grid gap-5 md:grid-cols-2">
-              {privateDetailFields.map(([label, value]) => (
-                <div key={label} className="rounded-lg border border-border/60 bg-slate-50/60 p-4">
-                  <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                    {label}
-                  </p>
-                  <p className="whitespace-pre-wrap text-sm leading-relaxed">{value}</p>
-                </div>
-              ))}
-            </div>
+            {detailSections.length === 0 ? (
+              <p className="text-sm italic text-muted-foreground">
+                No additional responses beyond the publishable demo feedback fields.
+              </p>
+            ) : (
+              <div className="space-y-8">
+                {detailSections.map(({ sectionTitle, rows }) => (
+                  <div key={sectionTitle}>
+                    <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-teal-700">
+                      {sectionTitle}
+                    </p>
+                    <div className="grid gap-5 md:grid-cols-2">
+                      {rows.map(({ label, value }) => (
+                        <div
+                          key={`${sectionTitle}-${label}`}
+                          className="rounded-lg border border-border/60 bg-slate-50/60 p-4"
+                        >
+                          <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                            {label}
+                          </p>
+                          <p className="whitespace-pre-wrap text-sm leading-relaxed">{value}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </CardContent>

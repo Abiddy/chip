@@ -391,3 +391,95 @@ export function validateStep(step, form) {
 
   return true;
 }
+
+function hasDisplayValue(value) {
+  if (value == null) return false;
+  if (typeof value === "string") return value.trim().length > 0;
+  if (Array.isArray(value)) return value.length > 0;
+  if (typeof value === "number") return true;
+  if (typeof value === "object") return Object.keys(value).length > 0;
+  return false;
+}
+
+function formatDisplayValue(value) {
+  if (Array.isArray(value)) return value.join(", ");
+  if (typeof value === "number") return String(value);
+  return String(value).trim();
+}
+
+function formatMultiFieldValue(payload, field, otherField) {
+  const selected = payload[field] || [];
+  if (!Array.isArray(selected) || selected.length === 0) return null;
+
+  return selected
+    .map((option) => {
+      if (option === "Other" && otherField) {
+        const other = (payload[otherField] || "").trim();
+        return other ? `Other: ${other}` : "Other";
+      }
+      return option;
+    })
+    .join(", ");
+}
+
+/**
+ * Builds admin-facing sections from a stored submission payload,
+ * mirroring every question in FORM_STEPS that has an answer.
+ */
+export function getAdminReviewDetailSections(payload = {}) {
+  const sectionMap = new Map();
+
+  const addRow = (sectionTitle, label, value) => {
+    if (!hasDisplayValue(value)) return;
+
+    if (!sectionMap.has(sectionTitle)) {
+      sectionMap.set(sectionTitle, []);
+    }
+
+    sectionMap.get(sectionTitle).push({
+      label,
+      value: formatDisplayValue(value),
+    });
+  };
+
+  for (const step of FORM_STEPS) {
+    if (step.type === "intro") continue;
+
+    const sectionTitle = step.sectionTitle || "Other";
+
+    if (step.type === "group") {
+      for (const field of step.fields) {
+        addRow(sectionTitle, field.label, payload[field.field]);
+      }
+      continue;
+    }
+
+    if (step.type === "featureMatrix") {
+      const ratings = payload.featureRatings || {};
+      for (const feature of FEATURES) {
+        const rating = ratings[feature.key];
+        if (rating != null && rating !== "") {
+          addRow(sectionTitle, feature.label, `${rating} / 5`);
+        }
+      }
+      continue;
+    }
+
+    if (step.type === "multi") {
+      addRow(
+        sectionTitle,
+        step.label,
+        formatMultiFieldValue(payload, step.field, step.otherField)
+      );
+      continue;
+    }
+
+    if (step.field) {
+      addRow(sectionTitle, step.label, payload[step.field]);
+    }
+  }
+
+  return Array.from(sectionMap.entries())
+    .map(([sectionTitle, rows]) => ({ sectionTitle, rows }))
+    .filter(({ rows }) => rows.length > 0);
+}
